@@ -1,0 +1,6 @@
+{
+  "default": true,
+  "MD041": false,                 // allow top-level heading variations if you want
+  "MD022": { "level": 2 },        // multiple blank lines
+  "MD013": false                  // line length — optional
+}

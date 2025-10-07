@@ -1,0 +1,53 @@
+---
+alwaysApply: false
+description: "Information about linting, formatting, and quality assurance tools"
+globs: ".github/**,.markdownlint.json,.remarkrc.cjs,.pre-commit-config.yaml"
+---
+
+# Linting and Quality Assurance
+
+## Automated Linting Tools
+
+### MarkdownLint
+- Configuration: [.markdownlint.json](mdc:.markdownlint.json)
+- Enforces consistent Markdown formatting
+- Runs in pre-commit hooks and GitHub Actions
+
+### Remark
+- Configuration: [.remarkrc.cjs](mdc:.remarkrc.cjs)
+- Validates frontmatter structure
+- Ensures proper Markdown syntax
+
+### Pre-commit Hooks
+- Configuration: [.pre-commit-config.yaml](mdc:.pre-commit-config.yaml)
+- Runs markdownlint and prettier on changed files
+- Install with: `pip install pre-commit && pre-commit install`
+
+## GitHub Actions Workflow
+- Location: [.github/workflows/lint.yml](mdc:.github/workflows/lint.yml)
+- Runs on every push and pull request
+- Validates all Markdown files in the repository
+
+### Manual Linting Commands
+```bash
+# Install dependencies
+npm init -y
+npm install remark-cli remark-frontmatter remark-validate-frontmatter remark-preset-lint-recommended markdownlint-cli
+
+# Run linters
+npx remark . --frail
+npx markdownlint "**/*.md"
+```
+
+## What Gets Validated
+1. **Frontmatter**: Required fields (title, date) and optional fields (tags, related, slug, category)
+2. **Markdown Syntax**: Proper headings, links, code blocks
+3. **Code Blocks**: Must specify language tags
+4. **File Structure**: Consistent formatting across all notes
+
+## Integration with Note Creation
+When you create a note using the helper script, it automatically:
+- Uses the correct template structure
+- Includes proper frontmatter
+- Follows the established patterns
+- Is ready for the linting pipeline

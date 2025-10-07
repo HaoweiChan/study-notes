@@ -1,0 +1,21 @@
+name: Lint Markdown
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install deps
+        run: |
+          npm init -y
+          npm install --no-audit --no-fund remark-cli remark-frontmatter remark-validate-frontmatter remark-preset-lint-recommended markdownlint-cli
+      - name: Run remark
+        run: npx remark . --frail
+      - name: Run markdownlint
+        run: npx markdownlint "**/*.md"

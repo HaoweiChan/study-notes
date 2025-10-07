@@ -1,0 +1,56 @@
+---
+alwaysApply: true
+description: "Guidelines for creating and structuring notes in this repository"
+globs: "notes/**/*.md"
+---
+
+# Note Structure and Format
+
+## File Organization
+- Notes are organized by category in subdirectories: `notes/ml/`, `notes/algo/`, `notes/sd/`
+- Categories: `ml` (machine learning), `algo` (algorithms), `sd` (system design)
+- Filenames: `{slug}.md` (no dates in filenames)
+
+## Required Frontmatter
+Every note must include:
+```yaml
+---
+title: "Your Note Title"
+date: "YYYY-MM-DD"
+category: "ml|algo|sd"
+---
+```
+
+## Optional Frontmatter Fields
+```yaml
+tags: []
+related: []
+slug: "custom-slug"  # if different from generated slug
+```
+
+## Required Sections
+Every note must have these sections:
+- `# Title` (H1 heading matching the title)
+- `## Summary` - 1-3 line summary
+- `## Details` - Main content
+- `## Examples / snippets` - Code examples with language tags
+
+## Code Block Requirements
+- All code blocks must specify a language (e.g., ```python, ```javascript)
+- Use fenced code blocks with backticks
+- Include helpful comments in code examples
+
+## Template Usage
+Use the helper script to create new notes:
+```bash
+./scripts/new_note.sh "Note Title" category [slug]
+```
+
+Example:
+```bash
+./scripts/new_note.sh "Kalman Filter" ml kalman-filter
+```
+
+## File References
+- [Note Template](mdc:templates/note-template.md) - Template for new notes
+- [Helper Script](mdc:scripts/new_note.sh) - Script for creating notes

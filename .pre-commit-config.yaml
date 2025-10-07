@@ -1,0 +1,12 @@
+repos:
+-   repo: https://github.com/markdownlint/markdownlint
+    rev: v0.40.0
+    hooks:
+    - id: markdownlint
+      files: \.(md|markdown)$
+-   repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.0.0
+    hooks:
+    - id: prettier
+      args: [--parser, markdown]
+      files: \.(md|markdown)$

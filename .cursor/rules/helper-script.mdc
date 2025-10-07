@@ -1,0 +1,60 @@
+---
+alwaysApply: false
+description: "Information about the note creation helper script and automation tools"
+globs: "scripts/*"
+---
+
+# Helper Script and Automation Tools
+
+## Note Creation Script
+Location: [scripts/new_note.sh](mdc:scripts/new_note.sh)
+
+### Usage
+```bash
+./scripts/new_note.sh "Note Title" <category> [slug]
+```
+
+### Categories and Aliases
+- `ml` or `machine-learning` - Machine Learning notes
+- `algo` or `algorithms` - Algorithms & Problem Solving
+- `sd`, `system-design`, `system`, or `sys` - System Design
+
+### Examples
+```bash
+# Default ML category
+./scripts/new_note.sh "Neural Networks"
+
+# Explicit category
+./scripts/new_note.sh "Binary Search Algorithm" algo
+
+# With custom slug
+./scripts/new_note.sh "Load Balancing Strategies" sd load-balancing
+
+# Using aliases
+./scripts/new_note.sh "Decision Trees" machine-learning decision-trees
+```
+
+## What the Script Does
+1. Validates the category (must be ml/algo/sd or their aliases)
+2. Generates a slug from the title if not provided
+3. Creates the appropriate directory structure if needed
+4. Uses the [note template](mdc:templates/note-template.md) to create the file
+5. Replaces placeholders (TITLE, DATE, SLUG, CATEGORY)
+
+## Template Placeholders
+The template uses these placeholders:
+- `{{TITLE}}` - Note title
+- `{{DATE}}` - Current date (YYYY-MM-DD)
+- `{{SLUG}}` - Generated or provided slug
+- `{{CATEGORY}}` - Note category
+
+## File Structure Created
+```
+notes/
+├── ml/
+│   └── {slug}.md
+├── algo/
+│   └── {slug}.md
+└── sd/
+    └── {slug}.md
+```
