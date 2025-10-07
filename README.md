@@ -92,7 +92,7 @@ The `.cursor/rules.mdc` file contains best-effort rules for Cursor IDE integrati
 ```bash
 # Install dependencies
 npm init -y
-npm install --no-audit --no-fund remark-cli remark-frontmatter remark-validate-frontmatter remark-preset-lint-recommended markdownlint-cli
+npm install --no-audit --no-fund remark-cli remark-frontmatter remark-preset-lint-recommended markdownlint-cli
 
 # Run linters
 npx remark . --frail
