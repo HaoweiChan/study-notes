@@ -40,6 +40,38 @@ Every note must have these sections:
 - Use fenced code blocks with backticks
 - Include helpful comments in code examples
 
+## Markdown Linting Guidelines
+
+To ensure notes pass automated linting (remark and markdownlint), follow these rules:
+
+### Variable References in Text
+- **ALWAYS escape square brackets** when referring to variables, array indices, or dictionary keys in prose
+- ❌ Wrong: `Update rains[i] = l`
+- ✅ Correct: `Update rains\[i] = l`
+- ❌ Wrong: `Set dist[neighbor] = dist[u] + 1`
+- ✅ Correct: `Set dist\[neighbor] = dist\[u] + 1`
+- ❌ Wrong: `Range [ql, qr]`
+- ✅ Correct: `Range \[ql, qr]`
+
+**Why?** Remark interprets `[text]` as markdown link references. Escaping with backslash `\[text]` tells the linter it's literal text.
+
+### Common Patterns to Escape
+- Array/list indices: `arr\[i]`, `matrix\[row]\[col]`
+- Dictionary/map keys: `dict\[key]`, `visited\[node]`
+- Mathematical ranges: `\[a, b]`, `\[0, n)`
+- Function parameters: `func\[param]`
+
+### Other Linting Rules
+- Use spaces instead of hard tabs for indentation
+- Keep existing style for headings and lists (rules are relaxed in `.markdownlint.json`)
+
+### Testing Locally
+Before pushing, run linters locally:
+```bash
+npx remark . --frail
+npx markdownlint "**/*.md" --ignore node_modules
+```
+
 ## Template Usage
 Use the helper script to create new notes:
 ```bash

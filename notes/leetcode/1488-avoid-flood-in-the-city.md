@@ -38,7 +38,7 @@ If there are multiple valid answers, return any of them. If it's impossible to a
   - If it rains on lake `l`:
     - If lake `l` is already full, it's impossible (return [])
     - Mark lake `l` as full and add (current_day, l) to the heap
-    - Update rains[i] = l
+    - Update rains\[i] = l
   - If it's a dry day:
     - If there are full lakes, dry the one that became full earliest
     - Otherwise, assign -1
