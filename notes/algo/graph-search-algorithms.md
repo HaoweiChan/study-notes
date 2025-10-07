@@ -24,7 +24,7 @@ BFS is a graph traversal that explores nodes level by level from a start node. I
 
 **How it Works**
 1. Initialize queue & distance - Put start node(s) in a queue; mark distance 0
-2. Expand by layers - Pop from the queue; push unvisited neighbors; set dist[neighbor] = dist[u] + 1
+2. Expand by layers - Pop from the queue; push unvisited neighbors; set dist\[neighbor] = dist\[u] + 1
 3. Early exit for targets - If a target is found, its first discovery distance is minimal (by edges)
 
 **When to Use BFS**
@@ -95,8 +95,8 @@ Dijkstra computes shortest paths from a source in graphs with non-negative edge 
 - **Space Complexity:** O(V)
 
 **How it Works**
-1. Initialize distances & heap - Set dist[src]=0, others ∞; push (0, src) into a min-heap
-2. Extract-min & relax - Pop (d,u). If stale (d != dist[u]), skip. For each (u→v,w≥0), relax: if d+w < dist[v], update and push
+1. Initialize distances & heap - Set dist\[src]=0, others ∞; push (0, src) into a min-heap
+2. Extract-min & relax - Pop (d,u). If stale (d != dist\[u]), skip. For each (u→v,w≥0), relax: if d+w < dist\[v], update and push
 3. Early exit (optional) - If you only need the distance to a single target, you can stop when the target is popped
 
 **When to Use Dijkstra**
@@ -119,7 +119,7 @@ Union–Find (DSU) maintains a partition of elements into disjoint sets, support
 - **Space Complexity:** O(N)
 
 **How it Works**
-1. Each node starts alone - parent[x] = x, size[x] = 1
+1. Each node starts alone - parent\[x] = x, size\[x] = 1
 2. Find with compression - find(x) returns the set representative and flattens paths for speed
 3. Union by size/rank - Attach the smaller tree under the larger; update sizes and component count
 
@@ -143,7 +143,7 @@ A* finds shortest paths like Dijkstra but uses a heuristic to guide the search t
 - **Space Complexity:** O(V)
 
 **How it Works**
-1. g-score and heuristic h - g[u] = best-known distance from source; h[u] = admissible heuristic estimate to target
+1. g-score and heuristic h - g\[u] = best-known distance from source; h\[u] = admissible heuristic estimate to target
 2. Priority by f = g + h - Expand nodes in increasing f; if h never overestimates, first pop of target is optimal
 3. Relax neighbors - Standard relax like Dijkstra, but priority uses g + h
 

@@ -20,5 +20,5 @@ Write your notes here.
 # small code snippet, language-tagged
 
 Links
-	•	reference links
+  - reference links
 ```

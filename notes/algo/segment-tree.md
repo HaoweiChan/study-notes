@@ -88,7 +88,7 @@ class SegmentTree:
             self.tree[node] = self.tree[2 * node + 1] + self.tree[2 * node + 2]
 ```
 
-### Range Query: Sum in Range [ql, qr]
+### Range Query: Sum in Range \[ql, qr]
 ```python
     def query(self, node, l, r, ql, qr):
         if ql > r or qr < l:  # no overlap

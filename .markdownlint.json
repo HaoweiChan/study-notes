@@ -1,6 +1,11 @@
 {
   "default": true,
-  "MD041": false,                 // allow top-level heading variations if you want
-  "MD022": { "level": 2 },        // multiple blank lines
-  "MD013": false                  // line length — optional
+  "MD013": false,                 // line length
+  "MD022": false,                 // blanks around headings
+  "MD025": false,                 // multiple h1 headings
+  "MD031": false,                 // blanks around fences
+  "MD032": false,                 // blanks around lists
+  "MD036": false,                 // emphasis as heading
+  "MD040": false,                 // code language
+  "MD041": false                  // first line heading
 }

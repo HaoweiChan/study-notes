@@ -18,4 +18,4 @@ jobs:
       - name: Run remark
         run: npx remark . --frail
       - name: Run markdownlint
-        run: npx markdownlint "**/*.md"
+        run: npx markdownlint "**/*.md" --ignore node_modules
