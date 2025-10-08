@@ -52,7 +52,7 @@ For a fixed maximum value `m`, we need to count the number of non-decreasing arr
 The number of non-decreasing sequences of length k with values from 1 to m is equal to C(m + k - 1, k - 1).
 
 ## Time & Space Complexity
-- **Time Complexity:** O(n * sqrt(n) + n * k) due to factoring numbers up to n
+- **Time Complexity:** O(n*sqrt(n) + n*k) due to factoring numbers up to n
 - **Space Complexity:** O(n) for DP arrays and factorization storage
 
 ## Key Insights
@@ -152,7 +152,7 @@ Total: 6 ✓
 
 ## Edge Cases & Validation
 - **k = 1**: Should return n (any single element from 1 to n)
-- **n = 1**: Should return 1 (only [1] repeated k times)
+- **n = 1**: Should return 1 (only \[1] repeated k times)
 - **Large n, small k**: Should handle efficiently
 - **k > n**: Still valid (can repeat values)
 - **n = 1, k = 1**: Should return 1

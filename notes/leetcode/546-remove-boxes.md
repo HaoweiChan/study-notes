@@ -39,7 +39,7 @@ The key insight is that when we have a subarray `boxes[i..j]`, and we want to re
 ### DP Transition
 For each `dp[i][j][k]`:
 1. **Option 1**: Remove the last box `boxes[j]` alone (if k > 0, we get 1² points, but we can also merge with the k trailing boxes)
-2. **Option 2**: Find the last position `m` (m < j) where `boxes[m] == boxes[j]`, and combine the removal of boxes[m+1..j] with the trailing boxes
+2. **Option 2**: Find the last position `m` (m < j) where `boxes[m] == boxes[j]`, and combine the removal of boxes\[m+1..j] with the trailing boxes
 
 ### Base Cases
 - `dp[i][i][k] = (k + 1)²` for any k (we can remove the single box, plus k trailing boxes of same color)
