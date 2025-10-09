@@ -1,21 +1,23 @@
 ---
-title: "Implement Router"
+title: "0000. Implement Router"
 date: "2025-01-27"
 tags: ["Hash Table", "String", "Design"]
 related: []
-slug: "implement-router"
+slug: "0000-implement-router"
 category: "leetcode"
 leetcode_url: "https://leetcode.com/problems/implement-router/description/"
 leetcode_difficulty: "Medium"
 leetcode_topics: ["Hash Table", "String", "Design"]
 ---
 
-# Implement Router
+# 0000. Implement Router
 
 ## Summary
 Design and implement a basic HTTP router that can register routes with different HTTP methods and handle incoming requests by matching them to the appropriate handler functions.
 
 ## Problem Description
+**Note:** This appears to be a custom system design problem or interview question, as it's not found in the standard LeetCode problem set.
+
 Implement a Router class that supports:
 
 1. **Route Registration**: Register routes with specific HTTP methods (GET, POST, PUT, DELETE, etc.)
