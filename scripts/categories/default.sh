@@ -18,6 +18,9 @@ handle_default_category() {
         "leetcode")
             template_file="templates/leetcode-template.md"
             ;;
+        "system-design")
+            template_file="templates/system-design-template.md"
+            ;;
         *)
             template_file="templates/default-template.md"
             ;;
