@@ -4,7 +4,7 @@ date: "2025-10-07"
 tags: []
 related: []
 slug: "2d-prefix-sum"
-category: "algo"
+category: "algorithm"
 ---
 
 # 2D Prefix Sum

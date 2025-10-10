@@ -4,7 +4,7 @@ date: "2025-10-07"
 tags: []
 related: []
 slug: "union-find-dsu"
-category: "algo"
+category: "algorithm"
 ---
 
 # Union-Find DSU

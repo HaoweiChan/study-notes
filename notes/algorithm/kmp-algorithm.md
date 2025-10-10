@@ -4,7 +4,7 @@ date: "2025-10-07"
 tags: []
 related: []
 slug: "kmp-algorithm"
-category: "algo"
+category: "algorithm"
 ---
 
 # KMP Algorithm

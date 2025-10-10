@@ -4,7 +4,7 @@ date: "2025-10-07"
 tags: []
 related: []
 slug: "segment-tree"
-category: "algo"
+category: "algorithm"
 ---
 
 # Segment Tree

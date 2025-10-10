@@ -4,7 +4,7 @@ date: "2025-10-07"
 tags: []
 related: []
 slug: "graph-search-algorithms"
-category: "algo"
+category: "algorithm"
 ---
 
 # Graph Search Algorithms

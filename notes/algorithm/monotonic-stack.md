@@ -4,7 +4,7 @@ date: "2025-10-07"
 tags: []
 related: []
 slug: "monotonic-stack"
-category: "algo"
+category: "algorithm"
 ---
 
 # Monotonic Stack
