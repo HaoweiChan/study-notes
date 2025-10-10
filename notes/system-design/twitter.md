@@ -3,7 +3,7 @@ title: "Twitter System Design"
 date: "2025-10-10"
 tags: []
 related: []
-slug: "design-twitter"
+slug: "twitter"
 category: "system-design"
 ---
 

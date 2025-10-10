@@ -39,6 +39,7 @@ graph TB
 - **Component Name:** Purpose and key features
 
 ### Data Models
+
 | Entity | Key Fields | Relationships | Purpose |
 |--------|------------|---------------|---------|
 | **Entity** | field1, field2 | 1:N with Other | Description |
