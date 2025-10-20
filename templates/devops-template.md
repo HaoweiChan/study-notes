@@ -104,6 +104,7 @@ CMD ["npm", "start"]
 ## Troubleshooting & Common Issues
 
 ### Common Problems
+
 | Issue | Symptom | Solution |
 |-------|---------|----------|
 | **Issue 1** | Symptom description | Solution steps |

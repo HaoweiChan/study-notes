@@ -345,6 +345,7 @@ spec:
 ## Troubleshooting & Common Issues
 
 ### Common Problems
+
 | Issue | Symptom | Solution |
 |-------|---------|----------|
 | **Pods in Pending** | Cannot schedule pods | Check resource availability and node status |

@@ -275,6 +275,7 @@ CMD ["node", "server.js"]
 ## Troubleshooting & Common Issues
 
 ### Common Problems
+
 | Issue | Symptom | Solution |
 |-------|---------|----------|
 | **Image won't build** | Build fails with cryptic errors | Check Dockerfile syntax and layer order |
