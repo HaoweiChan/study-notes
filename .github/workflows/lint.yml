@@ -33,14 +33,38 @@ jobs:
         run: |
           python -c "
           import json
+          import re
+          
+          # Load flashcards
           with open('docs/artifacts/flashcards.json', 'r') as f:
               cards = json.load(f)
           print(f'Found {len(cards)} flashcards')
+          
+          # Validate card format
           for card in cards:
               if 'q' not in card or 'a' not in card or 'category' not in card:
                   print(f'Invalid card format: {card}')
                   exit(1)
           print('All flashcards have valid format')
+          
+          # Extract categories from flashcards
+          flashcard_categories = set(card['category'] for card in cards)
+          print(f'Categories in flashcards: {sorted(flashcard_categories)}')
+          
+          # Extract deck options from HTML
+          with open('docs/index.html', 'r') as f:
+              html_content = f.read()
+          deck_options = re.findall(r'<option value=\"([^\"]+)\">', html_content)
+          deck_categories = set(opt for opt in deck_options if opt != 'all')
+          print(f'Deck options in HTML: {sorted(deck_categories)}')
+          
+          # Validate that all flashcard categories are in deck options
+          missing_in_html = flashcard_categories - deck_categories
+          if missing_in_html:
+              print(f'ERROR: Categories in flashcards but not in HTML: {missing_in_html}')
+              exit(1)
+          
+          print('✅ All flashcard categories have corresponding deck options')
           "
 
       - name: Commit generated flashcards
