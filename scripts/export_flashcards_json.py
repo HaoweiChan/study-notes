@@ -6,8 +6,8 @@ import frontmatter
 
 ROOT = Path(__file__).resolve().parents[1]
 NOTES = ROOT / "notes"
-OUT = ROOT / "artifacts"
-OUT.mkdir(exist_ok=True)
+OUT = ROOT / "docs" / "artifacts"
+OUT.mkdir(parents=True, exist_ok=True)
 
 FENCE_RE = re.compile(r"```flashcard\s*\n(.*?)\n```", re.S|re.I)
 FLASH_SECTION_RE = re.compile(r"^##+\s*Flashcards\s*(.*?)^(?:##\s|\Z)", re.S|re.I|re.M)
