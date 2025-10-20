@@ -48,13 +48,13 @@ jobs:
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add artifacts/flashcards.json
+          git add -f artifacts/flashcards.json
           if ! git diff --staged --quiet; then
             TOTAL_CARDS=$(grep -c '"category"' artifacts/flashcards.json)
-            git commit -m "🤖 Auto-generate flashcards from notes
+            git commit -m "Auto-generate flashcards from notes
 
-            • Updated ${TOTAL_CARDS} total flashcards
-            • Generated from algorithm, devops, and system-design notes" || echo "No changes to commit"
+            - Updated ${TOTAL_CARDS} total flashcards
+            - Generated from algorithm, devops, and system-design notes" || echo "No changes to commit"
           else
             echo "No flashcard changes to commit"
           fi
