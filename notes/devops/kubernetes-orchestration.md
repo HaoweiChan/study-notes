@@ -580,6 +580,24 @@ spec:
     targetPort: 8080
 ```
 
+## Flashcards
+
+- What is the primary purpose of Kubernetes? ::: To automate deployment, scaling, and management of containerized applications
+- What is a Pod in Kubernetes? ::: The smallest deployable unit that can contain one or more containers that share storage and network
+- What is the role of the Kubernetes API Server? ::: To serve as the central management point for the entire cluster, handling all administrative operations
+- What is the purpose of a Deployment in Kubernetes? ::: To manage stateless applications, providing declarative updates and scaling capabilities
+- What is a Service in Kubernetes? ::: An abstraction that defines a logical set of Pods and enables network access to them
+- What is the purpose of an Ingress in Kubernetes? ::: To manage external access to services, typically handling HTTP/HTTPS traffic and load balancing
+- What is the role of etcd in Kubernetes? ::: To store the entire cluster state and configuration data reliably and consistently
+- What is the purpose of a ReplicaSet in Kubernetes? ::: To ensure that a specified number of pod replicas are running at all times
+- What is the role of the Kubelet in Kubernetes? ::: To run on each worker node and ensure containers are running in Pods as expected
+- What is the purpose of a ConfigMap in Kubernetes? ::: To store configuration data as key-value pairs that can be consumed by pods
+- What is the difference between a Deployment and a StatefulSet? ::: Deployments manage stateless apps with rolling updates, while StatefulSets manage stateful apps with stable identities
+- What is the purpose of a Namespace in Kubernetes? ::: To provide a mechanism for isolating groups of resources within a single cluster
+- What is the role of the Kubernetes Scheduler? ::: To assign pods to nodes based on resource requirements and constraints
+- What is the purpose of a PersistentVolume in Kubernetes? ::: To provide an abstraction for storage that persists beyond the lifecycle of individual pods
+- What are the main components of the Kubernetes control plane? ::: API Server, etcd, Controller Manager, and Scheduler
+
 ## Links
 - [Kubernetes Official Documentation](https://kubernetes.io/docs/)
 - [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
