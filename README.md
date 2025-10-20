@@ -47,11 +47,59 @@ Use the provided helper script to create new notes from the template:
 
 # Explicit categories
 ./scripts/new_note.sh "Longest Increasing Subsequence DP" algo lis-dp
-./scripts/new_note.sh "High-throughput video ingestion" sd
+```
+
+### Study Flashcards
+
+🎯 **Interactive Flashcard Study System**
+
+Access the flashcard study interface at: **[Study Flashcards](https://haoweichan.github.io/study-notes/)**
+
+**Features:**
+- 120+ flashcards across Algorithm and DevOps topics
+- Spaced repetition learning system
+- Progress tracking and deck selection
+- Mobile-responsive design
+
+**Adding Flashcards:**
+Flashcards are automatically extracted from notes. Add them using any of these formats in your notes:
+
+```markdown
+## Flashcards
+
+- What is the time complexity of binary search? ::: O(log n)
+- What data structure is used for BFS? ::: Queue
+
+```yaml
+---
+flashcards:
+  - q: "Question?"
+    a: "Answer!"
+---
+```
+
+```flashcard
+Q: Question?
+A: Answer!
+
+---
+
+Q: Another question?
+A: Another answer!
+```
+
+**Examples:**
+```bash
+# Default category (ML)
+./scripts/new_note.sh "Kalman hedge ratio"
+
+# Explicit categories
+./scripts/new_note.sh "Longest Increasing Subsequence DP" algo lis-dp
 
 # Using aliases
 ./scripts/new_note.sh "Neural Network Architectures" machine-learning
 ./scripts/new_note.sh "Load Balancer Design" system-design
+./scripts/new_note.sh "High-throughput video ingestion" sd
 ```
 
 ### Note Format

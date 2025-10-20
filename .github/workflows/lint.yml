@@ -61,8 +61,9 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add artifacts/flashcards.json
           if ! git diff --staged --quiet; then
+            TOTAL_CARDS=$(grep -c '"category"' artifacts/flashcards.json)
             git commit -m "🤖 Auto-generate flashcards from notes
 
-            - Updated $(grep -c '"category"' artifacts/flashcards.json) total flashcards
-            - Generated from algorithm, devops, and system-design notes" || echo "No changes to commit"
+            • Updated ${TOTAL_CARDS} total flashcards
+            • Generated from algorithm, devops, and system-design notes" || echo "No changes to commit"
           fi
