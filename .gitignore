@@ -1,7 +1,7 @@
 # Dependencies
 node_modules/
 
-# npm
+# npm (keep these files for CI/CD)
 package.json
 package-lock.json
 

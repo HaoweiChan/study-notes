@@ -1,0 +1,27 @@
+{
+  "name": "study-notes",
+  "version": "1.0.0",
+  "description": "A personal repository for organized study notes and knowledge sharing.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HaoweiChan/study-notes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/HaoweiChan/study-notes/issues"
+  },
+  "homepage": "https://github.com/HaoweiChan/study-notes#readme",
+  "dependencies": {
+    "markdownlint-cli": "^0.45.0",
+    "remark-cli": "^12.0.1",
+    "remark-frontmatter": "^5.0.0",
+    "remark-preset-lint-recommended": "^7.0.1"
+  }
+}
