@@ -72,7 +72,7 @@ jobs:
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add docs/artifacts/flashcards.json
+          git add -f docs/artifacts/flashcards.json
           if ! git diff --staged --quiet; then
             TOTAL_CARDS=$(grep -c '"category"' docs/artifacts/flashcards.json)
             git commit -m "Auto-generate flashcards from notes
