@@ -14,32 +14,41 @@ Location: [scripts/new_note.sh](mdc:scripts/new_note.sh)
 ./scripts/new_note.sh "Note Title" <category> [slug]
 ```
 
-### Categories and Aliases
-- `ml` or `machine-learning` - Machine Learning notes
-- `algo` or `algorithms` - Algorithms & Problem Solving
-- `sd`, `system-design`, `system`, or `sys` - System Design
+### Categories (Auto-Discovered)
+The script automatically discovers available categories from the `notes/` directory structure. Common categories include:
+- `algorithm` - Algorithms & Problem Solving
+- `machine-learning` - Machine Learning notes
+- `system-design` - System Design and Architecture
+- `leetcode` - LeetCode Problems (requires problem number)
+- `devops` - DevOps and Infrastructure topics
+
+**Note:** Categories are dynamically discovered from existing `notes/` subdirectories. Adding a new category directory to `notes/` automatically makes it available.
 
 ### Examples
 ```bash
-# Default ML category
-./scripts/new_note.sh "Neural Networks"
+# Default algorithm category
+./scripts/new_note.sh "Binary Search Algorithm"
 
 # Explicit category
-./scripts/new_note.sh "Binary Search Algorithm" algo
+./scripts/new_note.sh "Load Balancing Strategies" system-design
 
 # With custom slug
-./scripts/new_note.sh "Load Balancing Strategies" sd load-balancing
+./scripts/new_note.sh "Docker Deep Dive" devops docker-containers
 
-# Using aliases
-./scripts/new_note.sh "Decision Trees" machine-learning decision-trees
+# LeetCode problem (prompts for problem number)
+./scripts/new_note.sh "Two Sum" leetcode
+
+# LeetCode with problem number in slug
+./scripts/new_note.sh "Valid Parentheses" leetcode 20
 ```
 
 ## What the Script Does
-1. Validates the category (must be ml/algo/sd or their aliases)
-2. Generates a slug from the title if not provided
-3. Creates the appropriate directory structure if needed
-4. Uses the [note template](mdc:templates/note-template.md) to create the file
-5. Replaces placeholders (TITLE, DATE, SLUG, CATEGORY)
+1. **Discovers categories** from `notes/` directory structure (no hardcoded list)
+2. **Validates category** against existing directories in `notes/`
+3. **Generates slug** from title if not provided
+4. **Creates directory structure** if needed
+5. **Uses appropriate template** based on category (e.g., LeetCode template for leetcode category)
+6. **Replaces placeholders** (TITLE, DATE, SLUG, CATEGORY)
 
 ## Template Placeholders
 The template uses these placeholders:
@@ -48,13 +57,21 @@ The template uses these placeholders:
 - `{{SLUG}}` - Generated or provided slug
 - `{{CATEGORY}}` - Note category
 
-## File Structure Created
+## File Structure (Dynamic)
 ```
 notes/
-├── ml/
+├── algorithm/           # Auto-discovered
 │   └── {slug}.md
-├── algo/
+├── machine-learning/    # Auto-discovered
 │   └── {slug}.md
-└── sd/
+├── system-design/       # Auto-discovered
+│   └── {slug}.md
+└── [new-category]/      # Add new directory here
     └── {slug}.md
 ```
+
+## Adding New Categories
+1. Create a new directory under `notes/` (e.g., `notes/infrastructure/`)
+2. The script will automatically recognize it as a valid category
+3. Optionally create a category-specific template in `templates/` for custom formatting
+4. The script will use the default template if no category-specific template exists

@@ -6,9 +6,10 @@ globs: "notes/**/*.md"
 
 # Note Structure and Format
 
-## File Organization
-- Notes are organized by category in subdirectories: `notes/ml/`, `notes/algo/`, `notes/sd/`
-- Categories: `ml` (machine learning), `algo` (algorithms), `sd` (system design)
+## File Organization (Dynamic Categories)
+- Notes are organized by category in subdirectories under `notes/`
+- **Categories are auto-discovered** from existing `notes/` subdirectories (e.g., `algorithm/`, `machine-learning/`, `system-design/`, `devops/`)
+- **Adding new categories:** Create a new directory under `notes/` and it becomes automatically available
 - Filenames: `{slug}.md` (no dates in filenames)
 
 ## Required Frontmatter
@@ -17,7 +18,7 @@ Every note must include:
 ---
 title: "Your Note Title"
 date: "YYYY-MM-DD"
-category: "ml|algo|sd"
+category: "category-name"  # Must match a directory in notes/
 ---
 ```
 
@@ -78,11 +79,24 @@ Use the helper script to create new notes:
 ./scripts/new_note.sh "Note Title" category [slug]
 ```
 
-Example:
+Examples:
 ```bash
-./scripts/new_note.sh "Kalman Filter" ml kalman-filter
+# Create in algorithm category (default)
+./scripts/new_note.sh "Binary Search" algorithm
+
+# Create in machine-learning category
+./scripts/new_note.sh "Neural Networks" machine-learning
+
+# Create in newly added category (auto-discovered)
+./scripts/new_note.sh "Docker Guide" devops
+
+# With custom slug
+./scripts/new_note.sh "Load Balancing" system-design load-balancing-strategies
 ```
 
 ## File References
-- [Note Template](mdc:templates/note-template.md) - Template for new notes
+- [Note Template](mdc:templates/note-template.md) - Default template for new notes
+- [DevOps Template](mdc:templates/devops-template.md) - Specialized template for DevOps topics
+- [LeetCode Template](mdc:templates/leetcode-template.md) - Template for coding problems
+- [System Design Template](mdc:templates/system-design-template.md) - Template for system design notes
 - [Helper Script](mdc:scripts/new_note.sh) - Script for creating notes
