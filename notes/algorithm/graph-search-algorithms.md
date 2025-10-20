@@ -324,3 +324,19 @@ path, cost = astar(adj, src=0, tgt=7, heuristic=lambda v: 0.0)
 print(cost)  # Expected: shortest path cost (matches Dijkstra when h==0)
 ```
 ```
+
+## Flashcards
+
+- What is the main difference between BFS and DFS in terms of exploration strategy? ::: BFS explores level by level (breadth-first), while DFS explores as far as possible along a branch (depth-first)
+- What is the time complexity of BFS on a graph with V vertices and E edges? ::: O(V + E) for both time and space in the worst case
+- When should you use Dijkstra's algorithm instead of BFS? ::: When edges have non-negative weights greater than 1, or when you need to find shortest paths in weighted graphs
+- What optimization does Union-Find use to achieve nearly constant time operations? ::: Path compression and union by rank/size
+- What is the key difference between A* search and Dijkstra's algorithm? ::: A* uses a heuristic function to guide the search toward the target, while Dijkstra explores uniformly
+- When is 0-1 BFS more appropriate than regular BFS? ::: When edge weights are only 0 or 1, allowing for more efficient shortest path computation
+- What makes minimax algorithm suitable for two-player games? ::: It assumes both players play optimally and explores all possible future moves
+- What data structure is commonly used to implement BFS? ::: Queue (FIFO - First In, First Out)
+- What data structure is commonly used to implement DFS? ::: Stack (LIFO - Last In, First Out) or recursion
+- What is the primary use case for Union-Find? ::: Managing disjoint sets and connectivity queries in graphs
+
+```
+```

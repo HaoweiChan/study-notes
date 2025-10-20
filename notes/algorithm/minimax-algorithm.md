@@ -150,4 +150,19 @@ def apply_move(state, move):
     # Return new state after applying move
     pass
 ```
+
+## Flashcards
+
+- What type of algorithm is minimax and what games is it typically used for? ::: Minimax is a decision-making algorithm for two-player turn-based games where both players play optimally
+- What are the two main player types in minimax algorithm? ::: Maximizing player (tries to maximize score) and minimizing player (tries to minimize score)
+- What is the key assumption that minimax makes about player behavior? ::: Both players play optimally, making the best possible moves at each turn
+- What technique is commonly used to optimize minimax algorithm? ::: Alpha-beta pruning to eliminate branches that won't affect the final decision
+- What is the time complexity of minimax without optimization? ::: O(b^d) where b is branching factor and d is depth, exponential in the worst case
+- What data structure or technique can help avoid recomputing game states in minimax? ::: Memoization or transposition tables to cache evaluated positions
+- What is the main purpose of the minimax algorithm in game theory? ::: To determine the best move for a player assuming optimal play from both sides
+- How does minimax determine which move to choose at each step? ::: It evaluates all possible future moves recursively and chooses the move that leads to the best outcome
+- What happens at terminal nodes (game over states) in minimax? ::: The algorithm returns the evaluated score of that position
+- What is a key limitation of the basic minimax algorithm? ::: It becomes computationally expensive for games with high branching factors or deep search depths
+
+```
 ```

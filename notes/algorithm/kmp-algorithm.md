@@ -90,6 +90,19 @@ kmp_search(text, pattern)
 # Output: Found pattern at index 10
 ```
 
+## Flashcards
+
+- What is the main advantage of the KMP algorithm over naive string matching? ::: KMP avoids redundant comparisons by using the LPS array to skip unnecessary character checks
+- What does LPS stand for in the KMP algorithm? ::: Longest Proper Prefix which is also Suffix
+- What is the time complexity of the KMP algorithm for pattern matching? ::: O(n + m) where n is text length and m is pattern length
+- What is the space complexity of the KMP algorithm? ::: O(m) for the LPS array where m is pattern length
+- In KMP, what happens when a mismatch occurs at position j in the pattern? ::: We use the LPS array to determine how far back to go in the pattern (to position lps\[j-1])
+- What is the key insight that makes KMP more efficient than naive matching? ::: The pattern itself contains information about how to shift when mismatches occur
+- How does KMP preprocessing work for the pattern "ABABAC"? ::: Build LPS array where each position shows longest proper prefix that is also suffix
+- What is the worst-case scenario for KMP algorithm efficiency? ::: When the pattern consists of many repeated characters, but KMP still maintains O(n + m) worst case
+- How many comparisons does KMP make in the worst case? ::: O(n + m) total comparisons, much better than naive O(n * m)
+- What preprocessing step makes KMP efficient? ::: Computing the LPS (failure function) array that tells us where to jump when mismatches occur
+
 ### LPS Array Visualization Example
 For pattern "AAACAAAA", the LPS array construction works as follows:
 - The algorithm builds the longest proper prefix-suffix array to enable efficient backtracking during pattern matching.

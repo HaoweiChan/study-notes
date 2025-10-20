@@ -235,4 +235,19 @@ lst.update_range(0, 0, len(arr) - 1, 1, 3, 10)
 # Query sum from index 0 to 4
 print(lst.query(0, 0, len(arr) - 1, 0, 4))  # Output: 64 (1+12+13+14+5)
 ```
+
+## Flashcards
+
+- What is the primary purpose of a segment tree? ::: To efficiently perform range queries (sum, min, max) and point updates on arrays
+- What is the time complexity for building a segment tree? ::: O(n) where n is the size of the input array
+- What is the time complexity for range queries in a segment tree? ::: O(log n) where n is the size of the input array
+- What is the time complexity for point updates in a segment tree? ::: O(log n) where n is the size of the input array
+- What is the space complexity of a segment tree? ::: O(4*n) or O(n) since we allocate space for 4*n nodes but many may not be used
+- What technique is used for range updates in segment trees? ::: Lazy propagation to mark nodes for future updates
+- What is the main advantage of segment trees over simple array traversal for range queries? ::: Logarithmic time complexity instead of linear time for each query
+- What type of problems commonly require segment trees? ::: Problems with frequent range sum/min/max queries and point updates
+- How does a segment tree represent the array? ::: As a binary tree where each node represents a segment of the array
+- What happens during a range query in a segment tree? ::: The query recursively traverses the tree, combining results from child nodes
+
+```
 ```

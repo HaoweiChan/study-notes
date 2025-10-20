@@ -12,10 +12,29 @@ jobs:
         with:
           node-version: 20
       - name: Install deps
-        run: |
-          npm init -y
-          npm install --no-audit --no-fund remark-cli remark-frontmatter remark-preset-lint-recommended markdownlint-cli
+        run: npm install
       - name: Run remark
         run: npx remark . --frail
       - name: Run markdownlint
         run: npx markdownlint "**/*.md" --ignore node_modules
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install Python dependencies
+        run: pip install frontmatter
+      - name: Generate flashcards
+        run: python scripts/export_flashcards_json.py
+      - name: Validate flashcards format
+        run: |
+          python -c "
+          import json
+          with open('artifacts/flashcards.json', 'r') as f:
+              cards = json.load(f)
+          print(f'Found {len(cards)} flashcards')
+          for card in cards:
+              if 'q' not in card or 'a' not in card or 'category' not in card:
+                  print(f'Invalid card format: {card}')
+                  exit(1)
+          print('All flashcards have valid format')
+          "

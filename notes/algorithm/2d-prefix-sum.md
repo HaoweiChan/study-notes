@@ -143,6 +143,14 @@ result = prefix_obj.query(1, 1, 2, 2)
 print(f"Sum from (1,1) to (2,2): {result}")  # Expected: 5+6+8+9 = 28
 ```
 
+## Flashcards
+
+- What is the time complexity for building a 2D prefix sum array? ::: O(m * n) where m and n are the dimensions of the matrix
+- What is the time complexity for querying a submatrix sum using 2D prefix sum? ::: O(1) constant time
+- What is the formula for computing prefix_sum\[i]\[j] in a 2D prefix sum array? ::: prefix_sum\[i]\[j] = matrix\[i]\[j] + prefix_sum\[i-1]\[j] + prefix_sum\[i]\[j-1] - prefix_sum\[i-1]\[j-1]
+- What adjustment is needed when querying a submatrix that doesn't start at (0,0)? ::: Subtract the sums of the regions above and to the left, and add back the overlapping corner region
+- What is the main advantage of using 2D prefix sums over nested loops for range queries? ::: O(1) query time instead of O(m \* n) for each query where m\*n is the submatrix size
+
 ### Edge Cases and Validation
 ```python
 # Empty matrix
