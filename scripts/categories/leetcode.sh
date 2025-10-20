@@ -9,6 +9,7 @@ handle_leetcode_category() {
     local title="$1"
     local slug_arg="$2"
     local date="$3"
+    local category="$4"
 
     local target_dir="notes/leetcode"
     local template_file="templates/leetcode-template.md"
