@@ -1,0 +1,277 @@
+/* Design System from Figma - Placeholder Component (Community) */
+
+/* ============================================
+   CSS Variables - Design Tokens
+   ============================================ */
+:root {
+  /* Colors - Background */
+  --background-base: #FFFFFF;
+  
+  /* Colors - Borders */
+  --border-base: #DBDBDB;
+  
+  /* Colors - Text */
+  --text-strong: #000000;
+  --text-weak: #949494;
+  
+  /* Colors - Primary */
+  --primary-base: #000000;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  
+  /* Border Radius */
+  --radius-sm: 2px;
+  --radius-md: 8px;
+  
+  /* Border Width */
+  --border-width: 2px;
+  
+  /* Typography - Font Family */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  
+  /* Typography - Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-black: 900;
+  
+  /* Typography - Font Sizes */
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-base: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 17px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 22px;
+  --font-size-3xl: 72px;
+  
+  /* Typography - Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.33;
+  --line-height-relaxed: 1.5;
+  --line-height-loose: 1.6;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+}
+
+/* ============================================
+   Reset & Base Styles
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--background-base);
+  color: var(--text-strong);
+  line-height: var(--line-height-relaxed);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================
+   Components - Buttons
+   ============================================ */
+.btn {
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  border-radius: 24px;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  padding: 12px 32px;
+  background: var(--primary-base);
+  color: var(--background-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.3px;
+}
+
+.btn-primary:hover {
+  background: #333333;
+}
+
+.btn-secondary {
+  padding: 10px 20px;
+  background: var(--background-base);
+  border: var(--border-width) solid var(--border-base);
+  color: var(--text-weak);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.btn-secondary:hover {
+  border-color: var(--text-strong);
+  color: var(--text-strong);
+}
+
+.btn-ghost {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: transparent;
+  color: var(--text-weak);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.btn-ghost:hover {
+  color: var(--text-strong);
+}
+
+.btn-icon {
+  padding: var(--spacing-sm);
+  background: var(--background-base);
+  border: var(--border-width) solid var(--border-base);
+  border-radius: var(--radius-md);
+  width: 40px;
+  height: 40px;
+}
+
+.btn-icon:hover {
+  border-color: var(--text-strong);
+}
+
+/* ============================================
+   Components - Card/Placeholder
+   ============================================ */
+.card {
+  background: var(--background-base);
+  border: var(--border-width) solid var(--border-base);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast);
+}
+
+.card:hover {
+  border-color: var(--text-weak);
+}
+
+/* ============================================
+   Components - Input/Text Field
+   ============================================ */
+.input {
+  position: relative;
+  background: var(--background-base);
+  border: var(--border-width) solid var(--border-base);
+  border-radius: var(--radius-md);
+  padding: 0 var(--spacing-md);
+  display: flex;
+  align-items: center;
+  font-family: var(--font-family);
+  transition: all var(--transition-fast);
+}
+
+.input:focus-within {
+  border-color: var(--text-strong);
+}
+
+.input input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-strong);
+}
+
+.input input::placeholder {
+  color: var(--text-weak);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ============================================
+   Components - Select/Dropdown
+   ============================================ */
+.select {
+  padding: var(--spacing-sm) 32px var(--spacing-sm) 12px;
+  border: var(--border-width) solid var(--border-base);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  font-weight: var(--font-weight-medium);
+  background: var(--background-base);
+  color: var(--text-strong);
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.select:hover {
+  border-color: var(--text-strong);
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--text-strong);
+}
+
+/* ============================================
+   Components - Progress Bar
+   ============================================ */
+.progress {
+  width: 100%;
+  height: var(--spacing-xs);
+  background: var(--border-base);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--primary-base);
+  border-radius: var(--radius-sm);
+  transition: width var(--transition-fast);
+}
+
+/* ============================================
+   Components - Separator
+   ============================================ */
+.separator {
+  height: 1px;
+  background: var(--border-base);
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+.text-strong {
+  color: var(--text-strong);
+  font-weight: var(--font-weight-semibold);
+}
+
+.text-weak {
+  color: var(--text-weak);
+}
+
+.label-smallest {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+}
+

@@ -1,59 +1,470 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Notes Flashcards</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Study Notes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
   <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;max-width:900px;margin:40px auto;padding:0 16px}
-    .deck-select, .card, .controls{margin:12px 0}
-    .card{border:1px solid #ddd;border-radius:8px;padding:24px;min-height:160px;display:flex;flex-direction:column;justify-content:center}
-    .q{font-size:1.15rem;margin-bottom:12px}
-    .a{display:none;color:#0b0;white-space:pre-wrap}
-    .show .a{display:block}
-    .show .q{opacity:0.6}
-    button{margin-right:8px;padding:8px 12px;border-radius:6px}
-    .meta{color:#666;font-size:0.9rem;margin-top:8px}
+    /* Page-specific layout styles */
+    .header {
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      border-bottom: 1px solid var(--border-base);
+    }
+
+    .header h1 {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-strong);
+      letter-spacing: -0.2px;
+    }
+
+    .deck-select {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .container {
+      flex: 1;
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 60px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      position: relative;
+      padding: 60px 48px;
+      width: 100%;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .card-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .q {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-medium);
+      color: var(--text-strong);
+      line-height: var(--line-height-relaxed);
+      letter-spacing: -0.2px;
+    }
+
+    .a {
+      display: none;
+      font-size: var(--font-size-md);
+      color: var(--text-weak);
+      line-height: var(--line-height-loose);
+      white-space: pre-wrap;
+      padding: 20px 0;
+      border-top: 1px solid var(--border-base);
+    }
+
+    .show .a {
+      display: block;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .meta {
+      margin-top: var(--spacing-lg);
+      padding-top: var(--spacing-md);
+      border-top: 1px solid var(--border-base);
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      border: none;
+    }
+
+    /* Category tags - 12 Color Palette */
+    .tag-category {
+      color: white;
+      font-weight: 600;
+    }
+
+    .tag-category[data-color="0"] { background: #1976D2; }  /* Deep Blue */
+    .tag-category[data-color="1"] { background: #388E3C; }  /* Forest Green */
+    .tag-category[data-color="2"] { background: #7B1FA2; }  /* Deep Purple */
+    .tag-category[data-color="3"] { background: #D32F2F; }  /* Deep Red */
+    .tag-category[data-color="4"] { background: #F57C00; }  /* Deep Orange */
+    .tag-category[data-color="5"] { background: #0288D1; }  /* Cyan */
+    .tag-category[data-color="6"] { background: #C2185B; }  /* Pink */
+    .tag-category[data-color="7"] { background: #5D4037; }  /* Brown */
+    .tag-category[data-color="8"] { background: #303F9F; }  /* Indigo */
+    .tag-category[data-color="9"] { background: #689F38; }  /* Light Green */
+    .tag-category[data-color="10"] { background: #E64A19; } /* Deep Orange Red */
+    .tag-category[data-color="11"] { background: #00796B; } /* Teal */
+
+    /* Topic tags - Light color palette */
+    .tag-topic {
+      background: #F5F5F5;
+      color: #616161;
+      font-weight: 500;
+    }
+
+    .controls {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+    }
+
+    #show {
+      width: 100%;
+    }
+
+    .show ~ .controls #show {
+      display: none;
+    }
+
+    .nav-buttons {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: var(--spacing-md);
+      align-items: center;
+      width: 100%;
+    }
+
+    .nav-buttons #prev {
+      justify-self: start;
+    }
+
+    .nav-buttons #random {
+      justify-self: center;
+    }
+
+    .nav-buttons #next {
+      justify-self: end;
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .container {
+        padding: 40px 20px;
+      }
+
+      .card {
+        padding: 40px 32px;
+        min-height: 280px;
+      }
+
+      .q {
+        font-size: 18px;
+      }
+
+      .a {
+        font-size: 15px;
+      }
+
+      .controls {
+        max-width: 100%;
+      }
+
+      .grade-buttons {
+        flex-direction: column;
+      }
+
+      .nav-buttons {
+        width: 100%;
+      }
+
+      .nav-buttons button {
+        flex: 1;
+      }
+    }
+
+    .search-field {
+      position: relative;
+      width: 402px;
+    }
+
+    .search-field .input {
+      height: 40px;
+    }
+
+    .dark-mode-toggle {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      width: 56px;
+      height: 56px;
+      background: var(--background-base);
+      border: var(--border-width) solid var(--border-base);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 1000;
+    }
+
+    .dark-mode-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .dark-mode-toggle svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--text-strong);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      --background-base: #1E1E1E;
+      --card-bg: #2D2D2D;
+      --text-strong: #E0E0E0;
+      --text-weak: #9E9E9E;
+      --border-base: #404040;
+      --primary-base: #FFFFFF;
+    }
+
+    body.dark-mode .dark-mode-toggle:hover {
+      background: #404040;
+    }
+
+    body.dark-mode .search-result-item:hover {
+      background: #404040;
+    }
+
+    body.dark-mode .btn-secondary {
+      background: var(--card-bg);
+    }
+
+    body.dark-mode .btn-secondary:hover {
+      background: #404040;
+    }
+
+    body.dark-mode .tag-topic {
+      background: #404040;
+      color: #B0B0B0;
+    }
+
+    .search-results {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--background-base);
+      border: var(--border-width) solid var(--border-base);
+      border-top: none;
+      border-radius: 0 0 var(--radius-md) var(--radius-md);
+      max-height: 300px;
+      overflow-y: auto;
+      display: none;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .search-results.show {
+      display: block;
+    }
+
+    .search-result-item {
+      padding: 12px var(--spacing-md);
+      cursor: pointer;
+      border-bottom: 1px solid var(--border-base);
+      transition: background var(--transition-fast);
+    }
+
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
+
+    .search-result-item:hover {
+      background: #F5F5F5;
+    }
+
+    .search-result-question {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--text-strong);
+      margin-bottom: 4px;
+    }
+
+    .search-result-meta {
+      font-size: var(--font-size-xs);
+      color: var(--text-weak);
+      display: flex;
+      gap: var(--spacing-sm);
+      align-items: center;
+    }
+
+    .search-result-meta .tag {
+      padding: 2px 8px;
+      font-size: 10px;
+    }
+
+    .bookmark-btn {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      padding: var(--spacing-sm);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 1;
+      transition: all var(--transition-fast);
+      opacity: 0.3;
+      z-index: 10;
+    }
+
+    .bookmark-btn:hover {
+      opacity: 0.6;
+    }
+
+    .bookmark-btn.bookmarked {
+      opacity: 1;
+      color: #FFB800;
+    }
+
+    body.dark-mode .bookmark-btn {
+      color: #E0E0E0;
+      text-shadow: 0 0 2px rgba(255,255,255,0.3);
+    }
+
+    body.dark-mode .bookmark-btn.bookmarked {
+      color: #FFB800;
+      text-shadow: 0 0 4px rgba(255,184,0,0.5);
+    }
   </style>
 </head>
 <body>
-  <h1>Flashcards — Notes</h1>
-  <div class="deck-select">
-    <label>Deck:
-      <select id="deck">
-        <option value="all">All</option>
-        <option value="algorithm">algorithm</option>
-        <option value="devops">devops</option>
-        <option value="machine-learning">machine-learning</option>
-        <option value="system-design">system-design</option>
-        <option value="leetcode">leetcode</option>
-        <option value="agentic">agentic</option>
+  <header class="header">
+    <h1>Study Notes</h1>
+    <div class="search-field">
+      <div class="input">
+        <input type="text" id="search" placeholder="Search flashcards..." autocomplete="off" />
+      </div>
+      <div id="searchResults" class="search-results"></div>
+    </div>
+    <div class="deck-select">
+      <select id="deck" class="select">
+        <option value="all">All Decks</option>
+        <option value="bookmarked">⭐ Bookmarked</option>
+        <option value="algorithm">Algorithm</option>
+        <option value="devops">DevOps</option>
+        <option value="machine-learning">Machine Learning</option>
+        <option value="system-design">System Design</option>
+        <option value="leetcode">LeetCode</option>
+        <option value="agentic">Agentic</option>
       </select>
-    </label>
+    </div>
+  </header>
+
+  <div class="container">
+    <div id="cardArea" class="card" onclick="handleCardClick()">
+      <button id="bookmark" class="bookmark-btn" onclick="toggleBookmark(event)" title="Bookmark this card">☆</button>
+      <div class="card-content">
+        <div class="q" id="q">Loading…</div>
+        <div class="a" id="a"></div>
+      </div>
+      <div class="meta" id="meta"></div>
+    </div>
+
+    <div class="controls">
+      <button id="show" class="btn btn-primary">Show answer</button>
+      <div class="nav-buttons">
+        <button id="prev" class="btn btn-ghost">←  Prev</button>
+        <button id="random" class="btn btn-secondary">Random</button>
+        <button id="next" class="btn btn-ghost">Next  →</button>
+      </div>
+    </div>
   </div>
 
-  <div id="cardArea" class="card">
-    <div class="q" id="q">Loading…</div>
-    <div class="a" id="a"></div>
-    <div class="meta" id="meta"></div>
-  </div>
-
-  <div class="controls">
-    <button id="show">Show Answer</button>
-    <button id="again">Again</button>
-    <button id="good">Good</button>
-    <button id="easy">Easy</button>
-    <button id="prev">◀ Prev</button>
-    <button id="next">Next ▶</button>
-  </div>
+  <button id="darkModeToggle" class="dark-mode-toggle" title="Toggle dark mode">
+    <svg id="moonIcon" viewBox="0 0 24 24">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+    <svg id="sunIcon" style="display:none;" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </button>
 
 <script>
 const DATA_PATH = './artifacts/flashcards.json';
 let allCards = [];
 let filtered = [];
 let idx = 0;
+let bookmarkedCards = new Set();
 
 function saveState(){ localStorage.setItem('flash_state', JSON.stringify({idx,deck:document.getElementById('deck').value})); }
-function loadState(){ try{ const s=JSON.parse(localStorage.getItem('flash_state')||'{}'); if(s.idx) idx=s.idx; if(s.deck) document.getElementById('deck').value=s.deck;}catch(e){} }
+function loadState(){ 
+  try{ 
+    const s=JSON.parse(localStorage.getItem('flash_state')||'{}'); 
+    if(s.idx) idx=s.idx; 
+    if(s.deck) document.getElementById('deck').value=s.deck;
+    
+    // Load bookmarks
+    const bookmarks = JSON.parse(localStorage.getItem('bookmarked_cards')||'[]');
+    bookmarkedCards = new Set(bookmarks);
+  }catch(e){} 
+}
 
 async function load(){
   const res = await fetch(DATA_PATH);
@@ -63,49 +474,214 @@ async function load(){
   showCard();
 }
 
-function applyFilter(){
-  const deck = document.getElementById('deck').value;
-  filtered = (deck==='all')? allCards.slice() : allCards.filter(c=>c.category===deck);
-  if(filtered.length===0){ document.getElementById('q').textContent='No cards in this deck.'; document.getElementById('a').textContent=''; }
-  if(idx>=filtered.length) idx = 0;
+// Category to color mapping - Pre-assign colors to known categories
+const categoryColors = {
+  'algorithm': 0,
+  'devops': 1,
+  'machine-learning': 2,
+  'system-design': 3,
+  'leetcode': 4,
+  'agentic': 5
+};
+let colorIndex = 6; // Start from 6 for new categories
+
+function getCategoryColor(category) {
+  if (!categoryColors[category]) {
+    categoryColors[category] = colorIndex % 12;
+    colorIndex++;
+  }
+  return categoryColors[category];
 }
 
-function renderMeta(c){ return `Category: ${c.category} • Source: ${c.source}` }
+function applyFilter(){
+  const deck = document.getElementById('deck').value;
+  const searchTerm = document.getElementById('search').value.toLowerCase();
+
+  if(deck === 'bookmarked') {
+    filtered = allCards.filter((c, i) => bookmarkedCards.has(i));
+  } else if(deck === 'all') {
+    filtered = allCards.slice();
+  } else {
+    filtered = allCards.filter(c => c.category === deck);
+  }
+
+  // Apply search filter
+  if(searchTerm) {
+    filtered = filtered.filter(c =>
+      c.q.toLowerCase().includes(searchTerm) ||
+      c.a.toLowerCase().includes(searchTerm) ||
+      c.category.toLowerCase().includes(searchTerm) ||
+      c.source.toLowerCase().includes(searchTerm)
+    );
+  }
+
+  if(filtered.length===0){
+    document.getElementById('q').textContent='No cards match your filters.';
+    document.getElementById('a').textContent='';
+    document.getElementById('meta').innerHTML = '';
+  }
+  if(idx>=filtered.length) idx = 0;
+}
 
 function showCard(){
   if(!filtered || filtered.length===0) return;
   const c = filtered[idx];
   document.getElementById('q').textContent = c.q;
   document.getElementById('a').textContent = c.a;
-  document.getElementById('meta').textContent = renderMeta(c);
+  
+  // Update meta with tags
+  const metaDiv = document.getElementById('meta');
+  const categoryColor = getCategoryColor(c.category);
+  metaDiv.innerHTML = `
+    <span class="tag tag-category" data-color="${categoryColor}">${c.category}</span>
+    <span class="tag tag-topic">${c.source}</span>
+  `;
+  
   document.getElementById('cardArea').classList.remove('show');
+  
+  // Update bookmark button
+  const bookmarkBtn = document.getElementById('bookmark');
+  const originalIdx = allCards.indexOf(filtered[idx]);
+  if(bookmarkedCards.has(originalIdx)) {
+    bookmarkBtn.textContent = '★';
+    bookmarkBtn.classList.add('bookmarked');
+  } else {
+    bookmarkBtn.textContent = '☆';
+    bookmarkBtn.classList.remove('bookmarked');
+  }
+  
   saveState();
 }
 
-document.getElementById('show').addEventListener('click', ()=>{ document.getElementById('cardArea').classList.add('show'); });
-document.getElementById('next').addEventListener('click', ()=>{ idx=(idx+1)%filtered.length; showCard(); });
-document.getElementById('prev').addEventListener('click', ()=>{ idx=(idx-1+filtered.length)%filtered.length; showCard(); });
-document.getElementById('again').addEventListener('click', ()=>{ nextAfterGrade(0); });
-document.getElementById('good').addEventListener('click', ()=>{ nextAfterGrade(3); });
-document.getElementById('easy').addEventListener('click', ()=>{ nextAfterGrade(5); });
-
-function nextAfterGrade(score){
-  // rudimentary scheduling: if "good" or "easy", push card later; if "again" keep it close.
-  if(!filtered || filtered.length===0) return;
-  const c = filtered.splice(idx,1)[0];
-  if(score>=3) {
-    // push farther: append to end
-    filtered.push(c);
+function toggleBookmark(e){
+  e.stopPropagation();
+  const bookmarkBtn = document.getElementById('bookmark');
+  const originalIdx = allCards.indexOf(filtered[idx]);
+  
+  if(bookmarkedCards.has(originalIdx)) {
+    bookmarkedCards.delete(originalIdx);
+    bookmarkBtn.textContent = '☆';
+    bookmarkBtn.classList.remove('bookmarked');
   } else {
-    // keep it near front: insert 2 positions later
-    const insertAt = Math.min(2, filtered.length);
-    filtered.splice(insertAt,0,c);
+    bookmarkedCards.add(originalIdx);
+    bookmarkBtn.textContent = '★';
+    bookmarkBtn.classList.add('bookmarked');
   }
-  if(idx>=filtered.length) idx = 0;
-  showCard();
+  // Save bookmarks to localStorage
+  localStorage.setItem('bookmarked_cards', JSON.stringify([...bookmarkedCards]));
 }
 
-document.getElementById('deck').addEventListener('change', ()=>{ applyFilter(); idx=0; showCard(); saveState(); });
+function handleCardClick(){
+  if(!document.getElementById('cardArea').classList.contains('show')){
+    document.getElementById('cardArea').classList.add('show');
+  }
+}
+
+document.getElementById('show').addEventListener('click', (e)=>{ e.stopPropagation(); document.getElementById('cardArea').classList.add('show'); });
+document.getElementById('next').addEventListener('click', (e)=>{ e.stopPropagation(); idx=(idx+1)%filtered.length; showCard(); });
+document.getElementById('prev').addEventListener('click', (e)=>{ e.stopPropagation(); idx=(idx-1+filtered.length)%filtered.length; showCard(); });
+document.getElementById('random').addEventListener('click', (e)=>{ e.stopPropagation(); idx=Math.floor(Math.random()*filtered.length); showCard(); });
+
+function applyDeckFilter() {
+  const deck = document.getElementById('deck').value;
+  
+  if(deck === 'bookmarked') {
+    filtered = allCards.filter((c, i) => bookmarkedCards.has(i));
+  } else if(deck === 'all') {
+    filtered = allCards.slice();
+  } else {
+    filtered = allCards.filter(c => c.category === deck);
+  }
+  
+  idx = 0;
+  if(filtered.length > 0) {
+    showCard();
+  } else {
+    document.getElementById('q').textContent = 'No cards in this deck.';
+    document.getElementById('a').textContent = '';
+    document.getElementById('meta').innerHTML = '';
+  }
+  saveState();
+}
+
+function handleSearch() {
+  const searchTerm = document.getElementById('search').value.toLowerCase().trim();
+  const searchResults = document.getElementById('searchResults');
+  
+  if(!searchTerm) {
+    searchResults.classList.remove('show');
+    searchResults.innerHTML = '';
+    return;
+  }
+  
+  const matches = allCards.filter(c =>
+    c.q.toLowerCase().includes(searchTerm) ||
+    c.a.toLowerCase().includes(searchTerm) ||
+    c.category.toLowerCase().includes(searchTerm) ||
+    c.source.toLowerCase().includes(searchTerm)
+  );
+  
+  if(matches.length === 0) {
+    searchResults.innerHTML = '<div class="search-result-item" style="cursor: default; color: var(--text-weak);">No results found</div>';
+    searchResults.classList.add('show');
+    return;
+  }
+  
+  searchResults.innerHTML = matches.slice(0, 10).map((card) => {
+    const categoryColor = getCategoryColor(card.category);
+    return `
+      <div class="search-result-item" data-card-idx="${allCards.indexOf(card)}">
+        <div class="search-result-question">${card.q}</div>
+        <div class="search-result-meta">
+          <span class="tag tag-category" data-color="${categoryColor}">${card.category}</span>
+          <span>${card.source}</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  searchResults.classList.add('show');
+  
+  searchResults.querySelectorAll('.search-result-item[data-card-idx]').forEach(item => {
+    item.addEventListener('click', () => {
+      const cardIdx = parseInt(item.dataset.cardIdx);
+      filtered = allCards.slice();
+      idx = cardIdx;
+      showCard();
+      document.getElementById('search').value = '';
+      searchResults.classList.remove('show');
+      searchResults.innerHTML = '';
+    });
+  });
+}
+
+document.addEventListener('click', (e) => {
+  const searchField = document.querySelector('.search-field');
+  const searchResults = document.getElementById('searchResults');
+  if (!searchField.contains(e.target)) {
+    searchResults.classList.remove('show');
+  }
+});
+
+// Dark mode toggle
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+  const isDark = document.body.classList.contains('dark-mode');
+  document.getElementById('moonIcon').style.display = isDark ? 'none' : 'block';
+  document.getElementById('sunIcon').style.display = isDark ? 'block' : 'none';
+  localStorage.setItem('dark_mode', isDark ? 'true' : 'false');
+}
+
+// Load dark mode preference
+if(localStorage.getItem('dark_mode') === 'true') {
+  document.body.classList.add('dark-mode');
+  document.getElementById('moonIcon').style.display = 'none';
+  document.getElementById('sunIcon').style.display = 'block';
+}
+
+document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+document.getElementById('deck').addEventListener('change', applyDeckFilter);
+document.getElementById('search').addEventListener('input', handleSearch);
 
 load();
 </script>
