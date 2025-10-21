@@ -2,6 +2,8 @@
 
 A structured knowledge base with an interactive flashcard interface. Built for efficient learning and quick reference.
 
+**Live Demo:** [haoweichan.github.io/study-notes](https://haoweichan.github.io/study-notes/)
+
 ## What's Inside
 
 **Flashcard Study System** — 120+ cards with real-time search, category filtering, dark mode, bookmarks, and spaced repetition.
@@ -64,44 +66,29 @@ Use the provided helper script to create new notes from the template:
 ./scripts/new_note.sh "Two Sum" leetcode
 ```
 
-### Study Flashcards
+### Adding Flashcards
 
-🎯 **Interactive Flashcard Study System**
+Flashcards are auto-extracted from notes. Use any of these formats:
 
-Access the flashcard study interface at: **[Study Flashcards](https://haoweichan.github.io/study-notes/)**
-
-**Features:**
-- 120+ flashcards across Algorithm and DevOps topics
-- Spaced repetition learning system
-- Progress tracking and deck selection
-- Mobile-responsive design
-
-**Adding Flashcards:**
-Flashcards are automatically extracted from notes. Add them using any of these formats in your notes:
-
+**List format:**
 ```markdown
-## Flashcards
-
 - What is the time complexity of binary search? ::: O(log n)
-- What data structure is used for BFS? ::: Queue
+```
 
+**Frontmatter:**
 ```yaml
----
 flashcards:
   - q: "Question?"
     a: "Answer!"
----
 ```
 
+**Fenced block:**
+````markdown
 ```flashcard
 Q: Question?
 A: Answer!
-
----
-
-Q: Another question?
-A: Another answer!
 ```
+````
 
 
 ### Note Format
