@@ -1,6 +1,12 @@
-# Personal Notes Repo
+# Study Notes
 
-A personal repository for organized study notes and knowledge sharing.
+A structured knowledge base with an interactive flashcard interface. Built for efficient learning and quick reference.
+
+## What's Inside
+
+**Flashcard Study System** — 120+ cards with real-time search, category filtering, dark mode, bookmarks, and spaced repetition.
+
+**Clean Architecture** — Markdown-first notes with auto-extracted flashcards, automated linting, and GitHub Pages deployment.
 
 ## Repository Structure
 
