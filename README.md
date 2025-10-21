@@ -11,24 +11,31 @@ A structured knowledge base with an interactive flashcard interface. Built for e
 ## Repository Structure
 
 ```
-notes-repo/
-├── README.md                 # This file
+study-notes/
+├── docs/
+│   ├── index.html           # Flashcard web interface
+│   ├── styles.css           # Design system from Figma
+│   └── artifacts/
+│       └── flashcards.json  # Auto-generated flashcard data
+├── notes/
+│   ├── algorithm/           # Algorithm & data structure notes
+│   ├── devops/              # DevOps & infrastructure notes
+│   ├── system-design/       # System architecture notes
+│   ├── machine-learning/    # ML notes
+│   ├── leetcode/            # Coding problem solutions
+│   └── agentic/             # AI agent & automation notes
 ├── templates/
-│   └── note-template.md      # Template for new notes
-├── notes/                    # Your notes organized by category
-│   ├── ml/                   # Machine learning notes
-│   ├── algo/                 # Algorithms & problem solving
-│   └── sd/                   # System design notes
-├── .cursor/
-│   └── rules.mdc            # Cursor rules for note generation/validation
-├── .github/
-│   └── workflows/
-│       └── lint.yml         # GitHub Actions for linting
-├── .markdownlint.json       # Markdown linting configuration
-├── .remarkrc.cjs           # Remark linting configuration
-├── .pre-commit-config.yaml  # Pre-commit hooks
-└── scripts/
-    └── new_note.sh         # Helper script to create new notes
+│   ├── default-template.md
+│   ├── leetcode-template.md
+│   ├── system-design-template.md
+│   ├── devops-template.md
+│   └── agentic-template.md
+├── scripts/
+│   ├── new_note.sh          # Create new notes
+│   ├── export_flashcards_json.py  # Extract flashcards
+│   └── categories/          # Category-specific scripts
+└── .github/workflows/
+    └── lint.yml             # CI/CD for linting
 ```
 
 ## Usage
@@ -41,18 +48,20 @@ Use the provided helper script to create new notes from the template:
 ./scripts/new_note.sh "Title of note" <category> [slug]
 ```
 
-**Categories (with aliases):**
-- `ml` (machine-learning, ml-research) — Machine learning
-- `algo` (algorithms, algo-problems) — Algorithms & problem solving
-- `sd` (system-design, system, sys) — System design
+**Available Categories:**
+- `algorithm` — Algorithms & data structures
+- `devops` — Infrastructure & DevOps
+- `system-design` — System architecture
+- `machine-learning` — ML & AI
+- `leetcode` — Coding problems
+- `agentic` — AI agents & automation
 
 **Examples:**
 ```bash
-# Default category (ML)
-./scripts/new_note.sh "Kalman hedge ratio"
-
-# Explicit categories
-./scripts/new_note.sh "Longest Increasing Subsequence DP" algo lis-dp
+./scripts/new_note.sh "Binary Search Tree" algorithm
+./scripts/new_note.sh "Docker Networking" devops
+./scripts/new_note.sh "Design Twitter" system-design
+./scripts/new_note.sh "Two Sum" leetcode
 ```
 
 ### Study Flashcards
@@ -94,19 +103,6 @@ Q: Another question?
 A: Another answer!
 ```
 
-**Examples:**
-```bash
-# Default category (ML)
-./scripts/new_note.sh "Kalman hedge ratio"
-
-# Explicit categories
-./scripts/new_note.sh "Longest Increasing Subsequence DP" algo lis-dp
-
-# Using aliases
-./scripts/new_note.sh "Neural Network Architectures" machine-learning
-./scripts/new_note.sh "Load Balancer Design" system-design
-./scripts/new_note.sh "High-throughput video ingestion" sd
-```
 
 ### Note Format
 
@@ -152,11 +148,3 @@ npm install --no-audit --no-fund remark-cli remark-frontmatter remark-preset-lin
 npx remark . --frail
 npx markdownlint "**/*.md"
 ```
-
-## Contributing
-
-This is a personal study notes repository. Feel free to use this structure for your own notes!
-
-## License
-
-This repository is for personal use and learning purposes.
