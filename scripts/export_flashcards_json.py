@@ -54,7 +54,7 @@ def extract_section(text):
     return out
 
 cards = []
-for cat in ("machine-learning","algorithm","system-design","devops"):
+for cat in ("algorithm", "system-design", "devops", "leetcode", "agentic", "machine-learning"):
     folder = NOTES / cat
     if not folder.exists(): continue
     for md in folder.rglob("*.md"):

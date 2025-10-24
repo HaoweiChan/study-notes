@@ -43,4 +43,22 @@ leetcode_topics: []
 
 ## Related Problems
 {{RELATED_PROBLEMS}}
+
+## Quizzes
+
+### Pattern Recognition
+Q: What problem patterns or constraints suggest using this algorithm?
+Options:
+- A) {{PATTERN_OPTION_A}}
+- B) {{PATTERN_OPTION_B}}
+- C) {{PATTERN_OPTION_C}}
+- D) {{PATTERN_OPTION_D}}
+Answers: {{ANSWER_LETTERS}}
+Explanation: {{EXPLANATION_WHY_THIS_ALGORITHM}}
+
+## Learning Sources
+- [LeetCode Official Solution]({{LEETCODE_URL}}) - Official problem analysis and solutions
+- [NeetCode YouTube](https://www.youtube.com/c/NeetCode) - Video explanation of similar problems
+- [Algorithm Visualizer](https://algorithm-visualizer.org/) - Interactive visualization
+- [LeetCode Discuss]({{LEETCODE_URL}}/discuss/) - Community solutions and explanations
 ```

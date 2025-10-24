@@ -181,8 +181,20 @@ jobs:
 }
 ```
 
-## Links
-- Official documentation
-- Tutorial resources
-- Community guides
-- Related blog posts
+## Quizzes
+
+Q: When should you use {{TITLE}} in your DevOps workflow?
+Options:
+- A) {{SCENARIO_A}}
+- B) {{SCENARIO_B}}
+- C) {{SCENARIO_C}}
+- D) {{SCENARIO_D}}
+Answers: {{ANSWER_LETTERS}}
+Explanation: {{EXPLANATION_WHY}}
+
+## Learning Sources
+- [Official Documentation](URL) - Official docs and API reference
+- [Tutorial Series](URL) - Comprehensive learning path
+- [Video Course](URL) - Hands-on video tutorials
+- [Best Practices Guide](URL) - Industry best practices and patterns
+- [Community Examples](URL) - Real-world implementations and case studies

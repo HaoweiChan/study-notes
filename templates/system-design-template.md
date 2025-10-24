@@ -84,5 +84,20 @@ def key_function(param):
     pass
 ```
 
-## Links
-- Reference materials and further reading
+## Quizzes
+
+Q: What are the key architectural decisions for {{TITLE}}?
+Options:
+- A) {{DECISION_A}}
+- B) {{DECISION_B}}
+- C) {{DECISION_C}}
+- D) {{DECISION_D}}
+Answers: {{ANSWER_LETTERS}}
+Explanation: {{EXPLANATION_WHY_THESE_DECISIONS}}
+
+## Learning Sources
+- [System Design Primer](https://github.com/donnemartin/system-design-primer) - Comprehensive system design guide
+- [Design Pattern Article](URL) - Specific patterns used in this design
+- [Case Study](URL) - Real-world implementation examples
+- [Architecture Blog](URL) - Detailed architecture discussions
+- [Video Walkthrough](URL) - Visual explanation of the system

@@ -29,12 +29,25 @@ related: []
 slug: "custom-slug"  # if different from generated slug
 ```
 
+## Web Research Requirement
+**MANDATORY**: Before creating any note, you must perform web research to gather quality learning resources.
+
+Every note must include a `## Learning Sources` section at the end with 3-5 high-quality resources:
+- Official documentation
+- Tutorial articles or blog posts
+- Video explanations
+- Interactive visualizations
+- Community discussions or guides
+
+Format: `- [Source Title](URL) - Brief description of what this resource offers`
+
 ## Required Sections
 Every note must have these sections:
 - `# Title` (H1 heading matching the title)
 - `## Summary` - 1-3 line summary
 - `## Details` - Main content
 - `## Examples / snippets` - Code examples with language tags
+- `## Learning Sources` - 3-5 quality learning resources (see Web Research Requirement above)
 
 ## Optional Sections
 Notes may include these additional sections:
@@ -82,6 +95,54 @@ A: Queue
 - Focus on key concepts, definitions, and problem-solving patterns
 - Test for understanding, not just memorization
 - Use consistent terminology across related notes
+
+### Quizzes Section (Recommended)
+Include a `## Quizzes` section to create interactive multiple-choice questions that will be automatically extracted for the quiz study system. Quizzes support multiple correct answers.
+
+#### Frontmatter Format (Recommended for multiple quizzes)
+```yaml
+---
+title: "Note Title"
+quizzes:
+  - q: "Which algorithms work for shortest path? (Select all that apply)"
+    options: ["BFS", "DFS", "Dijkstra", "Union-Find"]
+    answers: [0, 2]  # Indices of correct options (0-based)
+    explanation: "BFS works for unweighted graphs, Dijkstra for weighted graphs with non-negative edges"
+  - q: "What data structures are used in graph traversal?"
+    options: ["Queue", "Stack", "Heap", "Array"]
+    answers: [0, 1]
+    explanation: "Queue for BFS, Stack for DFS"
+---
+```
+
+#### Markdown Section Format
+```markdown
+## Quizzes
+
+### Pattern Recognition
+Q: Given a sorted array and O(log n) requirement, which algorithms apply? (Select all)
+Options:
+- A) Binary Search
+- B) Linear Search
+- C) Two Pointers
+- D) Sliding Window
+Answers: A, C
+Explanation: Binary Search is optimal for sorted arrays with O(log n). Two Pointers can also work efficiently on sorted data in O(n).
+```
+
+**Guidelines for Quizzes:**
+- Focus on pattern recognition and decision-making
+- Questions should test "when to use" rather than just "what is"
+- Multiple correct answers are encouraged when appropriate
+- Always provide clear explanations for why answers are correct
+- For LeetCode notes: link problem constraints to algorithm choices
+
+**LeetCode Pattern Recognition Guidelines:**
+- "Sorted array + O(log n) requirement → Binary Search"
+- "Shortest path + unweighted graph → BFS"
+- "Connected components → Union-Find or DFS"
+- "Sliding window on contiguous subarray → Sliding Window technique"
+- Help identify which algorithm(s) to use based on problem patterns
 
 ## Code Block Requirements
 - All code blocks must specify a language (e.g., `python`, `javascript`)
