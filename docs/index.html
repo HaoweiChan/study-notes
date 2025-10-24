@@ -384,6 +384,173 @@
       color: #FFB800;
       text-shadow: 0 0 4px rgba(255,184,0,0.5);
     }
+
+    .mode-toggle {
+      display: flex;
+      gap: 8px;
+    }
+
+    .mode-toggle .btn-secondary {
+      min-width: 100px;
+    }
+
+    .mode-toggle .mode-active {
+      background: var(--primary-base);
+      color: white;
+    }
+
+    body.dark-mode .mode-toggle .mode-active {
+      background: var(--primary-base);
+      color: black;
+    }
+
+    /* Quiz-specific styles */
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .quiz-option {
+      padding: 16px;
+      border: 2px solid var(--border-base);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      background: var(--background-base);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      position: relative;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--primary-base);
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    body.dark-mode .quiz-option:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .quiz-option input[type="checkbox"] {
+      margin-top: 2px;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .quiz-option-text {
+      flex: 1;
+      font-size: var(--font-size-md);
+      color: var(--text-strong);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .quiz-option.selected {
+      border-color: var(--primary-base);
+      background: rgba(25, 118, 210, 0.08);
+    }
+
+    .quiz-option.correct {
+      border-color: #388E3C;
+      background: rgba(56, 142, 60, 0.1);
+    }
+
+    .quiz-option.incorrect {
+      border-color: #D32F2F;
+      background: rgba(211, 47, 47, 0.1);
+    }
+
+    .quiz-option.correct::after {
+      content: '✓';
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #388E3C;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .quiz-option.incorrect::after {
+      content: '✗';
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #D32F2F;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .quiz-explanation {
+      margin-top: 24px;
+      padding: 20px;
+      background: var(--card-bg);
+      border-left: 4px solid var(--primary-base);
+      border-radius: 4px;
+      display: none;
+    }
+
+    .quiz-explanation.show {
+      display: block;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .quiz-explanation-title {
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-strong);
+      margin-bottom: 8px;
+    }
+
+    .quiz-explanation-text {
+      font-size: var(--font-size-md);
+      color: var(--text-weak);
+      line-height: var(--line-height-loose);
+    }
+
+    #submitQuiz {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .quiz-submitted #submitQuiz {
+      display: none;
+    }
+
+    .quiz-result {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: var(--font-weight-medium);
+      display: none;
+    }
+
+    .quiz-result.show {
+      display: block;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .quiz-result.correct {
+      background: rgba(56, 142, 60, 0.1);
+      color: #388E3C;
+      border: 2px solid #388E3C;
+    }
+
+    .quiz-result.incorrect {
+      background: rgba(211, 47, 47, 0.1);
+      color: #D32F2F;
+      border: 2px solid #D32F2F;
+    }
+
+    .quiz-result.partial {
+      background: rgba(245, 124, 0, 0.1);
+      color: #F57C00;
+      border: 2px solid #F57C00;
+    }
   </style>
 </head>
 <body>
@@ -407,24 +574,56 @@
         <option value="agentic">Agentic</option>
       </select>
     </div>
+    <div class="mode-toggle">
+      <button id="flashcardMode" class="btn btn-secondary mode-active">Flashcards</button>
+      <button id="quizMode" class="btn btn-secondary">Quizzes</button>
+    </div>
   </header>
 
   <div class="container">
-    <div id="cardArea" class="card" onclick="handleCardClick()">
-      <button id="bookmark" class="bookmark-btn" onclick="toggleBookmark(event)" title="Bookmark this card">☆</button>
-      <div class="card-content">
-        <div class="q" id="q">Loading…</div>
-        <div class="a" id="a"></div>
+    <!-- Flashcard Mode -->
+    <div id="flashcardContainer" class="mode-container">
+      <div id="cardArea" class="card" onclick="handleCardClick()">
+        <button id="bookmark" class="bookmark-btn" onclick="toggleBookmark(event)" title="Bookmark this card">☆</button>
+        <div class="card-content">
+          <div class="q" id="q">Loading…</div>
+          <div class="a" id="a"></div>
+        </div>
+        <div class="meta" id="meta"></div>
       </div>
-      <div class="meta" id="meta"></div>
+
+      <div class="controls">
+        <button id="show" class="btn btn-primary">Show answer</button>
+        <div class="nav-buttons">
+          <button id="prev" class="btn btn-ghost">←  Prev</button>
+          <button id="random" class="btn btn-secondary">Random</button>
+          <button id="next" class="btn btn-ghost">Next  →</button>
+        </div>
+      </div>
     </div>
 
-    <div class="controls">
-      <button id="show" class="btn btn-primary">Show answer</button>
-      <div class="nav-buttons">
-        <button id="prev" class="btn btn-ghost">←  Prev</button>
-        <button id="random" class="btn btn-secondary">Random</button>
-        <button id="next" class="btn btn-ghost">Next  →</button>
+    <!-- Quiz Mode -->
+    <div id="quizContainer" class="mode-container" style="display: none;">
+      <div id="quizArea" class="card">
+        <div class="card-content">
+          <div class="q" id="quizQuestion">Loading…</div>
+          <div class="quiz-options" id="quizOptions"></div>
+          <div class="quiz-result" id="quizResult"></div>
+          <div class="quiz-explanation" id="quizExplanation">
+            <div class="quiz-explanation-title">Explanation</div>
+            <div class="quiz-explanation-text" id="quizExplanationText"></div>
+          </div>
+        </div>
+        <div class="meta" id="quizMeta"></div>
+      </div>
+
+      <div class="controls">
+        <button id="submitQuiz" class="btn btn-primary">Submit Answer</button>
+        <div class="nav-buttons">
+          <button id="prevQuiz" class="btn btn-ghost">←  Prev</button>
+          <button id="randomQuiz" class="btn btn-secondary">Random</button>
+          <button id="nextQuiz" class="btn btn-ghost">Next  →</button>
+        </div>
       </div>
     </div>
   </div>
@@ -447,11 +646,17 @@
   </button>
 
 <script>
-const DATA_PATH = './artifacts/flashcards.json';
+const FLASHCARD_PATH = './artifacts/flashcards.json';
+const QUIZ_PATH = './artifacts/quizzes.json';
 let allCards = [];
+let allQuizzes = [];
 let filtered = [];
+let filteredQuizzes = [];
 let idx = 0;
+let quizIdx = 0;
+let currentMode = 'flashcard';
 let bookmarkedCards = new Set();
+let selectedAnswers = new Set();
 
 function saveState(){ localStorage.setItem('flash_state', JSON.stringify({idx,deck:document.getElementById('deck').value})); }
 function loadState(){ 
@@ -467,11 +672,21 @@ function loadState(){
 }
 
 async function load(){
-  const res = await fetch(DATA_PATH);
-  allCards = await res.json();
+  const flashRes = await fetch(FLASHCARD_PATH);
+  allCards = await flashRes.json();
+  
+  const quizRes = await fetch(QUIZ_PATH);
+  allQuizzes = await quizRes.json();
+  
   applyFilter();
+  applyQuizFilter();
   loadState();
-  showCard();
+  
+  if(currentMode === 'flashcard') {
+    showCard();
+  } else {
+    showQuiz();
+  }
 }
 
 // Category to color mapping - Pre-assign colors to known categories
@@ -523,6 +738,23 @@ function applyFilter(){
   if(idx>=filtered.length) idx = 0;
 }
 
+function applyQuizFilter(){
+  const deck = document.getElementById('deck').value;
+
+  if(deck === 'all' || deck === 'bookmarked') {
+    filteredQuizzes = allQuizzes.slice();
+  } else {
+    filteredQuizzes = allQuizzes.filter(q => q.category === deck);
+  }
+
+  if(filteredQuizzes.length===0){
+    document.getElementById('quizQuestion').textContent='No quizzes match your filters.';
+    document.getElementById('quizOptions').innerHTML = '';
+    document.getElementById('quizMeta').innerHTML = '';
+  }
+  if(quizIdx>=filteredQuizzes.length) quizIdx = 0;
+}
+
 function showCard(){
   if(!filtered || filtered.length===0) return;
   const c = filtered[idx];
@@ -571,6 +803,109 @@ function toggleBookmark(e){
   localStorage.setItem('bookmarked_cards', JSON.stringify([...bookmarkedCards]));
 }
 
+function showQuiz(){
+  if(!filteredQuizzes || filteredQuizzes.length===0) return;
+  
+  const quiz = filteredQuizzes[quizIdx];
+  document.getElementById('quizQuestion').textContent = quiz.q;
+  
+  // Reset state
+  selectedAnswers.clear();
+  document.getElementById('quizArea').classList.remove('quiz-submitted');
+  document.getElementById('quizResult').classList.remove('show', 'correct', 'incorrect', 'partial');
+  document.getElementById('quizExplanation').classList.remove('show');
+  
+  // Build options
+  const optionsContainer = document.getElementById('quizOptions');
+  optionsContainer.innerHTML = '';
+  
+  quiz.options.forEach((option, i) => {
+    const optionDiv = document.createElement('div');
+    optionDiv.className = 'quiz-option';
+    optionDiv.innerHTML = `
+      <input type="checkbox" id="option${i}" data-index="${i}">
+      <label for="option${i}" class="quiz-option-text">${option}</label>
+    `;
+    optionDiv.onclick = (e) => {
+      if(e.target.tagName !== 'INPUT') {
+        const checkbox = optionDiv.querySelector('input');
+        checkbox.checked = !checkbox.checked;
+      }
+      toggleOption(i);
+    };
+    optionsContainer.appendChild(optionDiv);
+  });
+  
+  // Update meta with tags
+  const metaDiv = document.getElementById('quizMeta');
+  const categoryColor = getCategoryColor(quiz.category);
+  metaDiv.innerHTML = `
+    <span class="tag tag-category" data-color="${categoryColor}">${quiz.category}</span>
+    <span class="tag tag-topic">${quiz.source}</span>
+  `;
+}
+
+function toggleOption(index) {
+  const optionDiv = document.querySelectorAll('.quiz-option')[index];
+  const checkbox = document.getElementById(`option${index}`);
+  
+  if(checkbox.checked) {
+    selectedAnswers.add(index);
+    optionDiv.classList.add('selected');
+  } else {
+    selectedAnswers.delete(index);
+    optionDiv.classList.remove('selected');
+  }
+}
+
+function submitQuiz() {
+  if(!filteredQuizzes || filteredQuizzes.length===0) return;
+  
+  const quiz = filteredQuizzes[quizIdx];
+  const correctAnswers = new Set(quiz.answers);
+  const userAnswers = selectedAnswers;
+  
+  // Check if correct
+  const isCorrect = correctAnswers.size === userAnswers.size && 
+                    [...correctAnswers].every(a => userAnswers.has(a));
+  const hasPartial = userAnswers.size > 0 && !isCorrect;
+  
+  // Mark options
+  quiz.options.forEach((option, i) => {
+    const optionDiv = document.querySelectorAll('.quiz-option')[i];
+    const checkbox = document.getElementById(`option${i}`);
+    checkbox.disabled = true;
+    
+    if(correctAnswers.has(i)) {
+      optionDiv.classList.add('correct');
+    }
+    if(userAnswers.has(i) && !correctAnswers.has(i)) {
+      optionDiv.classList.add('incorrect');
+    }
+  });
+  
+  // Show result
+  const resultDiv = document.getElementById('quizResult');
+  resultDiv.classList.add('show');
+  
+  if(isCorrect) {
+    resultDiv.textContent = '✓ Correct! Well done!';
+    resultDiv.classList.add('correct');
+  } else if(hasPartial) {
+    const correctCount = [...userAnswers].filter(a => correctAnswers.has(a)).length;
+    resultDiv.textContent = `Partially correct (${correctCount}/${correctAnswers.size} correct)`;
+    resultDiv.classList.add('partial');
+  } else {
+    resultDiv.textContent = '✗ Incorrect. Review the explanation below.';
+    resultDiv.classList.add('incorrect');
+  }
+  
+  // Show explanation
+  document.getElementById('quizExplanationText').textContent = quiz.explanation || 'No explanation available.';
+  document.getElementById('quizExplanation').classList.add('show');
+  document.getElementById('quizArea').classList.add('quiz-submitted');
+}
+
 function handleCardClick(){
   if(!document.getElementById('cardArea').classList.contains('show')){
     document.getElementById('cardArea').classList.add('show');
@@ -593,15 +928,51 @@ function applyDeckFilter() {
     filtered = allCards.filter(c => c.category === deck);
   }
   
+  // Also update quiz filter
+  applyQuizFilter();
+  
   idx = 0;
-  if(filtered.length > 0) {
+  quizIdx = 0;
+  
+  if(currentMode === 'flashcard') {
+    if(filtered.length > 0) {
+      showCard();
+    } else {
+      document.getElementById('q').textContent = 'No cards in this deck.';
+      document.getElementById('a').textContent = '';
+      document.getElementById('meta').innerHTML = '';
+    }
+  } else {
+    if(filteredQuizzes.length > 0) {
+      showQuiz();
+    } else {
+      document.getElementById('quizQuestion').textContent = 'No quizzes in this deck.';
+      document.getElementById('quizOptions').innerHTML = '';
+      document.getElementById('quizMeta').innerHTML = '';
+    }
+  }
+  
+  saveState();
+}
+
+function switchMode(mode) {
+  currentMode = mode;
+  
+  if(mode === 'flashcard') {
+    document.getElementById('flashcardContainer').style.display = 'block';
+    document.getElementById('quizContainer').style.display = 'none';
+    document.getElementById('flashcardMode').classList.add('mode-active');
+    document.getElementById('quizMode').classList.remove('mode-active');
+    document.getElementById('search').placeholder = 'Search flashcards...';
     showCard();
   } else {
-    document.getElementById('q').textContent = 'No cards in this deck.';
-    document.getElementById('a').textContent = '';
-    document.getElementById('meta').innerHTML = '';
+    document.getElementById('flashcardContainer').style.display = 'none';
+    document.getElementById('quizContainer').style.display = 'block';
+    document.getElementById('flashcardMode').classList.remove('mode-active');
+    document.getElementById('quizMode').classList.add('mode-active');
+    document.getElementById('search').placeholder = 'Search quizzes...';
+    showQuiz();
   }
-  saveState();
 }
 
 function handleSearch() {
@@ -682,6 +1053,16 @@ if(localStorage.getItem('dark_mode') === 'true') {
 document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
 document.getElementById('deck').addEventListener('change', applyDeckFilter);
 document.getElementById('search').addEventListener('input', handleSearch);
+
+// Mode toggle listeners
+document.getElementById('flashcardMode').addEventListener('click', () => switchMode('flashcard'));
+document.getElementById('quizMode').addEventListener('click', () => switchMode('quiz'));
+
+// Quiz navigation listeners
+document.getElementById('submitQuiz').addEventListener('click', submitQuiz);
+document.getElementById('nextQuiz').addEventListener('click', () => { quizIdx=(quizIdx+1)%filteredQuizzes.length; showQuiz(); });
+document.getElementById('prevQuiz').addEventListener('click', () => { quizIdx=(quizIdx-1+filteredQuizzes.length)%filteredQuizzes.length; showQuiz(); });
+document.getElementById('randomQuiz').addEventListener('click', () => { quizIdx=Math.floor(Math.random()*filteredQuizzes.length); showQuiz(); });
 
 load();
 </script>

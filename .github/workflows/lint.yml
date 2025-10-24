@@ -29,6 +29,8 @@ jobs:
         run: pip install frontmatter
       - name: Generate flashcards
         run: python scripts/export_flashcards_json.py
+      - name: Generate quizzes
+        run: python scripts/export_quizzes_json.py
       - name: Validate flashcards format
         run: |
           python -c "
@@ -66,19 +68,45 @@ jobs:
           
           print('✅ All flashcard categories have corresponding deck options')
           "
+      - name: Validate quizzes format
+        run: |
+          python -c "
+          import json
+          
+          # Load quizzes
+          with open('docs/artifacts/quizzes.json', 'r') as f:
+              quizzes = json.load(f)
+          print(f'Found {len(quizzes)} quizzes')
+          
+          # Validate quiz format
+          for quiz in quizzes:
+              if 'q' not in quiz or 'options' not in quiz or 'answers' not in quiz:
+                  print(f'Invalid quiz format: {quiz}')
+                  exit(1)
+              if not isinstance(quiz['answers'], list):
+                  print(f'Answers must be a list: {quiz}')
+                  exit(1)
+              if not all(isinstance(a, int) and 0 <= a < len(quiz['options']) for a in quiz['answers']):
+                  print(f'Invalid answer indices: {quiz}')
+                  exit(1)
+          print('All quizzes have valid format')
+          "
 
-      - name: Commit generated flashcards
+      - name: Commit generated flashcards and quizzes
         if: github.event_name == 'push'
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add -f docs/artifacts/flashcards.json
+          git add -f docs/artifacts/quizzes.json
           if ! git diff --staged --quiet; then
             TOTAL_CARDS=$(grep -c '"category"' docs/artifacts/flashcards.json)
-            git commit -m "Auto-generate flashcards from notes
+            TOTAL_QUIZZES=$(grep -c '"category"' docs/artifacts/quizzes.json || echo "0")
+            git commit -m "Auto-generate flashcards and quizzes from notes
 
-            - Updated ${TOTAL_CARDS} total flashcards
-            - Generated from algorithm, devops, and system-design notes" || echo "No changes to commit"
+            - Updated ${TOTAL_CARDS} flashcards
+            - Updated ${TOTAL_QUIZZES} quizzes
+            - Generated from all note categories" || echo "No changes to commit"
           else
-            echo "No flashcard changes to commit"
+            echo "No flashcard or quiz changes to commit"
           fi
