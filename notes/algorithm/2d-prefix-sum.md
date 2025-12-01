@@ -2,7 +2,8 @@
 title: "2D Prefix Sum"
 date: "2025-10-07"
 tags: []
-related: []
+related:
+  - "difference-array"
 slug: "2d-prefix-sum"
 category: "algorithm"
 ---
