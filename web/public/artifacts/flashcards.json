@@ -1,0 +1,722 @@
+[
+  {
+    "q": "What is the main purpose of a monotonic queue?",
+    "a": "To efficiently find the minimum or maximum value in a sliding window in O(n) time",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-queue.md"
+  },
+  {
+    "q": "What are the two main operations performed on a monotonic queue?",
+    "a": "Push (add element while maintaining monotonic order) and Pop (remove element if outside window)",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-queue.md"
+  },
+  {
+    "q": "What is the key property that makes monotonic queues efficient?",
+    "a": "They maintain elements in increasing or decreasing order, allowing O(1) access to min/max",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-queue.md"
+  },
+  {
+    "q": "When should you use a monotonic decreasing queue?",
+    "a": "When you need to find the maximum value in each sliding window",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-queue.md"
+  },
+  {
+    "q": "When should you use a monotonic increasing queue?",
+    "a": "When you need to find the minimum value in each sliding window",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-queue.md"
+  },
+  {
+    "q": "What is the time complexity for processing n elements with window size k using monotonic queue?",
+    "a": "O(n) total time, O(k) space for the queue",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-queue.md"
+  },
+  {
+    "q": "What happens when pushing an element to a monotonic decreasing queue?",
+    "a": "Remove all elements smaller than the current element from the back before adding",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-queue.md"
+  },
+  {
+    "q": "What happens when the front element goes out of the current window?",
+    "a": "Remove it from the front of the queue",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-queue.md"
+  },
+  {
+    "q": "What problem can be solved using dual monotonic queues (both min and max)?",
+    "a": "Finding longest subarray where max - min ≤ limit",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-queue.md"
+  },
+  {
+    "q": "What is the main advantage of monotonic queue over a regular sliding window approach?",
+    "a": "O(1) time to get min/max per window instead of O(k) time",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-queue.md"
+  },
+  {
+    "q": "What is the primary purpose of a segment tree?",
+    "a": "To efficiently perform range queries (sum, min, max) and point updates on arrays",
+    "category": "algorithm",
+    "source": "notes/algorithm/segment-tree.md"
+  },
+  {
+    "q": "What is the time complexity for building a segment tree?",
+    "a": "O(n) where n is the size of the input array",
+    "category": "algorithm",
+    "source": "notes/algorithm/segment-tree.md"
+  },
+  {
+    "q": "What is the time complexity for range queries in a segment tree?",
+    "a": "O(log n) where n is the size of the input array",
+    "category": "algorithm",
+    "source": "notes/algorithm/segment-tree.md"
+  },
+  {
+    "q": "What is the time complexity for point updates in a segment tree?",
+    "a": "O(log n) where n is the size of the input array",
+    "category": "algorithm",
+    "source": "notes/algorithm/segment-tree.md"
+  },
+  {
+    "q": "What is the space complexity of a segment tree?",
+    "a": "O(4*n) or O(n) since we allocate space for 4*n nodes but many may not be used",
+    "category": "algorithm",
+    "source": "notes/algorithm/segment-tree.md"
+  },
+  {
+    "q": "What technique is used for range updates in segment trees?",
+    "a": "Lazy propagation to mark nodes for future updates",
+    "category": "algorithm",
+    "source": "notes/algorithm/segment-tree.md"
+  },
+  {
+    "q": "What is the main advantage of segment trees over simple array traversal for range queries?",
+    "a": "Logarithmic time complexity instead of linear time for each query",
+    "category": "algorithm",
+    "source": "notes/algorithm/segment-tree.md"
+  },
+  {
+    "q": "What type of problems commonly require segment trees?",
+    "a": "Problems with frequent range sum/min/max queries and point updates",
+    "category": "algorithm",
+    "source": "notes/algorithm/segment-tree.md"
+  },
+  {
+    "q": "How does a segment tree represent the array?",
+    "a": "As a binary tree where each node represents a segment of the array",
+    "category": "algorithm",
+    "source": "notes/algorithm/segment-tree.md"
+  },
+  {
+    "q": "What happens during a range query in a segment tree?",
+    "a": "The query recursively traverses the tree, combining results from child nodes",
+    "category": "algorithm",
+    "source": "notes/algorithm/segment-tree.md"
+  },
+  {
+    "q": "What is the primary purpose of Union-Find (Disjoint Set Union)?",
+    "a": "To efficiently manage disjoint sets and perform union and find operations",
+    "category": "algorithm",
+    "source": "notes/algorithm/union-find-dsu.md"
+  },
+  {
+    "q": "What are the two main operations in Union-Find?",
+    "a": "Find (determine which set an element belongs to) and Union (merge two sets)",
+    "category": "algorithm",
+    "source": "notes/algorithm/union-find-dsu.md"
+  },
+  {
+    "q": "What optimization techniques are used to achieve nearly constant time operations?",
+    "a": "Path compression and union by rank or size",
+    "category": "algorithm",
+    "source": "notes/algorithm/union-find-dsu.md"
+  },
+  {
+    "q": "What is path compression in Union-Find?",
+    "a": "Making each node on the find path point directly to the root to flatten the tree structure",
+    "category": "algorithm",
+    "source": "notes/algorithm/union-find-dsu.md"
+  },
+  {
+    "q": "What is union by rank in Union-Find?",
+    "a": "Always attaching the smaller tree to the root of the larger tree to keep trees balanced",
+    "category": "algorithm",
+    "source": "notes/algorithm/union-find-dsu.md"
+  },
+  {
+    "q": "What is the time complexity of Union-Find operations with optimizations?",
+    "a": "Nearly O(α(n)) where α(n) is the inverse Ackermann function (effectively constant)",
+    "category": "algorithm",
+    "source": "notes/algorithm/union-find-dsu.md"
+  },
+  {
+    "q": "What famous algorithm uses Union-Find as a key component?",
+    "a": "Kruskal's algorithm for finding Minimum Spanning Trees",
+    "category": "algorithm",
+    "source": "notes/algorithm/union-find-dsu.md"
+  },
+  {
+    "q": "What type of graph problem is Union-Find particularly good for?",
+    "a": "Connected components and cycle detection in undirected graphs",
+    "category": "algorithm",
+    "source": "notes/algorithm/union-find-dsu.md"
+  },
+  {
+    "q": "What happens when you try to union two elements that are already in the same set?",
+    "a": "The operation returns false and no change is made",
+    "category": "algorithm",
+    "source": "notes/algorithm/union-find-dsu.md"
+  },
+  {
+    "q": "What is the main advantage of Union-Find over other data structures for connectivity queries?",
+    "a": "Extremely fast operations that are nearly constant time for practical purposes",
+    "category": "algorithm",
+    "source": "notes/algorithm/union-find-dsu.md"
+  },
+  {
+    "q": "What is the primary purpose of a monotonic stack?",
+    "a": "To efficiently find the next greater or next smaller element for each element in an array",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-stack.md"
+  },
+  {
+    "q": "What are the two main types of monotonic stacks?",
+    "a": "Increasing monotonic stack (for next smaller elements) and decreasing monotonic stack (for next greater elements)",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-stack.md"
+  },
+  {
+    "q": "What happens when we push an element onto a decreasing monotonic stack?",
+    "a": "We pop all elements that are smaller than the current element before pushing",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-stack.md"
+  },
+  {
+    "q": "What happens when we push an element onto an increasing monotonic stack?",
+    "a": "We pop all elements that are larger than the current element before pushing",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-stack.md"
+  },
+  {
+    "q": "What is the time complexity of processing n elements with a monotonic stack?",
+    "a": "O(n) because each element is pushed and popped at most once",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-stack.md"
+  },
+  {
+    "q": "What famous problem can be solved using a monotonic stack?",
+    "a": "Largest Rectangle in Histogram (LeetCode 84)",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-stack.md"
+  },
+  {
+    "q": "What is the key insight behind monotonic stacks for histogram problems?",
+    "a": "Each bar can extend to the left until it hits a taller bar, and to the right until it hits a taller bar",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-stack.md"
+  },
+  {
+    "q": "What problem involves finding how many days you have to wait for a warmer temperature?",
+    "a": "Daily Temperatures (LeetCode 739)",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-stack.md"
+  },
+  {
+    "q": "What data structure is commonly used to implement monotonic stacks?",
+    "a": "A regular stack, but with the monotonic property maintained during push operations",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-stack.md"
+  },
+  {
+    "q": "What is the main advantage of monotonic stacks over brute force approaches?",
+    "a": "They solve next greater/smaller element problems in linear time instead of quadratic time",
+    "category": "algorithm",
+    "source": "notes/algorithm/monotonic-stack.md"
+  },
+  {
+    "q": "What is the main difference between BFS and DFS in terms of exploration strategy?",
+    "a": "BFS explores level by level (breadth-first), while DFS explores as far as possible along a branch (depth-first)",
+    "category": "algorithm",
+    "source": "notes/algorithm/graph-search-algorithms.md"
+  },
+  {
+    "q": "What is the time complexity of BFS on a graph with V vertices and E edges?",
+    "a": "O(V + E) for both time and space in the worst case",
+    "category": "algorithm",
+    "source": "notes/algorithm/graph-search-algorithms.md"
+  },
+  {
+    "q": "When should you use Dijkstra's algorithm instead of BFS?",
+    "a": "When edges have non-negative weights greater than 1, or when you need to find shortest paths in weighted graphs",
+    "category": "algorithm",
+    "source": "notes/algorithm/graph-search-algorithms.md"
+  },
+  {
+    "q": "What optimization does Union-Find use to achieve nearly constant time operations?",
+    "a": "Path compression and union by rank/size",
+    "category": "algorithm",
+    "source": "notes/algorithm/graph-search-algorithms.md"
+  },
+  {
+    "q": "What is the key difference between A* search and Dijkstra's algorithm?",
+    "a": "A* uses a heuristic function to guide the search toward the target, while Dijkstra explores uniformly",
+    "category": "algorithm",
+    "source": "notes/algorithm/graph-search-algorithms.md"
+  },
+  {
+    "q": "When is 0-1 BFS more appropriate than regular BFS?",
+    "a": "When edge weights are only 0 or 1, allowing for more efficient shortest path computation",
+    "category": "algorithm",
+    "source": "notes/algorithm/graph-search-algorithms.md"
+  },
+  {
+    "q": "What makes minimax algorithm suitable for two-player games?",
+    "a": "It assumes both players play optimally and explores all possible future moves",
+    "category": "algorithm",
+    "source": "notes/algorithm/graph-search-algorithms.md"
+  },
+  {
+    "q": "What data structure is commonly used to implement BFS?",
+    "a": "Queue (FIFO - First In, First Out)",
+    "category": "algorithm",
+    "source": "notes/algorithm/graph-search-algorithms.md"
+  },
+  {
+    "q": "What data structure is commonly used to implement DFS?",
+    "a": "Stack (LIFO - Last In, First Out) or recursion",
+    "category": "algorithm",
+    "source": "notes/algorithm/graph-search-algorithms.md"
+  },
+  {
+    "q": "What is the primary use case for Union-Find?",
+    "a": "Managing disjoint sets and connectivity queries in graphs",
+    "category": "algorithm",
+    "source": "notes/algorithm/graph-search-algorithms.md"
+  },
+  {
+    "q": "What type of algorithm is minimax and what games is it typically used for?",
+    "a": "Minimax is a decision-making algorithm for two-player turn-based games where both players play optimally",
+    "category": "algorithm",
+    "source": "notes/algorithm/minimax-algorithm.md"
+  },
+  {
+    "q": "What are the two main player types in minimax algorithm?",
+    "a": "Maximizing player (tries to maximize score) and minimizing player (tries to minimize score)",
+    "category": "algorithm",
+    "source": "notes/algorithm/minimax-algorithm.md"
+  },
+  {
+    "q": "What is the key assumption that minimax makes about player behavior?",
+    "a": "Both players play optimally, making the best possible moves at each turn",
+    "category": "algorithm",
+    "source": "notes/algorithm/minimax-algorithm.md"
+  },
+  {
+    "q": "What technique is commonly used to optimize minimax algorithm?",
+    "a": "Alpha-beta pruning to eliminate branches that won't affect the final decision",
+    "category": "algorithm",
+    "source": "notes/algorithm/minimax-algorithm.md"
+  },
+  {
+    "q": "What is the time complexity of minimax without optimization?",
+    "a": "O(b^d) where b is branching factor and d is depth, exponential in the worst case",
+    "category": "algorithm",
+    "source": "notes/algorithm/minimax-algorithm.md"
+  },
+  {
+    "q": "What data structure or technique can help avoid recomputing game states in minimax?",
+    "a": "Memoization or transposition tables to cache evaluated positions",
+    "category": "algorithm",
+    "source": "notes/algorithm/minimax-algorithm.md"
+  },
+  {
+    "q": "What is the main purpose of the minimax algorithm in game theory?",
+    "a": "To determine the best move for a player assuming optimal play from both sides",
+    "category": "algorithm",
+    "source": "notes/algorithm/minimax-algorithm.md"
+  },
+  {
+    "q": "How does minimax determine which move to choose at each step?",
+    "a": "It evaluates all possible future moves recursively and chooses the move that leads to the best outcome",
+    "category": "algorithm",
+    "source": "notes/algorithm/minimax-algorithm.md"
+  },
+  {
+    "q": "What happens at terminal nodes (game over states) in minimax?",
+    "a": "The algorithm returns the evaluated score of that position",
+    "category": "algorithm",
+    "source": "notes/algorithm/minimax-algorithm.md"
+  },
+  {
+    "q": "What is a key limitation of the basic minimax algorithm?",
+    "a": "It becomes computationally expensive for games with high branching factors or deep search depths",
+    "category": "algorithm",
+    "source": "notes/algorithm/minimax-algorithm.md"
+  },
+  {
+    "q": "What is the time complexity for building a 2D prefix sum array?",
+    "a": "O(m * n) where m and n are the dimensions of the matrix",
+    "category": "algorithm",
+    "source": "notes/algorithm/2d-prefix-sum.md"
+  },
+  {
+    "q": "What is the time complexity for querying a submatrix sum using 2D prefix sum?",
+    "a": "O(1) constant time",
+    "category": "algorithm",
+    "source": "notes/algorithm/2d-prefix-sum.md"
+  },
+  {
+    "q": "What is the formula for computing prefix_sum\\[i]\\[j] in a 2D prefix sum array?",
+    "a": "prefix_sum\\[i]\\[j] = matrix\\[i]\\[j] + prefix_sum\\[i-1]\\[j] + prefix_sum\\[i]\\[j-1] - prefix_sum\\[i-1]\\[j-1]",
+    "category": "algorithm",
+    "source": "notes/algorithm/2d-prefix-sum.md"
+  },
+  {
+    "q": "What adjustment is needed when querying a submatrix that doesn't start at (0,0)?",
+    "a": "Subtract the sums of the regions above and to the left, and add back the overlapping corner region",
+    "category": "algorithm",
+    "source": "notes/algorithm/2d-prefix-sum.md"
+  },
+  {
+    "q": "What is the main advantage of using 2D prefix sums over nested loops for range queries?",
+    "a": "O(1) query time instead of O(m \\* n) for each query where m\\*n is the submatrix size",
+    "category": "algorithm",
+    "source": "notes/algorithm/2d-prefix-sum.md"
+  },
+  {
+    "q": "What is the main advantage of the KMP algorithm over naive string matching?",
+    "a": "KMP avoids redundant comparisons by using the LPS array to skip unnecessary character checks",
+    "category": "algorithm",
+    "source": "notes/algorithm/kmp-algorithm.md"
+  },
+  {
+    "q": "What does LPS stand for in the KMP algorithm?",
+    "a": "Longest Proper Prefix which is also Suffix",
+    "category": "algorithm",
+    "source": "notes/algorithm/kmp-algorithm.md"
+  },
+  {
+    "q": "What is the time complexity of the KMP algorithm for pattern matching?",
+    "a": "O(n + m) where n is text length and m is pattern length",
+    "category": "algorithm",
+    "source": "notes/algorithm/kmp-algorithm.md"
+  },
+  {
+    "q": "What is the space complexity of the KMP algorithm?",
+    "a": "O(m) for the LPS array where m is pattern length",
+    "category": "algorithm",
+    "source": "notes/algorithm/kmp-algorithm.md"
+  },
+  {
+    "q": "In KMP, what happens when a mismatch occurs at position j in the pattern?",
+    "a": "We use the LPS array to determine how far back to go in the pattern (to position lps\\[j-1])",
+    "category": "algorithm",
+    "source": "notes/algorithm/kmp-algorithm.md"
+  },
+  {
+    "q": "What is the key insight that makes KMP more efficient than naive matching?",
+    "a": "The pattern itself contains information about how to shift when mismatches occur",
+    "category": "algorithm",
+    "source": "notes/algorithm/kmp-algorithm.md"
+  },
+  {
+    "q": "How does KMP preprocessing work for the pattern \"ABABAC\"?",
+    "a": "Build LPS array where each position shows longest proper prefix that is also suffix",
+    "category": "algorithm",
+    "source": "notes/algorithm/kmp-algorithm.md"
+  },
+  {
+    "q": "What is the worst-case scenario for KMP algorithm efficiency?",
+    "a": "When the pattern consists of many repeated characters, but KMP still maintains O(n + m) worst case",
+    "category": "algorithm",
+    "source": "notes/algorithm/kmp-algorithm.md"
+  },
+  {
+    "q": "How many comparisons does KMP make in the worst case?",
+    "a": "O(n + m) total comparisons, much better than naive O(n * m)",
+    "category": "algorithm",
+    "source": "notes/algorithm/kmp-algorithm.md"
+  },
+  {
+    "q": "What preprocessing step makes KMP efficient?",
+    "a": "Computing the LPS (failure function) array that tells us where to jump when mismatches occur",
+    "category": "algorithm",
+    "source": "notes/algorithm/kmp-algorithm.md"
+  },
+  {
+    "q": "What is the main purpose of Docker containers?",
+    "a": "To package applications and their dependencies into lightweight, portable, and isolated environments",
+    "category": "devops",
+    "source": "notes/devops/docker-containers.md"
+  },
+  {
+    "q": "What is a Docker image?",
+    "a": "A read-only template that contains the application code, runtime, libraries, and configuration files needed to run a container",
+    "category": "devops",
+    "source": "notes/devops/docker-containers.md"
+  },
+  {
+    "q": "What is a Docker container?",
+    "a": "A runnable instance of a Docker image that provides an isolated process with its own filesystem and network",
+    "category": "devops",
+    "source": "notes/devops/docker-containers.md"
+  },
+  {
+    "q": "What is the purpose of a Dockerfile?",
+    "a": "To define the steps needed to create a Docker image through a series of instructions",
+    "category": "devops",
+    "source": "notes/devops/docker-containers.md"
+  },
+  {
+    "q": "What is the difference between a Docker image and a container?",
+    "a": "An image is the static blueprint/template, while a container is the running instance created from that image",
+    "category": "devops",
+    "source": "notes/devops/docker-containers.md"
+  },
+  {
+    "q": "What are the main benefits of using Docker?",
+    "a": "Portability, consistency across environments, isolation, scalability, and simplified dependency management",
+    "category": "devops",
+    "source": "notes/devops/docker-containers.md"
+  },
+  {
+    "q": "What is Docker Compose used for?",
+    "a": "To define and run multi-container Docker applications using a YAML configuration file",
+    "category": "devops",
+    "source": "notes/devops/docker-containers.md"
+  },
+  {
+    "q": "What is the purpose of Docker volumes?",
+    "a": "To persist data generated by and used by Docker containers beyond their lifecycle",
+    "category": "devops",
+    "source": "notes/devops/docker-containers.md"
+  },
+  {
+    "q": "What is the difference between COPY and ADD instructions in Dockerfile?",
+    "a": "COPY copies files from host to image, while ADD can also download files from URLs and extract archives",
+    "category": "devops",
+    "source": "notes/devops/docker-containers.md"
+  },
+  {
+    "q": "What is the purpose of the EXPOSE instruction in Dockerfile?",
+    "a": "To inform Docker that the container listens on specified network ports at runtime",
+    "category": "devops",
+    "source": "notes/devops/docker-containers.md"
+  },
+  {
+    "q": "What is the difference between ENTRYPOINT and CMD in Dockerfile?",
+    "a": "ENTRYPOINT defines the executable, while CMD provides default arguments that can be overridden",
+    "category": "devops",
+    "source": "notes/devops/docker-containers.md"
+  },
+  {
+    "q": "What is Docker layering?",
+    "a": "The concept where each Dockerfile instruction creates a new layer in the image, allowing for caching and reusability",
+    "category": "devops",
+    "source": "notes/devops/docker-containers.md"
+  },
+  {
+    "q": "What is the purpose of multi-stage builds in Docker?",
+    "a": "To create smaller, more efficient images by using multiple FROM statements and copying only necessary artifacts",
+    "category": "devops",
+    "source": "notes/devops/docker-containers.md"
+  },
+  {
+    "q": "What is the role of a Docker registry?",
+    "a": "To store, distribute, and manage Docker images across different environments and teams",
+    "category": "devops",
+    "source": "notes/devops/docker-containers.md"
+  },
+  {
+    "q": "What are some common Docker security best practices?",
+    "a": "Run containers as non-root users, use minimal base images, scan for vulnerabilities, and limit resource usage",
+    "category": "devops",
+    "source": "notes/devops/docker-containers.md"
+  },
+  {
+    "q": "What is the primary purpose of Kubernetes?",
+    "a": "To automate deployment, scaling, and management of containerized applications",
+    "category": "devops",
+    "source": "notes/devops/kubernetes-orchestration.md"
+  },
+  {
+    "q": "What is a Pod in Kubernetes?",
+    "a": "The smallest deployable unit that can contain one or more containers that share storage and network",
+    "category": "devops",
+    "source": "notes/devops/kubernetes-orchestration.md"
+  },
+  {
+    "q": "What is the role of the Kubernetes API Server?",
+    "a": "To serve as the central management point for the entire cluster, handling all administrative operations",
+    "category": "devops",
+    "source": "notes/devops/kubernetes-orchestration.md"
+  },
+  {
+    "q": "What is the purpose of a Deployment in Kubernetes?",
+    "a": "To manage stateless applications, providing declarative updates and scaling capabilities",
+    "category": "devops",
+    "source": "notes/devops/kubernetes-orchestration.md"
+  },
+  {
+    "q": "What is a Service in Kubernetes?",
+    "a": "An abstraction that defines a logical set of Pods and enables network access to them",
+    "category": "devops",
+    "source": "notes/devops/kubernetes-orchestration.md"
+  },
+  {
+    "q": "What is the purpose of an Ingress in Kubernetes?",
+    "a": "To manage external access to services, typically handling HTTP/HTTPS traffic and load balancing",
+    "category": "devops",
+    "source": "notes/devops/kubernetes-orchestration.md"
+  },
+  {
+    "q": "What is the role of etcd in Kubernetes?",
+    "a": "To store the entire cluster state and configuration data reliably and consistently",
+    "category": "devops",
+    "source": "notes/devops/kubernetes-orchestration.md"
+  },
+  {
+    "q": "What is the purpose of a ReplicaSet in Kubernetes?",
+    "a": "To ensure that a specified number of pod replicas are running at all times",
+    "category": "devops",
+    "source": "notes/devops/kubernetes-orchestration.md"
+  },
+  {
+    "q": "What is the role of the Kubelet in Kubernetes?",
+    "a": "To run on each worker node and ensure containers are running in Pods as expected",
+    "category": "devops",
+    "source": "notes/devops/kubernetes-orchestration.md"
+  },
+  {
+    "q": "What is the purpose of a ConfigMap in Kubernetes?",
+    "a": "To store configuration data as key-value pairs that can be consumed by pods",
+    "category": "devops",
+    "source": "notes/devops/kubernetes-orchestration.md"
+  },
+  {
+    "q": "What is the difference between a Deployment and a StatefulSet?",
+    "a": "Deployments manage stateless apps with rolling updates, while StatefulSets manage stateful apps with stable identities",
+    "category": "devops",
+    "source": "notes/devops/kubernetes-orchestration.md"
+  },
+  {
+    "q": "What is the purpose of a Namespace in Kubernetes?",
+    "a": "To provide a mechanism for isolating groups of resources within a single cluster",
+    "category": "devops",
+    "source": "notes/devops/kubernetes-orchestration.md"
+  },
+  {
+    "q": "What is the role of the Kubernetes Scheduler?",
+    "a": "To assign pods to nodes based on resource requirements and constraints",
+    "category": "devops",
+    "source": "notes/devops/kubernetes-orchestration.md"
+  },
+  {
+    "q": "What is the purpose of a PersistentVolume in Kubernetes?",
+    "a": "To provide an abstraction for storage that persists beyond the lifecycle of individual pods",
+    "category": "devops",
+    "source": "notes/devops/kubernetes-orchestration.md"
+  },
+  {
+    "q": "What are the main components of the Kubernetes control plane?",
+    "a": "API Server, etcd, Controller Manager, and Scheduler",
+    "category": "devops",
+    "source": "notes/devops/kubernetes-orchestration.md"
+  },
+  {
+    "q": "What does CI/CD stand for in software development?",
+    "a": "Continuous Integration / Continuous Deployment",
+    "category": "devops",
+    "source": "notes/devops/cicd-pipelines.md"
+  },
+  {
+    "q": "What is the main goal of Continuous Integration?",
+    "a": "To integrate code changes frequently and detect integration issues early through automated testing",
+    "category": "devops",
+    "source": "notes/devops/cicd-pipelines.md"
+  },
+  {
+    "q": "What is the primary benefit of Continuous Deployment?",
+    "a": "Automated deployment of every code change that passes all tests to production",
+    "category": "devops",
+    "source": "notes/devops/cicd-pipelines.md"
+  },
+  {
+    "q": "What are the core stages of a typical CI/CD pipeline?",
+    "a": "Build, Test, Deploy, Monitor",
+    "category": "devops",
+    "source": "notes/devops/cicd-pipelines.md"
+  },
+  {
+    "q": "What is the purpose of a build stage in CI/CD?",
+    "a": "To compile source code and create deployable artifacts like Docker images",
+    "category": "devops",
+    "source": "notes/devops/cicd-pipelines.md"
+  },
+  {
+    "q": "What type of testing is typically performed in the CI stage?",
+    "a": "Unit tests, integration tests, and static code analysis",
+    "category": "devops",
+    "source": "notes/devops/cicd-pipelines.md"
+  },
+  {
+    "q": "What is the role of artifact repositories in CI/CD?",
+    "a": "To store and version build artifacts, dependencies, and deployment packages",
+    "category": "devops",
+    "source": "notes/devops/cicd-pipelines.md"
+  },
+  {
+    "q": "What is infrastructure as code in the context of CI/CD?",
+    "a": "Managing and provisioning infrastructure through machine-readable definition files",
+    "category": "devops",
+    "source": "notes/devops/cicd-pipelines.md"
+  },
+  {
+    "q": "What is the purpose of blue-green deployment?",
+    "a": "To reduce downtime by running two identical production environments and switching between them",
+    "category": "devops",
+    "source": "notes/devops/cicd-pipelines.md"
+  },
+  {
+    "q": "What is canary deployment?",
+    "a": "Gradually rolling out changes to a small subset of users before full deployment",
+    "category": "devops",
+    "source": "notes/devops/cicd-pipelines.md"
+  },
+  {
+    "q": "What is the main advantage of feature flags in CI/CD?",
+    "a": "To enable/disable features without redeploying, allowing for safer releases",
+    "category": "devops",
+    "source": "notes/devops/cicd-pipelines.md"
+  },
+  {
+    "q": "What is the purpose of automated rollback in CI/CD?",
+    "a": "To quickly revert to a previous working version if issues are detected post-deployment",
+    "category": "devops",
+    "source": "notes/devops/cicd-pipelines.md"
+  },
+  {
+    "q": "What is the difference between Continuous Delivery and Continuous Deployment?",
+    "a": "Continuous Delivery requires manual approval for production deployment, while Continuous Deployment is fully automated",
+    "category": "devops",
+    "source": "notes/devops/cicd-pipelines.md"
+  },
+  {
+    "q": "What is the role of monitoring in CI/CD pipelines?",
+    "a": "To track deployment success, application health, and provide feedback for continuous improvement",
+    "category": "devops",
+    "source": "notes/devops/cicd-pipelines.md"
+  },
+  {
+    "q": "What is a common challenge with CI/CD pipelines?",
+    "a": "Managing environment drift between development, staging, and production environments",
+    "category": "devops",
+    "source": "notes/devops/cicd-pipelines.md"
+  }
+]
