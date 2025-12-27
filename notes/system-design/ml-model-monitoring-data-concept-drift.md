@@ -17,41 +17,41 @@ In production, ML models degrade over time not because code changes, but because
 ### 1. Types of Drift
 
 #### A. Data Drift (Covariate Shift)
--   **Definition**: The distribution of input features $P(X)$ changes, but the relationship to the target $P(Y|X)$ stays the same.
--   **Example**: Your model was trained on users aged 20-30. Suddenly, a marketing campaign brings in users aged 50-60. The model has never seen this age group and fails.
--   **Detection**: Compare training distribution vs. serving distribution.
+- **Definition**: The distribution of input features $P(X)$ changes, but the relationship to the target $P(Y|X)$ stays the same.
+- **Example**: Your model was trained on users aged 20-30. Suddenly, a marketing campaign brings in users aged 50-60. The model has never seen this age group and fails.
+- **Detection**: Compare training distribution vs. serving distribution.
 
 #### B. Concept Drift
--   **Definition**: The relationship between inputs and target $P(Y|X)$ changes.
--   **Example**: "Buying masks" was a niche behavior in 2019. In 2020 (COVID), it became mainstream. The *meaning* of the input features changed.
--   **Detection**: Harder. Requires ground truth labels (which might be delayed). Monitor accuracy/loss over time.
+- **Definition**: The relationship between inputs and target $P(Y|X)$ changes.
+- **Example**: "Buying masks" was a niche behavior in 2019. In 2020 (COVID), it became mainstream. The *meaning* of the input features changed.
+- **Detection**: Harder. Requires ground truth labels (which might be delayed). Monitor accuracy/loss over time.
 
 #### C. Label Drift (Prior Probability Shift)
--   **Definition**: The distribution of the target variable $P(Y)$ changes.
--   **Example**: In spam detection, normally 10% is spam. Suddenly, a botnet attack makes 90% of traffic spam.
+- **Definition**: The distribution of the target variable $P(Y)$ changes.
+- **Example**: In spam detection, normally 10% is spam. Suddenly, a botnet attack makes 90% of traffic spam.
 
 ### 2. Detection Metrics
 
 #### A. Statistical Tests (Univariate)
--   **KS Test (Kolmogorov-Smirnov)**: Measures maximum difference between two cumulative distribution functions (CDFs). Good for numerical data.
--   **PSI (Population Stability Index)**:
-    -   Bin the data (e.g., deciles).
-    -   Compare % of population in each bin for Training (Expected) vs Serving (Actual).
-    -   $PSI = \sum (Actual\% - Expected\%) \times \ln(Actual\% / Expected\%)$.
-    -   Rule of thumb: PSI < 0.1 (Stable), PSI > 0.2 (Significant Drift).
--   **Chi-Square Test**: For categorical data.
+- **KS Test (Kolmogorov-Smirnov)**: Measures maximum difference between two cumulative distribution functions (CDFs). Good for numerical data.
+- **PSI (Population Stability Index)**:
+    - Bin the data (e.g., deciles).
+    - Compare % of population in each bin for Training (Expected) vs Serving (Actual).
+    - $PSI = \sum (Actual\% - Expected\%) \times \ln(Actual\% / Expected\%)$.
+    - Rule of thumb: PSI < 0.1 (Stable), PSI > 0.2 (Significant Drift).
+- **Chi-Square Test**: For categorical data.
 
 #### B. Model Performance (Lagged)
--   If you get labels instantly (e.g., CTR), monitor LogLoss/AUC hourly.
--   If labels are delayed (e.g., Loan Default takes 1 year), rely on Data Drift proxies.
+- If you get labels instantly (e.g., CTR), monitor LogLoss/AUC hourly.
+- If labels are delayed (e.g., Loan Default takes 1 year), rely on Data Drift proxies.
 
 ### 3. Monitoring Architecture
-1.  **Inference Service**: Logs inputs (X) and predictions ($\hat{y}$) to a stream (Kafka).
-2.  **Drift Calculation Job**:
-    -   Consumes Kafka.
-    -   Fetches a "Reference Distribution" (from Training Set) from Feature Store.
-    -   Calculates PSI/KS every hour.
-3.  **Alerting**: PagerDuty if PSI > 0.2.
+1. **Inference Service**: Logs inputs (X) and predictions ($\hat{y}$) to a stream (Kafka).
+2. **Drift Calculation Job**:
+    - Consumes Kafka.
+    - Fetches a "Reference Distribution" (from Training Set) from Feature Store.
+    - Calculates PSI/KS every hour.
+3. **Alerting**: PagerDuty if PSI > 0.2.
 
 ## Examples / snippets
 

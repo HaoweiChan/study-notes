@@ -15,25 +15,25 @@ Reservoir Sampling is a randomized algorithm to select $k$ items from a stream o
 ## Details
 
 ### 1. The Problem
--   **Input**: A stream of data $S = x_1, x_2, ...$
--   **Constraint**: You can only pass through the data once ($O(N)$) and have limited memory ($O(k)$). $N$ is unknown.
--   **Goal**: Maintain a "reservoir" of $k$ items such that at any step $i$, every item seen so far ($x_1...x_i$) has a $k/i$ chance of being in the reservoir.
+- **Input**: A stream of data $S = x_1, x_2, ...$
+- **Constraint**: You can only pass through the data once ($O(N)$) and have limited memory ($O(k)$). $N$ is unknown.
+- **Goal**: Maintain a "reservoir" of $k$ items such that at any step $i$, every item seen so far ($x_1...x_i$) has a $k/i$ chance of being in the reservoir.
 
 ### 2. Algorithm (Algorithm R)
-1.  **Initialization**: Store the first $k$ elements into the reservoir.
-2.  **Processing**: For each incoming element $x_i$ (where $i > k$):
-    -   Generate a random integer $j$ between 1 and $i$ (inclusive).
-    -   If $j \le k$: Replace the element at index $j$ in the reservoir with $x_i$.
-    -   Else: Discard $x_i$.
+1. **Initialization**: Store the first $k$ elements into the reservoir.
+2. **Processing**: For each incoming element $x_i$ (where $i > k$):
+    - Generate a random integer $j$ between 1 and $i$ (inclusive).
+    - If $j \le k$: Replace the element at index $j$ in the reservoir with $x_i$.
+    - Else: Discard $x_i$.
 
 ### 3. Proof of Uniformity
 Why does item $x_i$ end up with probability $k/n$?
--   **Base Case**: At step $n$, the probability $x_n$ is selected is $k/n$ (by definition of the algorithm).
--   **Inductive Step**: What is the probability that an *existing* item stays in the reservoir?
-    -   It stays if it is *not* replaced.
-    -   $P(\text{replaced}) = P(x_n \text{ selected}) \times P(\text{index } j \text{ chosen}) = \frac{k}{n} \times \frac{1}{k} = \frac{1}{n}$.
-    -   $P(\text{survives}) = 1 - \frac{1}{n} = \frac{n-1}{n}$.
-    -   Combined with previous probability $\frac{k}{n-1}$: Final Prob = $\frac{k}{n-1} \times \frac{n-1}{n} = \frac{k}{n}$.
+- **Base Case**: At step $n$, the probability $x_n$ is selected is $k/n$ (by definition of the algorithm).
+- **Inductive Step**: What is the probability that an *existing* item stays in the reservoir?
+    - It stays if it is *not* replaced.
+    - $P(\text{replaced}) = P(x_n \text{ selected}) \times P(\text{index } j \text{ chosen}) = \frac{k}{n} \times \frac{1}{k} = \frac{1}{n}$.
+    - $P(\text{survives}) = 1 - \frac{1}{n} = \frac{n-1}{n}$.
+    - Combined with previous probability $\frac{k}{n-1}$: Final Prob = $\frac{k}{n-1} \times \frac{n-1}{n} = \frac{k}{n}$.
 
 ## Examples / snippets
 
@@ -96,7 +96,7 @@ Explanation: For $k=1$, at step $i$, we keep the new item with probability $1/i$
 Q: How would you perform reservoir sampling on a distributed system (MapReduce/Spark)?
 Options:
 - A) It's impossible.
-- B) Assign a random number $r \in [0, 1]$ to every item, sort by $r$, and take the top $k$.
+- B) Assign a random number $r \in \[0, 1\]$ to every item, sort by $r$, and take the top $k$.
 - C) Collect all data to one machine and run the standard algorithm.
 - D) Run reservoir sampling on each partition, then just concatenate the results.
 Answers: B

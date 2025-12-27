@@ -16,33 +16,33 @@ In domains like AdTech and NLP, data is often extremely sparse and high-dimensio
 
 ### 1. The Challenge: High Cardinality
 If you have a feature `user_id` with 10 million unique values:
--   **One-Hot Encoding**: Creates a vector of size 10M.
-    -   Memory: $10^7$ floats per sample $\rightarrow$ Impossible.
-    -   Computation: Matrix multiplication is huge.
-    -   Generalization: No relationship between User A and User B.
+- **One-Hot Encoding**: Creates a vector of size 10M.
+    - Memory: $10^7$ floats per sample $\rightarrow$ Impossible.
+    - Computation: Matrix multiplication is huge.
+    - Generalization: No relationship between User A and User B.
 
 ### 2. Embeddings (Dense Representation)
 Map each categorical ID to a low-dimensional dense vector (e.g., size 64).
--   **Lookup Table**: A matrix of size $N \times D$ (e.g., $10M \times 64$).
--   **Learning**: The vectors are learnable parameters. Similar users (who click similar ads) will have similar vectors (close in Euclidean space).
--   **Memory**: Much smaller than One-Hot, but still large if $N$ is huge.
+- **Lookup Table**: A matrix of size $N \times D$ (e.g., $10M \times 64$).
+- **Learning**: The vectors are learnable parameters. Similar users (who click similar ads) will have similar vectors (close in Euclidean space).
+- **Memory**: Much smaller than One-Hot, but still large if $N$ is huge.
 
 ### 3. The Hashing Trick (Feature Hashing)
 Used when the vocabulary size $N$ is unknown or too large to store an Embedding Table.
--   **Mechanism**: Apply a hash function to the raw feature value and modulo by a fixed size $K$.
-    -   $index = hash("user\_12345") \% K$
-    -   $x[index] = 1$
--   **Pros**:
-    -   Fixed memory usage ($K$).
-    -   No need to maintain a vocabulary dictionary (stateless).
-    -   Handles new values automatically.
--   **Cons**: **Collisions**. Different users might hash to the same index.
-    -   *Impact*: Surprisingly low impact on model performance if $K$ is sufficiently large (e.g., $2^{20}$). Deep networks are robust to some noise.
+- **Mechanism**: Apply a hash function to the raw feature value and modulo by a fixed size $K$.
+    - $index = hash("user\_12345") \% K$
+    - $x\[index\] = 1$
+- **Pros**:
+    - Fixed memory usage ($K$).
+    - No need to maintain a vocabulary dictionary (stateless).
+    - Handles new values automatically.
+- **Cons**: **Collisions**. Different users might hash to the same index.
+    - *Impact*: Surprisingly low impact on model performance if $K$ is sufficiently large (e.g., $2^{20}$). Deep networks are robust to some noise.
 
 ### 4. Crossed Features
 Combining two sparse features (e.g., `City` and `Job`) creates an even sparser feature.
--   Cardinality: $|City| \times |Job|$.
--   Hashing is almost mandatory here.
+- Cardinality: $|City| \times |Job|$.
+- Hashing is almost mandatory here.
 
 ## Examples / snippets
 

@@ -16,22 +16,22 @@ A **Feature Store** (e.g., Feast, Tecton) solves the **Training-Serving Skew** p
 
 ### 1. The Problem: Training-Serving Skew
 Skew occurs when the data used for inference differs from the data used for training.
--   **Logic Skew**: The Data Scientist writes `pandas` code for training features, but the Backend Engineer rewrites it in `Java/SQL` for production. Subtle bugs (e.g., handling nulls differently) cause model degradation.
--   **Data Latency Skew**: Training used yesterday's batch data, but production uses real-time stream data.
--   **Time Travel / Leakage**: Training data accidentally includes "future" information (e.g., calculating "avg spend" using transactions that happened *after* the prediction event).
+- **Logic Skew**: The Data Scientist writes `pandas` code for training features, but the Backend Engineer rewrites it in `Java/SQL` for production. Subtle bugs (e.g., handling nulls differently) cause model degradation.
+- **Data Latency Skew**: Training used yesterday's batch data, but production uses real-time stream data.
+- **Time Travel / Leakage**: Training data accidentally includes "future" information (e.g., calculating "avg spend" using transactions that happened *after* the prediction event).
 
 ### 2. What is a Feature Store?
 A system that manages feature engineering pipelines and serves them to two targets:
-1.  **Offline Store** (e.g., BigQuery, S3, Parquet): For generating historical training datasets. Supports "Time Travel" queries.
-2.  **Online Store** (e.g., Redis, DynamoDB): For low-latency (<10ms) retrieval of the *latest* feature values during real-time inference.
+1. **Offline Store** (e.g., BigQuery, S3, Parquet): For generating historical training datasets. Supports "Time Travel" queries.
+2. **Online Store** (e.g., Redis, DynamoDB): For low-latency (<10ms) retrieval of the *latest* feature values during real-time inference.
 
 ### 3. Key Concepts
--   **Feature Registry**: Single source of truth for feature definitions (YAML/Python).
--   **Materialization**: The process of computing features and pushing them to the Online Store.
--   **Point-in-Time (PIT) Correctness**:
-    -   When generating training data, we join labels (events) with features.
-    -   Crucial Rule: For a label at time $T$, we must join feature values known at time $t < T$.
-    -   Feature Stores automate this complex "As-Of Join".
+- **Feature Registry**: Single source of truth for feature definitions (YAML/Python).
+- **Materialization**: The process of computing features and pushing them to the Online Store.
+- **Point-in-Time (PIT) Correctness**:
+    - When generating training data, we join labels (events) with features.
+    - Crucial Rule: For a label at time $T$, we must join feature values known at time $t < T$.
+    - Feature Stores automate this complex "As-Of Join".
 
 ## Examples / snippets
 

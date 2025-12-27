@@ -49,14 +49,14 @@ When the clock starts, do **not** just start coding. Follow this "Speed-Run" pro
 #### Step 1: Specify (Min 2-5)
 * **Command:** `/speckit.specify`
 * **Your Prompt:** Keep it brief. Reference the problem file.
-    > "Build a [System] based on `problem.txt`. Focus on handling [Key Constraint, e.g., 100ms latency]. strictly follow the Constitution."
+    > "Build a \[System\] based on `problem.txt`. Focus on handling \[Key Constraint, e.g., 100ms latency\]. strictly follow the Constitution."
 * **The Win:** The AI will generate a `spec.md`. **READ IT.**
 * **Verbalize to Interviewer:** "I am generating a spec to ensure we handle the edge cases before we write code. I see the AI captured the latency requirement here..."
 
 #### Step 2: Plan (Min 5-8)
 * **Command:** `/speckit.plan`
 * **Your Prompt:** (Usually empty, or add a specific tech constraint).
-    > "Use [Library X] for this."
+    > "Use \[Library X\] for this."
 * **The Win:** It generates a `plan.md`.
 * **Control Check:** If the AI suggests a complex database setup, **STOP IT**.
     * *Correction:* "The plan suggests using PostgreSQL. For this 30-min interview, that's overkill. I'll instruct it to use SQLite or In-Memory Dict."

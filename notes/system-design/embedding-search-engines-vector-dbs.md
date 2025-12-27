@@ -16,36 +16,36 @@ Embedding Search Engines (or Vector Databases) enable efficient **Approximate Ne
 
 ### 1. The Problem: Exact NN is Slow
 To find the most similar vector to a query $q$ in a dataset of $N$ vectors ($d$ dimensions), exact search (Brute Force KNN) requires calculating distance to *every* point.
--   Complexity: $O(N \cdot d)$.
--   For $N=10M, d=1024$, this is too slow (<100ms requirement).
+- Complexity: $O(N \cdot d)$.
+- For $N=10M, d=1024$, this is too slow (<100ms requirement).
 
 ### 2. ANN Algorithms (Indexing)
 To speed this up, we build an index that allows us to visit only a fraction of the data.
 
 #### A. HNSW (Hierarchical Navigable Small World)
--   **Structure**: A multi-layered graph.
-    -   Top layers: "Highways" with long-range links (fast traversal across the graph).
-    -   Bottom layers: "Local roads" for fine-grained search.
--   **Mechanism**: Start at the top layer, greedily move to the neighbor closest to the query. Drop down a layer, repeat.
--   **Pros**: Extremely fast, high recall.
--   **Cons**: Memory intensive (stores the graph structure).
+- **Structure**: A multi-layered graph.
+    - Top layers: "Highways" with long-range links (fast traversal across the graph).
+    - Bottom layers: "Local roads" for fine-grained search.
+- **Mechanism**: Start at the top layer, greedily move to the neighbor closest to the query. Drop down a layer, repeat.
+- **Pros**: Extremely fast, high recall.
+- **Cons**: Memory intensive (stores the graph structure).
 
 #### B. IVF (Inverted File Index)
--   **Structure**: Partition the vector space into $K$ clusters (Voronoi cells) using K-Means.
--   **Mechanism**:
-    1.  Find the closest cluster center to the query.
-    2.  Search only vectors inside that cluster (and maybe 2-3 neighboring clusters).
--   **Pros**: Lower memory usage.
--   **Cons**: Accuracy can drop if the query falls on a cluster boundary (mitigated by probing multiple clusters).
+- **Structure**: Partition the vector space into $K$ clusters (Voronoi cells) using K-Means.
+- **Mechanism**:
+    1. Find the closest cluster center to the query.
+    2. Search only vectors inside that cluster (and maybe 2-3 neighboring clusters).
+- **Pros**: Lower memory usage.
+- **Cons**: Accuracy can drop if the query falls on a cluster boundary (mitigated by probing multiple clusters).
 
 ### 3. Similarity Metrics
--   **Cosine Similarity**: Measures the angle. Good for normalized vectors. $A \cdot B / (\|A\| \|B\|)$.
--   **Dot Product**: Measures magnitude and angle. $A \cdot B$. Used when magnitude matters (e.g., Matrix Factorization).
--   **Euclidean Distance (L2)**: Measures straight-line distance. $\|A - B\|^2$.
+- **Cosine Similarity**: Measures the angle. Good for normalized vectors. $A \cdot B / (\|A\| \|B\|)$.
+- **Dot Product**: Measures magnitude and angle. $A \cdot B$. Used when magnitude matters (e.g., Matrix Factorization).
+- **Euclidean Distance (L2)**: Measures straight-line distance. $\|A - B\|^2$.
 
 ### 4. System Components
--   **Faiss (Facebook AI Similarity Search)**: The engine (library) that implements HNSW/IVF. Runs on CPU/GPU.
--   **Vector DBs (Pinecone, Milvus, Weaviate)**: Full managed systems wrapping Faiss-like engines with CRUD, filtering, replication, and sharding.
+- **Faiss (Facebook AI Similarity Search)**: The engine (library) that implements HNSW/IVF. Runs on CPU/GPU.
+- **Vector DBs (Pinecone, Milvus, Weaviate)**: Full managed systems wrapping Faiss-like engines with CRUD, filtering, replication, and sharding.
 
 ## Examples / snippets
 

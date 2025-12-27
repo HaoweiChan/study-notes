@@ -15,24 +15,24 @@ LLMs are not just text generators; they can be reasoning engines. Techniques lik
 ## Details
 
 ### 1. Chain of Thought (CoT)
--   **Concept**: Prompting the model to "think step by step" before giving an answer.
--   **Mechanism**: The intermediate generation acts as a "scratchpad," allowing the model to compute intermediate results and reducing logical errors.
--   **Zero-Shot CoT**: Just adding "Let's think step by step."
--   **Few-Shot CoT**: Providing examples of (Question -> Reasoning -> Answer).
+- **Concept**: Prompting the model to "think step by step" before giving an answer.
+- **Mechanism**: The intermediate generation acts as a "scratchpad," allowing the model to compute intermediate results and reducing logical errors.
+- **Zero-Shot CoT**: Just adding "Let's think step by step."
+- **Few-Shot CoT**: Providing examples of (Question -> Reasoning -> Answer).
 
 ### 2. ReAct (Reason + Act)
--   **Concept**: Interleaves reasoning (Thinking) with action execution (Acting).
--   **Loop**:
-    1.  **Thought**: "The user wants to know the weather in Tokyo. I should check the weather API."
-    2.  **Action**: `SearchTool.run("weather Tokyo")`
-    3.  **Observation**: "Tokyo is 20°C and rainy." (Output from tool).
-    4.  **Thought**: "I have the answer. I will reply to the user."
-    5.  **Final Answer**: "It is currently rainy and 20°C in Tokyo."
--   **Significance**: Without ReAct, models hallucinate facts. With ReAct, they ground answers in external data.
+- **Concept**: Interleaves reasoning (Thinking) with action execution (Acting).
+- **Loop**:
+    1. **Thought**: "The user wants to know the weather in Tokyo. I should check the weather API."
+    2. **Action**: `SearchTool.run("weather Tokyo")`
+    3. **Observation**: "Tokyo is 20°C and rainy." (Output from tool).
+    4. **Thought**: "I have the answer. I will reply to the user."
+    5. **Final Answer**: "It is currently rainy and 20°C in Tokyo."
+- **Significance**: Without ReAct, models hallucinate facts. With ReAct, they ground answers in external data.
 
 ### 3. Other Patterns
--   **Plan-and-Solve**: The agent first generates a full plan (Step 1, Step 2, Step 3) and then executes it. Good for complex, multi-step tasks.
--   **Reflection / Self-Correction**: The agent reviews its own output ("Does this code actually solve the problem?") and generates a critique, then regenerates the solution.
+- **Plan-and-Solve**: The agent first generates a full plan (Step 1, Step 2, Step 3) and then executes it. Good for complex, multi-step tasks.
+- **Reflection / Self-Correction**: The agent reviews its own output ("Does this code actually solve the problem?") and generates a critique, then regenerates the solution.
 
 ## Examples / snippets
 

@@ -15,31 +15,31 @@ In "Learning to Rank" (LTR), loss functions define how the model optimizes the o
 ## Details
 
 ### 1. Pointwise Approach
--   **Concept**: Treat ranking as a standard regression or classification problem.
--   **Input**: Single item + Query.
--   **Loss**: MSE (for rating prediction) or LogLoss (for click prediction).
--   **Pros**: Simple, standard, fast.
--   **Cons**: Ignores the *relative* order.
-    -   Example: Predicting 0.9 vs 0.8 is the same error as 0.2 vs 0.1, but in ranking, only the top matters. It penalizes errors at the bottom of the list just as much as the top.
+- **Concept**: Treat ranking as a standard regression or classification problem.
+- **Input**: Single item + Query.
+- **Loss**: MSE (for rating prediction) or LogLoss (for click prediction).
+- **Pros**: Simple, standard, fast.
+- **Cons**: Ignores the *relative* order.
+    - Example: Predicting 0.9 vs 0.8 is the same error as 0.2 vs 0.1, but in ranking, only the top matters. It penalizes errors at the bottom of the list just as much as the top.
 
 ### 2. Pairwise Approach
--   **Concept**: The goal is to correctly order pairs of items. If Item A > Item B, the model should score $f(A) > f(B)$.
--   **Input**: Pair of items (Positive $i$, Negative $j$).
--   **Loss**: Minimize inversions.
-    -   **BPR (Bayesian Personalized Ranking)**: $Loss = - \ln \sigma(x_{uij})$ where $x_{uij} = \hat{y}_{ui} - \hat{y}_{uj}$.
-    -   **RankNet**: Uses Cross-Entropy on the probability that $i$ is ranked higher than $j$.
-    -   **LambdaRank**: Adjusts the gradients of RankNet by the change in NDCG gained by swapping the pair.
--   **Pros**: Directly optimizes order.
--   **Cons**: $O(N^2)$ pairs (though usually sampled).
+- **Concept**: The goal is to correctly order pairs of items. If Item A > Item B, the model should score $f(A) > f(B)$.
+- **Input**: Pair of items (Positive $i$, Negative $j$).
+- **Loss**: Minimize inversions.
+    - **BPR (Bayesian Personalized Ranking)**: $Loss = - \ln \sigma(x_{uij})$ where $x_{uij} = \hat{y}_{ui} - \hat{y}_{uj}$.
+    - **RankNet**: Uses Cross-Entropy on the probability that $i$ is ranked higher than $j$.
+    - **LambdaRank**: Adjusts the gradients of RankNet by the change in NDCG gained by swapping the pair.
+- **Pros**: Directly optimizes order.
+- **Cons**: $O(N^2)$ pairs (though usually sampled).
 
 ### 3. Listwise Approach
--   **Concept**: Optimize the evaluation metric (NDCG, MAP) over the entire list directly.
--   **Input**: Entire list of items for a query.
--   **Loss**:
-    -   **SoftRank**: Smooth approximation of rank to make it differentiable.
-    -   **LambdaMART**: Gradient Boosted Trees variant using LambdaRank gradients. (State-of-the-art for tabular ranking).
--   **Pros**: Optimizes what you actually care about (NDCG).
--   **Cons**: Complex implementation, computationally expensive.
+- **Concept**: Optimize the evaluation metric (NDCG, MAP) over the entire list directly.
+- **Input**: Entire list of items for a query.
+- **Loss**:
+    - **SoftRank**: Smooth approximation of rank to make it differentiable.
+    - **LambdaMART**: Gradient Boosted Trees variant using LambdaRank gradients. (State-of-the-art for tabular ranking).
+- **Pros**: Optimizes what you actually care about (NDCG).
+- **Cons**: Complex implementation, computationally expensive.
 
 ## Examples / snippets
 

@@ -15,24 +15,24 @@ Fine-tuning adapts a pre-trained LLM to a specific domain or style. **PEFT (Para
 ## Details
 
 ### 1. Full Fine-Tuning vs. PEFT
--   **Full Fine-Tuning**: Updates all weights ($W$). Requires massive VRAM (e.g., 600GB+ for Llama-3 70B). High risk of "Catastrophic Forgetting."
--   **PEFT**: Updates only a small set of extra parameters.
-    -   Pros: Low memory, faster training, modular (swap adapters for different tasks).
+- **Full Fine-Tuning**: Updates all weights ($W$). Requires massive VRAM (e.g., 600GB+ for Llama-3 70B). High risk of "Catastrophic Forgetting."
+- **PEFT**: Updates only a small set of extra parameters.
+    - Pros: Low memory, faster training, modular (swap adapters for different tasks).
 
 ### 2. LoRA (Low-Rank Adaptation)
--   **Hypothesis**: Weight updates $\Delta W$ have a low "intrinsic rank."
--   **Mechanism**: Instead of training $\Delta W$ (size $d \times d$), train two small matrices $A$ ($d \times r$) and $B$ ($r \times d$) where $r \ll d$ (e.g., $r=8$ or $16$).
-    -   $W_{new} = W_{frozen} + \Delta W = W_{frozen} + B \times A$
--   **Parameter Savings**: For GPT-3, LoRA reduces trainable params by 10,000x and VRAM by 3x.
--   **Inference**: Merge $B \times A$ back into $W$ for zero latency overhead.
+- **Hypothesis**: Weight updates $\Delta W$ have a low "intrinsic rank."
+- **Mechanism**: Instead of training $\Delta W$ (size $d \times d$), train two small matrices $A$ ($d \times r$) and $B$ ($r \times d$) where $r \ll d$ (e.g., $r=8$ or $16$).
+    - $W_{new} = W_{frozen} + \Delta W = W_{frozen} + B \times A$
+- **Parameter Savings**: For GPT-3, LoRA reduces trainable params by 10,000x and VRAM by 3x.
+- **Inference**: Merge $B \times A$ back into $W$ for zero latency overhead.
 
 ### 3. QLoRA (Quantized LoRA)
--   **Innovation**: Combines LoRA with **4-bit Quantization** of the base model.
--   **Mechanism**:
-    1.  Load the base model in 4-bit (using NormalFloat4 data type).
-    2.  Add LoRA adapters (in 16-bit).
-    3.  Backpropagate gradients through the frozen 4-bit weights to update the 16-bit adapters.
--   **Impact**: Enables fine-tuning a 65B parameter model on a single 48GB GPU (e.g., A6000), which previously required ~780GB VRAM.
+- **Innovation**: Combines LoRA with **4-bit Quantization** of the base model.
+- **Mechanism**:
+    1. Load the base model in 4-bit (using NormalFloat4 data type).
+    2. Add LoRA adapters (in 16-bit).
+    3. Backpropagate gradients through the frozen 4-bit weights to update the 16-bit adapters.
+- **Impact**: Enables fine-tuning a 65B parameter model on a single 48GB GPU (e.g., A6000), which previously required ~780GB VRAM.
 
 ## Examples / snippets
 

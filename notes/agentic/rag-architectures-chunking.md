@@ -15,25 +15,25 @@ Retrieval-Augmented Generation (RAG) connects LLMs to private data. The performa
 ## Details
 
 ### 1. The RAG Pipeline
-1.  **Ingestion**: Load documents (PDFs, Markdown, etc.).
-2.  **Chunking**: Split text into smaller segments.
-3.  **Embedding**: Convert chunks into vectors (e.g., OpenAI `text-embedding-3-small`).
-4.  **Retrieval**: Find top-k most similar chunks to the user query.
-5.  **Generation**: Feed chunks + query to LLM to generate an answer.
+1. **Ingestion**: Load documents (PDFs, Markdown, etc.).
+2. **Chunking**: Split text into smaller segments.
+3. **Embedding**: Convert chunks into vectors (e.g., OpenAI `text-embedding-3-small`).
+4. **Retrieval**: Find top-k most similar chunks to the user query.
+5. **Generation**: Feed chunks + query to LLM to generate an answer.
 
 ### 2. Chunking Strategies
 Bad chunking leads to "hallucinations" or missing context.
--   **Fixed-Size Chunking**: Split every 500 tokens with 50-token overlap. Simple but breaks sentences/ideas mid-thought.
--   **Recursive Character Chunking** (Standard): Tries to split by paragraphs (`\n\n`), then sentences (`.`), then words. Preserves semantic structure.
--   **Semantic Chunking**: Uses an embedding model to detect "topic shifts" and splits only when the semantic meaning changes significantly.
--   **Parent-Child Chunking**: Index small chunks (sentences) for better vector search accuracy, but return the *parent* chunk (full paragraph) to the LLM for better context.
+- **Fixed-Size Chunking**: Split every 500 tokens with 50-token overlap. Simple but breaks sentences/ideas mid-thought.
+- **Recursive Character Chunking** (Standard): Tries to split by paragraphs (`\n\n`), then sentences (`.`), then words. Preserves semantic structure.
+- **Semantic Chunking**: Uses an embedding model to detect "topic shifts" and splits only when the semantic meaning changes significantly.
+- **Parent-Child Chunking**: Index small chunks (sentences) for better vector search accuracy, but return the *parent* chunk (full paragraph) to the LLM for better context.
 
 ### 3. Advanced Retrieval
--   **Hybrid Search**: Vectors (Dense) are good at concepts ("fruit" matches "apple"), but bad at exact matches (Product IDs, specific acronyms). BM25 (Sparse) is good at exact matches.
-    -   *Solution*: Run both, then combine results using **Reciprocal Rank Fusion (RRF)**.
--   **Re-Ranking**:
-    -   *Step 1*: Retrieve 50 candidates using fast Bi-Encoders (Vector DB).
-    -   *Step 2*: Use a slow, high-precision **Cross-Encoder** (e.g., Cohere Rerank, BGE-Reranker) to score them against the query and pick the top 5.
+- **Hybrid Search**: Vectors (Dense) are good at concepts ("fruit" matches "apple"), but bad at exact matches (Product IDs, specific acronyms). BM25 (Sparse) is good at exact matches.
+    - *Solution*: Run both, then combine results using **Reciprocal Rank Fusion (RRF)**.
+- **Re-Ranking**:
+    - *Step 1*: Retrieve 50 candidates using fast Bi-Encoders (Vector DB).
+    - *Step 2*: Use a slow, high-precision **Cross-Encoder** (e.g., Cohere Rerank, BGE-Reranker) to score them against the query and pick the top 5.
 
 ## Examples / snippets
 

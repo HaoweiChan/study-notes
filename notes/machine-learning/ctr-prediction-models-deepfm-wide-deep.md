@@ -22,10 +22,10 @@ In online advertising, input features are often categorical with millions of pos
 
 ### Wide & Deep Learning (Google, 2016)
 Combines two components trained jointly:
-1.  **Wide Component (Linear Model)**:
+1. **Wide Component (Linear Model)**:
     - Uses raw sparse features and manually engineered **Cross-Product Transformations** (e.g., "User installed App X AND Impression is App Y").
     - **Goal**: Memorization. Good for specific, frequent co-occurrences.
-2.  **Deep Component (Feed-Forward NN)**:
+2. **Deep Component (Feed-Forward NN)**:
     - Uses low-dimensional, dense **Embeddings** for sparse features.
     - Passes embeddings through hidden layers (ReLU).
     - **Goal**: Generalization. Good for unseen combinations.
