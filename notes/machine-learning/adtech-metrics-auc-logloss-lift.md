@@ -18,27 +18,27 @@ In AdTech, standard classification metrics like Accuracy are misleading due to e
 If the average Click-Through Rate (CTR) is 0.1%, a dummy model that predicts "No Click" for every impression has **99.9% accuracy**. This model is useless. We need metrics that measure ranking ability and probability reliability.
 
 ### 2. AUC-ROC (Area Under the ROC Curve)
--   **Definition**: The probability that a randomly chosen **positive** instance (click) is ranked higher than a randomly chosen **negative** instance (no-click).
--   **Range**: 0.5 (Random) to 1.0 (Perfect).
--   **Use Case**: Evaluating the **ranking** quality. Can the model distinguish between a user who will click and one who won't?
--   **Pros**: Insensitive to class imbalance.
--   **Cons**: Doesn't tell you if the predicted *probability* is correct (e.g., predicting 0.9 for a click vs 0.51 for a click yields same rank order but different bidding implications).
+- **Definition**: The probability that a randomly chosen **positive** instance (click) is ranked higher than a randomly chosen **negative** instance (no-click).
+- **Range**: 0.5 (Random) to 1.0 (Perfect).
+- **Use Case**: Evaluating the **ranking** quality. Can the model distinguish between a user who will click and one who won't?
+- **Pros**: Insensitive to class imbalance.
+- **Cons**: Doesn't tell you if the predicted *probability* is correct (e.g., predicting 0.9 for a click vs 0.51 for a click yields same rank order but different bidding implications).
 
 ### 3. LogLoss (Binary Cross-Entropy)
--   **Formula**: $LogLoss = - \frac{1}{N} \sum_{i=1}^N [y_i \log(p_i) + (1-y_i) \log(1-p_i)]$
--   **Definition**: Measures the divergence between predicted probabilities and actual labels. Penalizes confident wrong predictions heavily.
--   **Use Case**: Evaluating **calibration**. In Real-Time Bidding (RTB), we bid $Bid = p(click) \times Value$. If $p(click)$ is off by 2x, we overpay by 2x. AUC doesn't catch this; LogLoss does.
--   **Goal**: Minimize LogLoss.
+- **Formula**: $LogLoss = - \frac{1}{N} \sum_{i=1}^N \[y_i \log(p_i) + (1-y_i) \log(1-p_i)\]$
+- **Definition**: Measures the divergence between predicted probabilities and actual labels. Penalizes confident wrong predictions heavily.
+- **Use Case**: Evaluating **calibration**. In Real-Time Bidding (RTB), we bid $Bid = p(click) \times Value$. If $p(click)$ is off by 2x, we overpay by 2x. AUC doesn't catch this; LogLoss does.
+- **Goal**: Minimize LogLoss.
 
 ### 4. Normalized Entropy (NE) / Normalized LogLoss
--   **Definition**: LogLoss divided by the entropy of the background average CTR.
--   **Formula**: $NE = \frac{LogLoss}{Entropy(p_{avg})}$ where $Entropy(p) = -[p \log p + (1-p) \log(1-p)]$
--   **Use Case**: Comparing model performance across different datasets/campaigns with different average CTRs. A LogLoss of 0.05 is good if average CTR is 0.1, but terrible if average CTR is 0.0001. NE normalizes this.
+- **Definition**: LogLoss divided by the entropy of the background average CTR.
+- **Formula**: $NE = \frac{LogLoss}{Entropy(p_{avg})}$ where $Entropy(p) = -\[p \log p + (1-p) \log(1-p)\]$
+- **Use Case**: Comparing model performance across different datasets/campaigns with different average CTRs. A LogLoss of 0.05 is good if average CTR is 0.1, but terrible if average CTR is 0.0001. NE normalizes this.
 
 ### 5. Calibration (Observed/Predicted Ratio)
--   **Definition**: Ratio of (Average Predicted CTR) / (Average Actual CTR).
--   **Ideal**: 1.0.
--   **Significance**: If Ratio > 1.0, the model over-estimates (over-bidding). If < 1.0, it under-estimates (losing opportunities).
+- **Definition**: Ratio of (Average Predicted CTR) / (Average Actual CTR).
+- **Ideal**: 1.0.
+- **Significance**: If Ratio > 1.0, the model over-estimates (over-bidding). If < 1.0, it under-estimates (losing opportunities).
 
 ## Examples / snippets
 

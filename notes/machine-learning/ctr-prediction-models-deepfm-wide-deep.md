@@ -23,25 +23,25 @@ In online advertising, input features are often categorical with millions of pos
 ### Wide & Deep Learning (Google, 2016)
 Combines two components trained jointly:
 1.  **Wide Component (Linear Model)**:
-    -   Uses raw sparse features and manually engineered **Cross-Product Transformations** (e.g., "User installed App X AND Impression is App Y").
-    -   **Goal**: Memorization. Good for specific, frequent co-occurrences.
+    - Uses raw sparse features and manually engineered **Cross-Product Transformations** (e.g., "User installed App X AND Impression is App Y").
+    - **Goal**: Memorization. Good for specific, frequent co-occurrences.
 2.  **Deep Component (Feed-Forward NN)**:
-    -   Uses low-dimensional, dense **Embeddings** for sparse features.
-    -   Passes embeddings through hidden layers (ReLU).
-    -   **Goal**: Generalization. Good for unseen combinations.
+    - Uses low-dimensional, dense **Embeddings** for sparse features.
+    - Passes embeddings through hidden layers (ReLU).
+    - **Goal**: Generalization. Good for unseen combinations.
 
-**Formula**: $P(Y=1|x) = \sigma(w_{wide}^T [x, \phi(x)] + w_{deep}^T a^{(lf)} + b)$
+**Formula**: $P(Y=1|x) = \sigma(w_{wide}^T \[x, \phi(x)\] + w_{deep}^T a^{(lf)} + b)$
 
 ### DeepFM (Huawei, 2017)
 Improves on Wide & Deep by removing the need for manual feature engineering in the "Wide" part.
--   Replaces the Linear/Wide component with a **Factorization Machine (FM)**.
--   **FM Component**: Learns 2nd-order feature interactions using dot products of latent vectors.
--   **Deep Component**: Standard DNN for high-order interactions.
--   **Key Innovation**: The FM and Deep parts **share the same input embeddings**. This means the embeddings are trained to serve both low-order interaction (FM) and high-order non-linear abstraction (Deep).
+- Replaces the Linear/Wide component with a **Factorization Machine (FM)**.
+- **FM Component**: Learns 2nd-order feature interactions using dot products of latent vectors.
+- **Deep Component**: Standard DNN for high-order interactions.
+- **Key Innovation**: The FM and Deep parts **share the same input embeddings**. This means the embeddings are trained to serve both low-order interaction (FM) and high-order non-linear abstraction (Deep).
 
 ### Other Notable Architectures
--   **DCN (Deep & Cross Network)**: Uses a specific "Cross Network" layer to explicitly apply feature crossing at each layer, learning bounded-degree interactions efficiently without manual engineering.
--   **Two-Tower (DSSM)**: Primarily for **Retrieval** (finding top K candidates from millions), not Ranking. Independent User Tower and Item Tower output embeddings, similarity is calculated via Dot Product.
+- **DCN (Deep & Cross Network)**: Uses a specific "Cross Network" layer to explicitly apply feature crossing at each layer, learning bounded-degree interactions efficiently without manual engineering.
+- **Two-Tower (DSSM)**: Primarily for **Retrieval** (finding top K candidates from millions), not Ranking. Independent User Tower and Item Tower output embeddings, similarity is calculated via Dot Product.
 
 ## Examples / snippets
 

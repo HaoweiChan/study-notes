@@ -31,43 +31,43 @@ Think of them as inverse operations, similar to **Integration** (Prefix Sum) and
 
 **Use this when:** You need to modify many ranges/submatrices, and you only need the final result after all modifications are done.
 
-*   **Logic:** Instead of looping through the whole rectangle to add $+1$, you just "mark" the corners. You are essentially saving the "edges" of the change.
-*   **The "Magic":** The matrix looks like nonsense (just sparse numbers) until you run a **Prefix Sum** pass over it at the very end. The Prefix Sum "fills in" the rectangles defined by the corners.
+* **Logic:** Instead of looping through the whole rectangle to add $+1$, you just "mark" the corners. You are essentially saving the "edges" of the change.
+* **The "Magic":** The matrix looks like nonsense (just sparse numbers) until you run a **Prefix Sum** pass over it at the very end. The Prefix Sum "fills in" the rectangles defined by the corners.
 
 #### 1D Logic
 To add `val` to `arr[l...r]`:
-1.  `diff[l] += val`
-2.  `diff[r + 1] -= val` (if `r + 1` is within bounds)
+1. `diff[l] += val`
+2. `diff[r + 1] -= val` (if `r + 1` is within bounds)
 
 #### 2D Logic
 **Visual:**
 > Update: `[r1, c1]` to `[r2, c2]`
 >
-> *   `[r1][c1]` says "Start adding here".
-> *   `[r1][c2+1]` says "Stop adding for this row".
-> *   `[r2+1][c1]` says "Stop adding for this column".
-> *   `[r2+1][c2+1]` says "Cancel out the double negative".
+> * `[r1][c1]` says "Start adding here".
+> * `[r1][c2+1]` says "Stop adding for this row".
+> * `[r2+1][c1]` says "Stop adding for this column".
+> * `[r2+1][c2+1]` says "Cancel out the double negative".
 
 ### 2. 2D Prefix Sum (The Precomputed Cache)
 
 **Use this when:** The matrix is static (doesn't change), but you need to answer millions of questions about the sum of different sub-rectangles.
 
-*   **Logic:** You pre-calculate the sum of the rectangle from `(0,0)` to every cell `(i,j)`.
-*   **The "Magic":** When asked for the sum of a submatrix `A`, you don't count cells. You take the total large area and subtract the sections you don't need (Top and Left), adding back the top-left corner that you subtracted twice.
+* **Logic:** You pre-calculate the sum of the rectangle from `(0,0)` to every cell `(i,j)`.
+* **The "Magic":** When asked for the sum of a submatrix `A`, you don't count cells. You take the total large area and subtract the sections you don't need (Top and Left), adding back the top-left corner that you subtracted twice.
 
 **Visual:**
 > Query Sum: `[r1, c1]` to `[r2, c2]`
 >
-> *   `Sum = P[r2][c2] - P[r1-1][c2] - P[r2][c1-1] + P[r1-1][c1-1]`
-> *   (Note: This uses inclusion-exclusion, which is the exact inverse logic of the Difference Array corner update).
+> * `Sum = P[r2][c2] - P[r1-1][c2] - P[r2][c1-1] + P[r1-1][c1-1]`
+> * (Note: This uses inclusion-exclusion, which is the exact inverse logic of the Difference Array corner update).
 
 ### Summary of the "Inverse" Relationship
 
-1.  **If you have `A` (Difference Matrix):**
-    *   Running **Prefix Sum** on `A` $\rightarrow$ gives you the **Original Matrix**.
+1. **If you have `A` (Difference Matrix):**
+    * Running **Prefix Sum** on `A` $\rightarrow$ gives you the **Original Matrix**.
 
-2.  **If you have `M` (Original Matrix):**
-    *   Running **Prefix Sum** on `M` $\rightarrow$ gives you the **Prefix Sum Matrix** (for quick queries).
+2. **If you have `M` (Original Matrix):**
+    * Running **Prefix Sum** on `M` $\rightarrow$ gives you the **Prefix Sum Matrix** (for quick queries).
 
 ## Examples / snippets
 
