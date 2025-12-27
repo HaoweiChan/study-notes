@@ -83,36 +83,6 @@ def t_learner(X_train, T_train, Y_train, X_test):
     return uplift
 ```
 
-## Flashcards
-
-- What is the difference between standard CTR prediction and Uplift Modeling? ::: CTR predicts the probability of an action, while Uplift predicts the **incremental difference** in probability caused by the treatment (ad).
-- What type of user should you target to maximize ROI in Uplift terms? ::: **Persuadables**: Users who only convert if they see the ad.
-- Why is the T-Learner called "Two-Model"? ::: Because it explicitly trains one model for the **Treatment group** and one model for the **Control group**.
-- What is the metric commonly used to evaluate Uplift models? ::: **AUUC (Area Under Uplift Curve)** or **Qini Coefficient**.
-- Why is evaluation difficult in Causal Inference? ::: Because of the **Fundamental Problem of Causal Inference**: we cannot observe the counterfactual (what would have happened) for a specific individual.
-
-## Quizzes
-
-### User Segments
-Q: In Uplift Modeling, which segment represents users who would buy the product *regardless* of whether they see the ad?
-Options:
-- A) Persuadables
-- B) Lost Causes
-- C) Sure Things
-- D) Sleeping Dogs
-Answers: C
-Explanation: "Sure Things" convert in both Treatment and Control groups. Showing ads to them is wasted budget because the incremental lift is zero.
-
-### S-Learner Risk
-Q: When using an S-Learner (Single Model with Treatment feature), what is a common risk if the treatment effect is weak?
-Options:
-- A) The model crashes.
-- B) The model overfits.
-- C) The model regularization (e.g., L1) might set the Treatment coefficient to zero, predicting zero uplift for everyone.
-- D) The model predicts negative probabilities.
-Answers: C
-Explanation: If features $X$ are very predictive of $Y$ but $T$ has a tiny effect, a single tree or linear model might ignore $T$ entirely to minimize loss, failing to capture the causal effect.
-
 ## Learning Sources
 - [Causal Inference for the Brave and True](https://matheusfacure.github.io/python-causality-handbook/) - Excellent interactive book.
 - [Uber Engineering: Causal Inference](https://www.uber.com/blog/causal-inference-at-uber/) - How Uber uses it for pricing/marketing.

@@ -64,36 +64,6 @@ To meet the 50ms SLA, the Bidder is a highly optimized, distributed system.
 | TOTAL              | 50ms        |                                      |
 ```
 
-## Flashcards
-
-- What is the primary constraint in an RTB system? ::: **Latency** (typically < 100ms total, < 50ms internal).
-- What database type is best for User Profile lookups in RTB? ::: **Key-Value Stores** like Redis or Aerospike (low latency, high throughput).
-- How do we handle heavy ML inference within 20ms? ::: Use a **Cascade** (light model for filtration, heavy model for ranking) or optimize model serving (quantization, compilation).
-- What is "Pacing" in AdTech? ::: Spreading an advertiser's budget evenly throughout the day so they don't spend it all in the first hour.
-- Why is distributed budget management difficult? ::: Because locking a central database for every bid is too slow; we use **local allocation** and **batch synchronization**.
-
-## Quizzes
-
-### Architecture Decisions
-Q: Your RTB system is timing out. Profiling shows the User Profile Service (PostgreSQL) is taking 100ms on complex joins. How do you fix this?
-Options:
-- A) Add more indexes to PostgreSQL.
-- B) Move User Profiles to a wide-column store or Key-Value store (Cassandra/Aerospike) and pre-compute segments.
-- C) Increase the timeout to 200ms.
-- D) Cache the entire database in Python memory.
-Answers: B
-Explanation: Relational joins are too slow for RTB. You must denormalize data. Pre-computing segments ("User X -> \[Segment A, Segment B\]") and storing in a high-performance KV store is the standard solution.
-
-### Budget Handling
-Q: You have 100 bidder instances. An advertiser has a $100 budget. How do you prevent overspending without slowing down bidding?
-Options:
-- A) Global Lock: Check a central Redis counter before every bid.
-- B) Local Allocation: Give each bidder $1. When it runs out, it asks a central coordinator for another $1.
-- C) Post-processing: Bid as much as you want, cancel ads later.
-- D) Randomly bid on 1% of traffic.
-Answers: B
-Explanation: Local Allocation minimizes network calls. "Check-and-set" on a central store (A) introduces massive contention and latency. Option B ensures strict limits with minimal overhead.
-
 ## Learning Sources
 - [High Scalability: Architecture of an Ad Server](http://highscalability.com/) - Search for "Ad Server Architecture".
 - [Introduction to Real-Time Bidding (IAB)](https://www.iab.com/guidelines/real-time-bidding-rtb-project/) - Industry standard protocols (OpenRTB).

@@ -78,36 +78,6 @@ D, I = index.search(xq, k) # D: Distances, I: Indices
 print(I[:5]) # Top 5 results for first 5 queries
 ```
 
-## Flashcards
-
-- What is the main trade-off in Approximate Nearest Neighbor (ANN) search? ::: Trading a small amount of **Accuracy/Recall** (missing the absolute best match) for massive gains in **Speed** ($O(N) \rightarrow O(\log N)$).
-- How does HNSW (Hierarchical Navigable Small World) work? ::: It builds a multi-layered graph where upper layers have long connections (highways) for fast traversal and lower layers have short connections for precise local search.
-- What is the "Voronoi Cell" concept in IVF indexing? ::: Partitioning the vector space into regions (cells) around centroids; during search, we only look at vectors inside the cell closest to the query.
-- Which similarity metric is best when vector magnitude should be ignored (only direction matters)? ::: **Cosine Similarity**.
-- What is `nprobe` in Faiss IVF? ::: A hyperparameter that determines how many adjacent clusters (cells) to search. Higher `nprobe` increases accuracy but decreases speed.
-
-## Quizzes
-
-### Index Selection
-Q: You have 1 Billion vectors. You need high accuracy but are memory constrained (cannot store a massive graph in RAM). Which index type is better?
-Options:
-- A) Flat Index (Brute Force)
-- B) HNSW
-- C) IVF with Product Quantization (IVF-PQ)
-- D) Linear Scan
-Answers: C
-Explanation: HNSW is fast but memory-hungry because it stores the graph edges. IVF-PQ (Product Quantization) compresses the vectors themselves (lossy compression) and uses an inverted index, drastically reducing memory footprint while maintaining acceptable accuracy for billion-scale datasets.
-
-### Metric Choice
-Q: You are using OpenAI Embeddings (which are normalized to unit length). Does it matter if you use Dot Product or Cosine Similarity?
-Options:
-- A) Yes, Cosine is better.
-- B) Yes, Dot Product is better.
-- C) No, they are mathematically equivalent for normalized vectors.
-- D) Yes, Euclidean is the only valid metric.
-Answers: C
-Explanation: Cosine Similarity is $\frac{A \cdot B}{\|A\|\|B\|}$. If vectors are normalized, $\|A\|=1$ and $\|B\|=1$, so Cosine Similarity simply equals the Dot Product $A \cdot B$.
-
 ## Learning Sources
 - [Faiss Wiki](https://github.com/facebookresearch/faiss/wiki) - The bible of vector search.
 - [Pinecone: What is a Vector Database?](https://www.pinecone.io/learn/vector-database/) - High-level overview.

@@ -79,36 +79,6 @@ def hybrid_search(query):
     return final_results
 ```
 
-## Flashcards
-
-- What is the main benefit of Recursive Character Chunking over Fixed-Size Chunking? ::: It attempts to keep related text together (paragraphs, sentences) rather than splitting mid-sentence, preserving **semantic meaning**.
-- Why is Hybrid Search often better than pure Vector Search? ::: Vector search can fail on **exact keyword matches** (like part numbers or acronyms), which BM25/Keyword search handles well.
-- What is the role of a Re-Ranker (Cross-Encoder) in RAG? ::: It takes a broad set of candidate results and re-scores them with high precision to select the best few for the LLM, improving relevance.
-- What is "Parent-Child" indexing? ::: Searching against small, precise chunks (Children) but returning larger, surrounding context (Parent) to the LLM.
-- What is Reciprocal Rank Fusion (RRF)? ::: An algorithm to combine ranked lists from different search methods (e.g., BM25 and Vector Search) into a single unified ranking.
-
-## Quizzes
-
-### Chunking Strategy
-Q: You are building a RAG system for a legal contract. The contract relies heavily on definitions found in previous paragraphs. If you use small, non-overlapping chunks, what is the risk?
-Options:
-- A) The retrieval will be too slow.
-- B) The chunks will lose context (e.g., "The Party" refers to whom?), leading to hallucinations.
-- C) The embedding model will crash.
-- D) The LLM will refuse to answer.
-Answers: B
-Explanation: Small chunks without overlap or parent context strip away necessary references. A chunk saying "The Party shall pay..." is useless if the definition of "The Party" is in a previous chunk that wasn't retrieved.
-
-### Improving Retrieval
-Q: Users are searching for specific error codes "ERR-505" but your Vector RAG system keeps returning generic "error handling" documentation instead of the specific page for 505. How do you fix this?
-Options:
-- A) Switch to a larger LLM.
-- B) Implement Hybrid Search (add Keyword/BM25 search).
-- C) Increase chunk size.
-- D) Use a different Vector Database.
-Answers: B
-Explanation: Embeddings cluster concepts. "ERR-505" and "ERR-404" might have very similar embeddings (both are errors). Keyword search (BM25) treats "ERR-505" as a specific token and will find the exact match.
-
 ## Learning Sources
 - [Pinecone: Chunking Strategies for LLM Applications](https://www.pinecone.io/learn/chunking-strategies/) - In-depth visual guide.
 - [LangChain Documentation: Text Splitters](https://python.langchain.com/docs/modules/data_connection/document_transformers/) - Practical implementation details.

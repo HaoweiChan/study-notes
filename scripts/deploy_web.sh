@@ -21,6 +21,10 @@ mkdir -p "$WEB_DIR/public/notes"
 rm -rf "$WEB_DIR/public/notes/"*
 cp -r "$PROJECT_ROOT/notes/"* "$WEB_DIR/public/notes/"
 
+# 1c. Clean notes (remove quizzes/flashcards for web display)
+echo "🧹 Cleaning notes for web..."
+python "$PROJECT_ROOT/scripts/clean_notes_for_web.py" "$WEB_DIR/public/notes"
+
 # 2. Build React App
 echo "🏗️  Building Web App..."
 cd "$WEB_DIR"

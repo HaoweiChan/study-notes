@@ -107,36 +107,6 @@ Paste this into `.specify/memory/constitution.md`:
 6. **No Placeholder**: Never leave "TODO" or "pass". Write working code.
 ```
 
-## Flashcards
-
-- What is the first command to run in the Spec Kit workflow? ::: `/speckit.specify`
-- Why is the `constitution.md` file important? ::: It defines the "rules of engagement" for the AI (e.g., "use single file", "explain Big-O"), preventing it from over-engineering or missing requirements.
-- If the AI generates an over-complicated plan (e.g., using PostgreSQL), what should you do? ::: **Interrupt and Refine**: Tell it to use a simpler alternative like SQLite or in-memory structures appropriate for a 30-minute interview.
-- What are the three main steps in the Spec Kit loop? ::: **Specify** (Requirements), **Plan** (Architecture), **Implement** (Code Generation).
-- What should you do if the task is trivial (e.g., "reverse a string")? ::: Skip Spec Kit and use standard Cursor Chat or Composer to avoid unnecessary overhead.
-
-## Quizzes
-
-### Handling Complexity
-Q: During the "Plan" phase, Spec Kit proposes a microservices architecture for a simple "URL Shortener" interview question. What is your move?
-Options:
-- A) Let it build the microservices to impress the interviewer.
-- B) Stop the generation and prompt: "Refine plan: Use a monolithic Python script with in-memory dictionary for storage."
-- C) Manually delete the plan file.
-- D) Switch to writing Java code.
-Answers: B
-Explanation: A 30-minute interview cannot support microservices. Demonstrating "Architectural Control" means knowing when to simplify. You must override the AI's tendency to over-engineer.
-
-### Setup
-Q: Why do we edit `constitution.md` *before* the interview?
-Options:
-- A) To cheat on the test.
-- B) To pre-load the AI with our coding standards (e.g., "Single File", "Defensive Coding") so we don't have to type them during the timed session.
-- C) Because the default one is empty.
-- D) To install Python libraries.
-Answers: B
-Explanation: The Constitution acts as a persistent set of instructions. By defining "Speed & MVP" and "Single File" preferences beforehand, you save time and ensure the AI output aligns with interview constraints automatically.
-
 ## Learning Sources
 - [Spec Kit GitHub Repository](https://github.com/github/spec-kit) - Official documentation and source code.
 - [Cursor Documentation](https://docs.cursor.com/) - Guide to using Cursor's AI features.

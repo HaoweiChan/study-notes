@@ -95,36 +95,6 @@ print(f"Betas: {bandit.beta}")
 # Expect Arm 1 (Index 1) to have high Alpha
 ```
 
-## Flashcards
-
-- What is the goal of Multi-Armed Bandit algorithms? ::: To balance **Exploration** (gathering data) and **Exploitation** (maximizing reward) to minimize regret.
-- How does Thompson Sampling select an arm? ::: It samples a random value from each arm's **posterior distribution** and picks the highest sample.
-- What is the intuition behind UCB (Upper Confidence Bound)? ::: **Optimism in the face of uncertainty**: it favors arms that have a high potential (upper bound), either because they have a high average or because we don't know enough about them yet.
-- How does Epsilon-Greedy handle exploration? ::: It chooses a completely random arm with a fixed probability $\epsilon$ at every step.
-- What is a Contextual Bandit? ::: A bandit algorithm that uses side information (Context/Features) about the user or environment to decide which arm is best for *that specific request*.
-
-## Quizzes
-
-### Algorithm Choice
-Q: You have 5 ad creatives. You want to find the winner quickly but maximize revenue during the test. Which algorithm is generally preferred in modern AdTech?
-Options:
-- A) A/B Testing (Equal traffic to all until significance)
-- B) Epsilon-Greedy
-- C) Thompson Sampling
-- D) Random Selection
-Answers: C
-Explanation: Thompson Sampling dynamically adjusts traffic. As soon as one creative looks promising, it gets more traffic (Exploit), but still allows others a chance (Explore). It minimizes "Regret" (revenue lost) compared to A/B testing which wastes 50% of traffic on the loser until the test ends.
-
-### UCB Logic
-Q: In the UCB formula $Score = Average + \text{Bonus}$. What happens to the "Bonus" term as we pull the arm more times?
-Options:
-- A) It increases.
-- B) It decreases (shrinks to zero).
-- C) It stays the same.
-- D) It becomes negative.
-Answers: B
-Explanation: The bonus represents the width of the confidence interval (Uncertainty). As we get more data ($n$ increases), our uncertainty decreases, so the bonus shrinks, and the algorithm relies more on the pure Average (Exploitation).
-
 ## Learning Sources
 - [A Tutorial on Thompson Sampling (arXiv)](https://arxiv.org/abs/1707.02038) - Comprehensive tutorial.
 - [Sutton & Barto: Reinforcement Learning](http://incompleteideas.net/book/the-book-2nd.html) - Chapter 2 covers Bandits in detail.

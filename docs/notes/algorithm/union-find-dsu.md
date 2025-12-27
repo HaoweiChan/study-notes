@@ -216,18 +216,3 @@ class OptimizedUnionFind:
         return self.size[self.find(x)]
 ```
 
-## Flashcards
-
-- What is the primary purpose of Union-Find (Disjoint Set Union)? ::: To efficiently manage disjoint sets and perform union and find operations
-- What are the two main operations in Union-Find? ::: Find (determine which set an element belongs to) and Union (merge two sets)
-- What optimization techniques are used to achieve nearly constant time operations? ::: Path compression and union by rank or size
-- What is path compression in Union-Find? ::: Making each node on the find path point directly to the root to flatten the tree structure
-- What is union by rank in Union-Find? ::: Always attaching the smaller tree to the root of the larger tree to keep trees balanced
-- What is the time complexity of Union-Find operations with optimizations? ::: Nearly O(α(n)) where α(n) is the inverse Ackermann function (effectively constant)
-- What famous algorithm uses Union-Find as a key component? ::: Kruskal's algorithm for finding Minimum Spanning Trees
-- What type of graph problem is Union-Find particularly good for? ::: Connected components and cycle detection in undirected graphs
-- What happens when you try to union two elements that are already in the same set? ::: The operation returns false and no change is made
-- What is the main advantage of Union-Find over other data structures for connectivity queries? ::: Extremely fast operations that are nearly constant time for practical purposes
-
-```
-```

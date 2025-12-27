@@ -61,36 +61,6 @@ model.print_trainable_parameters()
 # Output: "trainable params: 4,194,304 || all params: 7,000,000,000 || trainable%: 0.06%"
 ```
 
-## Flashcards
-
-- What is the main motivation for PEFT (Parameter-Efficient Fine-Tuning)? ::: To reduce the **computational and memory costs** of fine-tuning large models by updating only a small subset of parameters.
-- How does LoRA represent weight updates? ::: As the product of two **low-rank matrices** ($B \times A$) added to the frozen base weights.
-- What is the advantage of merging LoRA weights for inference? ::: It eliminates any **latency overhead**; the model architecture remains identical to the original, just with updated weight values.
-- What does QLoRA add to standard LoRA? ::: It loads the frozen base model in **4-bit precision** (quantized), drastically reducing VRAM usage while maintaining performance.
-- What is "Catastrophic Forgetting"? ::: When a model forgets previously learned knowledge (e.g., how to speak English) while being fine-tuned on a new task (e.g., coding). PEFT mitigates this by freezing the base model.
-
-## Quizzes
-
-### Resource Estimation
-Q: You want to fine-tune a 70B parameter model. In 16-bit (BF16), the model weights alone take ~140GB. Full fine-tuning requires gradients + optimizer states (~4x weights) $\approx$ 600GB+. Using QLoRA, roughly how much VRAM do you need?
-Options:
-- A) 600GB
-- B) ~40-48GB
-- C) 1GB
-- D) 140GB
-Answers: B
-Explanation: QLoRA loads the model in 4-bit (70B * 0.5 bytes = 35GB). The LoRA adapters + gradients + optimizer states add a small overhead (few GBs). This fits on a single A6000 (48GB) or two 24GB cards.
-
-### Architecture
-Q: Which layers should you apply LoRA to for best results?
-Options:
-- A) Only the embedding layer.
-- B) Only the output layer.
-- C) Usually the Attention layers (Query, Key, Value) and sometimes MLP layers.
-- D) Layer Norms only.
-Answers: C
-Explanation: Empirical studies show that adapting the Attention matrices (q_proj, v_proj) yields the best performance trade-off. Adapting MLP layers can further improve performance but adds more parameters.
-
 ## Learning Sources
 - [LoRA Paper (Microsoft)](https://arxiv.org/abs/2106.09685) - "LoRA: Low-Rank Adaptation of Large Language Models".
 - [QLoRA Paper (UW)](https://arxiv.org/abs/2305.14314) - "QLoRA: Efficient Finetuning of Quantized LLMs".

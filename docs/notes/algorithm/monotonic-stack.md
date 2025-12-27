@@ -153,18 +153,3 @@ def next_greater_elements_circular(nums):
     return res
 ```
 
-## Flashcards
-
-- What is the primary purpose of a monotonic stack? ::: To efficiently find the next greater or next smaller element for each element in an array
-- What are the two main types of monotonic stacks? ::: Increasing monotonic stack (for next smaller elements) and decreasing monotonic stack (for next greater elements)
-- What happens when we push an element onto a decreasing monotonic stack? ::: We pop all elements that are smaller than the current element before pushing
-- What happens when we push an element onto an increasing monotonic stack? ::: We pop all elements that are larger than the current element before pushing
-- What is the time complexity of processing n elements with a monotonic stack? ::: O(n) because each element is pushed and popped at most once
-- What famous problem can be solved using a monotonic stack? ::: Largest Rectangle in Histogram (LeetCode 84)
-- What is the key insight behind monotonic stacks for histogram problems? ::: Each bar can extend to the left until it hits a taller bar, and to the right until it hits a taller bar
-- What problem involves finding how many days you have to wait for a warmer temperature? ::: Daily Temperatures (LeetCode 739)
-- What data structure is commonly used to implement monotonic stacks? ::: A regular stack, but with the monotonic property maintained during push operations
-- What is the main advantage of monotonic stacks over brute force approaches? ::: They solve next greater/smaller element problems in linear time instead of quadratic time
-
-```
-```

@@ -68,39 +68,6 @@ ne = ll / entropy
 print(f"Normalized Entropy: {ne:.4f}")
 ```
 
-## Flashcards
-
-- Why is Accuracy a bad metric for CTR prediction? ::: Because of extreme **class imbalance** (CTR is very low), a model predicting all zeros would have high accuracy but zero value.
-- What does AUC measure in the context of CTR? ::: It measures the probability that a random **click** is ranked higher than a random **non-click**. It evaluates **ranking quality**.
-- What does LogLoss measure that AUC does not? ::: LogLoss measures **calibration** (how accurate the predicted probability values are), which is critical for calculating correct bids.
-- What is the benefit of Normalized Entropy (NE) over LogLoss? ::: NE allows for comparison of model performance across datasets with **different average CTRs**.
-- If a model has high AUC but high LogLoss, what does it mean? ::: The model ranks items correctly (good for sorting), but the probability values are incorrectly scaled (bad for pricing/bidding).
-
-## Quizzes
-
-### Metric Selection for Bidding
-Q: You are building a Real-Time Bidding (RTB) bidder where the bid price is calculated as `CTR * Value`. You have two models:
-- Model A: AUC 0.85, LogLoss 0.4
-- Model B: AUC 0.80, LogLoss 0.2
-Which model should you choose?
-Options:
-- A) Model A because it ranks ads better.
-- B) Model B because it has better probability calibration.
-- C) Neither, use Accuracy.
-- D) Model A because higher AUC implies better conversion.
-Answers: B
-Explanation: For bidding, the *value* of the probability matters directly for the price calculation. Lower LogLoss indicates the predicted probabilities are closer to reality, reducing the risk of over/under-bidding. Model A might rank well but output calibrated probabilities (e.g., predicting 0.99 for a 0.5 event).
-
-### Understanding AUC
-Q: An AUC of 0.5 indicates what?
-Options:
-- A) Perfect prediction
-- B) Random guessing
-- C) Inverse prediction (predicting 0 for 1 and vice versa)
-- D) 50% Accuracy
-Answers: B
-Explanation: An AUC of 0.5 means the model cannot distinguish between positive and negative classes better than a random coin flip.
-
 ## Learning Sources
 - [Google: Machine Learning Crash Course - Classification](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc) - Basics of ROC and AUC.
 - [Scikit-Learn Documentation: Log Loss](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html) - Mathematical definition and usage.

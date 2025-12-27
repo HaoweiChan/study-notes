@@ -86,36 +86,6 @@ loss.backward()
 optimizer.step()
 ```
 
-## Flashcards
-
-- What is the main memory limitation of standard Distributed Data Parallel (DDP)? ::: DDP requires the **entire model** and its optimizer state to fit into the memory of a **single GPU**.
-- How does FSDP (Fully Sharded Data Parallel) solve the DDP memory issue? ::: It shards (partitions) the **parameters, gradients, and optimizer states** across all GPUs, so no single GPU holds the full model.
-- What is "Pipeline Parallelism"? ::: Splitting the model by **layers** (e.g., first half on GPU 1, second half on GPU 2), processing data in a sequence.
-- What is the cost paid for the memory savings in FSDP? ::: Increased **communication overhead** (network traffic) because weights must be gathered from other GPUs before computation.
-- What does ZeRO Stage 3 shard? ::: It shards **Optimizer States, Gradients, AND Model Parameters**.
-
-## Quizzes
-
-### Selecting a Strategy
-Q: You are training a 7B parameter model (approx 14GB weights in FP16). You have 8 GPUs with 16GB VRAM each. Standard DDP fails with OOM. Why? And what should you use?
-Options:
-- A) DDP fails because 14GB fits, but Gradients + Optimizer (Adam) need ~3x more (42GB+). Use FSDP/ZeRO-2 or 3.
-- B) DDP fails because the batch size is too big. Reduce batch size to 1.
-- C) Use Model Parallelism.
-- D) Buy bigger GPUs.
-Answers: A
-Explanation: Model weights are only a fraction of VRAM usage. The Optimizer State (Adam maintains 2 states per weight = 8 bytes) and Gradients (4 bytes) dominate. 14GB weights $\rightarrow$ ~100GB total needed. 16GB VRAM is insufficient. FSDP shards this across 8 GPUs, making it fit.
-
-### Communication
-Q: In which scenario is FSDP most likely to be slower than DDP?
-Options:
-- A) Training a massive model on 100 GPUs.
-- B) Training a tiny model (e.g., ResNet-50) on multiple nodes with slow interconnect (Ethernet).
-- C) Training on a single GPU.
-- D) Using NVLink.
-Answers: B
-Explanation: FSDP requires heavy communication (All-Gather) at every layer forward/backward pass. If the model is small (fits in DDP) and the network is slow, the communication overhead of FSDP outweighs the memory benefits, making it slower than DDP.
-
 ## Learning Sources
 - [PyTorch FSDP Tutorial](https://pytorch.org/tutorials/intermediate/FSDP_tutorial.html) - Official guide.
 - [ZeRO Paper (DeepSpeed)](https://arxiv.org/abs/1910.02054) - The foundational paper on Zero Redundancy Optimization.

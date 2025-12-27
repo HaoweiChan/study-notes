@@ -65,36 +65,6 @@ class GraphSAGE(nn.Module):
         return torch.relu(self.linear(combined))
 ```
 
-## Flashcards
-
-- How do GNNs improve upon Matrix Factorization in RecSys? ::: By explicitly capturing **higher-order connectivity** (multi-hop neighbors) and leveraging node features, rather than just direct ID interactions.
-- What is "Inductive Learning" in GraphSAGE? ::: The ability to generate embeddings for **unseen nodes** (new users/items) based on their features and connections, without retraining the whole model.
-- What is the "Message Passing" mechanism? ::: The process where nodes exchange information with their neighbors to update their own state/embedding.
-- How does PinSage handle billions of nodes efficiently? ::: It uses **Random Walks** to sample a small, relevant set of neighbors for aggregation ("Importance Pooling") rather than processing the full neighborhood.
-- What is a "Bipartite Graph" in the context of RecSys? ::: A graph with two types of nodes (Users and Items) where edges only exist between a User and an Item (interactions), not between User-User or Item-Item.
-
-## Quizzes
-
-### Cold Start
-Q: A new user joins the platform. They fill out their profile (age, interests) but haven't clicked anything yet. Can GraphSAGE generate an embedding for them?
-Options:
-- A) No, GNNs require edges.
-- B) Yes, GraphSAGE is inductive and can use the user's profile features (node features) even with zero edges (aggregating 0 neighbors).
-- C) Only if we retrain the matrix.
-- D) Yes, by assigning a random ID.
-Answers: B
-Explanation: GraphSAGE learns an aggregator function. For a new node with no edges, the "neighbor aggregation" is null, but the "self-update" part uses the node's own features (profile data) to generate a meaningful initial embedding.
-
-### Scaling
-Q: In a social network with "Power Law" distribution, some influencers have 10 Million followers. How does GNN training handle aggregating 10M neighbors?
-Options:
-- A) It processes all 10M, requiring massive memory.
-- B) It ignores influencers.
-- C) It uses **Neighbor Sampling** (e.g., randomly pick 20 neighbors) to keep computation constant.
-- D) It compresses the neighbors into one byte.
-Answers: C
-Explanation: Standard GNN implementations (like GraphSAGE) fix the neighborhood size (e.g., sample 10 or 20 neighbors) to ensure the computational graph size is bounded and fits in GPU memory.
-
 ## Learning Sources
 - [GraphSAGE Paper](https://arxiv.org/abs/1706.02216) - "Inductive Representation Learning on Large Graphs".
 - [PinSage Paper (KDD 2018)](https://arxiv.org/abs/1806.01973) - "Graph Convolutional Neural Networks for Web-Scale Recommender Systems".

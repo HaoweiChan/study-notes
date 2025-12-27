@@ -86,36 +86,6 @@ class WideAndDeep(nn.Module):
         return self.sigmoid(wide_out + deep_out)
 ```
 
-## Flashcards
-
-- What is the main goal of the "Wide" component in Wide & Deep? ::: To **memorize** specific feature co-occurrences (e.g., specific rules).
-- What is the main goal of the "Deep" component in Wide & Deep? ::: To **generalize** to unseen feature combinations using embeddings.
-- How does DeepFM improve upon Wide & Deep? ::: It replaces the manual feature engineering of the Wide part with a **Factorization Machine (FM)** to learn 2nd-order interactions automatically.
-- What is the shared input mechanism in DeepFM? ::: The FM component and the Deep component share the same **Embedding vectors** for the raw features.
-- Which architecture is typically used for the Retrieval stage (candidate generation)? ::: **Two-Tower** (or DSSM) architecture.
-
-## Quizzes
-
-### Model Selection
-Q: You have a dataset where specific combinations of features (e.g., "City=Paris" AND "Language=French") are highly predictive, but you also want the model to recommend relevant items to users with little history. Which architecture helps balance these needs?
-Options:
-- A) Logistic Regression
-- B) Matrix Factorization
-- C) Wide & Deep
-- D) K-Nearest Neighbors
-Answers: C
-Explanation: Wide & Deep is explicitly designed to balance memorization (Wide part for specific rules like City+Language) and generalization (Deep part for new users/items via embeddings).
-
-### DeepFM Architecture
-Q: In DeepFM, how are 2nd-order feature interactions handled?
-Options:
-- A) By manually creating cross-product features
-- B) By a Factorization Machine component using dot products of embeddings
-- C) By the MLP (Multi-Layer Perceptron) hidden layers only
-- D) By a Recurrent Neural Network
-Answers: B
-Explanation: DeepFM uses a Factorization Machine layer to explicitly model 2nd-order interactions ($<v_i, v_j> x_i x_j$) using the shared embeddings, without manual engineering.
-
 ## Learning Sources
 - [Wide & Deep Learning for Recommender Systems (arXiv)](https://arxiv.org/abs/1606.07792) - The original paper by Google (2016).
 - [DeepFM: A Factorization-Machine based Neural Network (arXiv)](https://arxiv.org/abs/1703.04247) - The original paper by Huawei/IJCAI (2017).

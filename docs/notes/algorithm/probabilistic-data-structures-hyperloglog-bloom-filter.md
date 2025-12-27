@@ -69,36 +69,6 @@ class BloomFilter:
         return True # Probably present
 ```
 
-## Flashcards
-
-- What is the main trade-off of Probabilistic Data Structures? ::: They trade **Accuracy** (allowing small errors) for massive savings in **Memory** and **Time**.
-- Can a Bloom Filter produce a False Negative (saying an item is missing when it was added)? ::: **No**. If the item was added, its bits are definitely set to 1.
-- Can a Bloom Filter produce a False Positive? ::: **Yes**. Hash collisions can cause all bits for a new item to be already set by previous items.
-- What does HyperLogLog estimate? ::: **Cardinality** (the number of distinct elements in a set).
-- What is the typical memory usage of a HyperLogLog structure? ::: Very small, typically around **12 KB**, regardless of dataset size.
-
-## Quizzes
-
-### Bloom Filter Application
-Q: You are building a web crawler. You want to avoid visiting the same URL twice. You have 10 Billion URLs. You have limited RAM. Which structure is appropriate?
-Options:
-- A) Python Set (Hash Table)
-- B) HyperLogLog
-- C) Bloom Filter
-- D) Array
-Answers: C
-Explanation: A Set stores the full strings, consuming Terabytes. A Bloom Filter uses bits, checking membership in constant space with a small chance of false positives (re-crawling a URL), which is acceptable. HyperLogLog only counts; it doesn't check membership.
-
-### HyperLogLog Logic
-Q: In HyperLogLog, if you observe a hash with 10 leading zeros, roughly how many distinct elements have likely been seen (ignoring bucketing)?
-Options:
-- A) 10
-- B) 100
-- C) $2^{10} = 1024$
-- D) $10^2 = 100$
-Answers: C
-Explanation: Observing a sequence of outcome with probability $p$ typically requires $1/p$ trials. The probability of 10 leading zeros is $(1/2)^{10}$. Thus, we expect to see it after roughly $2^{10}$ distinct hashes.
-
 ## Learning Sources
 - [Redis Documentation: HyperLogLog](https://redis.io/docs/data-types/hyperloglogs/) - Practical usage in Redis (`PFADD`, `PFCOUNT`).
 - [Papers We Love: Probabilistic Data Structures](https://github.com/papers-we-love/papers-we-love) - Reference to original papers.

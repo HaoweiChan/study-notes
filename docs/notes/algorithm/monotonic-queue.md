@@ -140,18 +140,3 @@ def longest_subarray_with_limit(nums, limit):
     return max_length
 ```
 
-## Flashcards
-
-- What is the main purpose of a monotonic queue? ::: To efficiently find the minimum or maximum value in a sliding window in O(n) time
-- What are the two main operations performed on a monotonic queue? ::: Push (add element while maintaining monotonic order) and Pop (remove element if outside window)
-- What is the key property that makes monotonic queues efficient? ::: They maintain elements in increasing or decreasing order, allowing O(1) access to min/max
-- When should you use a monotonic decreasing queue? ::: When you need to find the maximum value in each sliding window
-- When should you use a monotonic increasing queue? ::: When you need to find the minimum value in each sliding window
-- What is the time complexity for processing n elements with window size k using monotonic queue? ::: O(n) total time, O(k) space for the queue
-- What happens when pushing an element to a monotonic decreasing queue? ::: Remove all elements smaller than the current element from the back before adding
-- What happens when the front element goes out of the current window? ::: Remove it from the front of the queue
-- What problem can be solved using dual monotonic queues (both min and max)? ::: Finding longest subarray where max - min ≤ limit
-- What is the main advantage of monotonic queue over a regular sliding window approach? ::: O(1) time to get min/max per window instead of O(k) time
-
-```
-```

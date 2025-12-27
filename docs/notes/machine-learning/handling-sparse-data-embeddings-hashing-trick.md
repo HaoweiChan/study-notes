@@ -84,35 +84,6 @@ idx2 = get_hashed_index("user_id=67890")
 # These indices are fed into an EmbeddingBag or Sparse Linear Layer
 ```
 
-## Flashcards
-
-- What is the main problem with One-Hot Encoding for User IDs? ::: **High Cardinality**: The vector size becomes unmanageably large (millions of dimensions) and sparse.
-- How do Embeddings solve the sparsity problem? ::: They map high-dimensional sparse indices to **low-dimensional dense vectors** (e.g., size 64), which capture semantic relationships.
-- What is the "Hashing Trick"? ::: Mapping raw feature values to a fixed-size vector index using a hash function and modulo, avoiding the need for a vocabulary dictionary.
-- What is the main downside of the Hashing Trick? ::: **Hash Collisions**: Different features may map to the same index, causing noise (though models are often robust to this).
-- Why is the Hashing Trick useful for "Crossed Features"? ::: Crossed features (e.g., City x Job) have combinatorial cardinality; hashing keeps the memory usage constant regardless of the number of combinations.
-
-## Quizzes
-
-### Memory Constraints
-Q: You have 100 Million unique User IDs. You want to use User ID as a feature in a Deep Learning model. Your GPU has 16GB memory. An embedding size of 128 floats (4 bytes) requires approx 50GB. What do you do?
-Options:
-- A) Buy a bigger GPU.
-- B) Use One-Hot Encoding.
-- C) Use the Hashing Trick to map users to a smaller space (e.g., 10 Million buckets) and learn embeddings for the buckets.
-- D) Ignore the User ID feature.
-Answers: C
-Explanation: 100M * 128 * 4 bytes = ~51.2 GB. This doesn't fit. Hashing allows you to cap the "effective" vocabulary size (e.g., to 10M or 1M) to fit in memory, accepting some collisions.
-
-### Comparison
-Q: Feature Hashing vs. Vocabulary Lookup. Which one allows you to train on a streaming dataset where new, never-before-seen User IDs appear constantly?
-Options:
-- A) Vocabulary Lookup
-- B) Feature Hashing
-- C) Neither
-Answers: B
-Explanation: Vocabulary Lookup requires building a dictionary of all known keys *before* training. Feature Hashing is stateless; it can handle any new string immediately by hashing it to an existing bucket.
-
 ## Learning Sources
 - [Weinberger et al.: Feature Hashing for Large Scale Multitask Learning](https://arxiv.org/abs/0902.2206) - The seminal paper on the hashing trick.
 - [Google Crash Course: Embeddings](https://developers.google.com/machine-learning/crash-course/embeddings/video-lecture) - Visual guide to embeddings.

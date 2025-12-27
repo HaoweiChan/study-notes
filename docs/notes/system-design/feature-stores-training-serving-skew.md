@@ -80,36 +80,6 @@ features = store.get_online_features(
 ).to_dict()
 ```
 
-## Flashcards
-
-- What is Training-Serving Skew? ::: The performance degradation caused when production data/logic differs from training data/logic.
-- What is the main responsibility of a Feature Store? ::: To serve consistent feature values to both **offline training** and **online inference** environments.
-- What is Point-in-Time (PIT) Correctness? ::: Ensuring that historical training data only uses feature values that were actually available **before** the event timestamp (no future leakage).
-- Which database type is typically used for the "Online Store"? ::: Low-latency Key-Value stores (Redis, DynamoDB, Cassandra).
-- Which database type is typically used for the "Offline Store"? ::: Scalable Data Warehouses or Data Lakes (BigQuery, Snowflake, S3/Parquet).
-
-## Quizzes
-
-### Debugging Skew
-Q: Your model has 90% accuracy in the notebook but 60% in production. You suspect "Logic Skew." What is the most likely cause?
-Options:
-- A) The model is overfitting.
-- B) The production code implements the feature calculation (e.g., rolling average) differently than the Python training code.
-- C) The production server is too slow.
-- D) The learning rate was too high.
-Answers: B
-Explanation: Logic skew happens when the implementation of feature engineering differs between environments (e.g., Python vs. SQL/Java). A Feature Store solves this by using a single definition.
-
-### Point-in-Time Correctness
-Q: You are predicting if a user will click an ad at 10:00 AM. You have a feature "Number of clicks today." Why is a simple SQL join dangerous?
-Options:
-- A) SQL is slow.
-- B) A simple join might include clicks that happened at 10:05 AM (after the prediction), causing Data Leakage.
-- C) It uses too much memory.
-- D) SQL cannot calculate sums.
-Answers: B
-Explanation: This is "Future Leakage." The model learns to predict using data it won't have in reality. You must use an "As-Of" join to get the count *strictly before* 10:00 AM.
-
 ## Learning Sources
 - [Feast Official Documentation](https://feast.dev/) - The leading open-source feature store.
 - [Tecton Blog: What is a Feature Store?](https://www.tecton.ai/blog/what-is-a-feature-store/) - Excellent conceptual overview.

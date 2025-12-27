@@ -70,36 +70,6 @@ print(f"DP Sum (e=0.1): {differentially_private_sum(clicks, 0.1):.2f}")
 # Output might be 52.3 or 41.5. Hide the exact '50'.
 ```
 
-## Flashcards
-
-- What is a Data Clean Room (DCR)? ::: A secure environment allowing two parties to join and analyze their first-party data (like email lists) to gain aggregate insights without revealing raw customer data to each other.
-- What is the primary goal of Federated Learning? ::: To train machine learning models on decentralized data (e.g., user devices) without ever uploading the private raw data to a central server.
-- What is Differential Privacy? ::: A mathematical definition of privacy that adds noise to query results to ensure the output doesn't reveal the presence or absence of any single individual.
-- Why are 3rd-party cookies being deprecated? ::: To protect user privacy by preventing cross-site tracking and profiling by unconsented AdTech vendors.
-- What is "Sensitivity" in Differential Privacy? ::: The maximum amount that the output of a function can change if a single individual's data is added or removed.
-
-## Quizzes
-
-### DCR Usage
-Q: A Retailer wants to know if their ads on a News Site led to purchases. They both have user email addresses. Why use a Data Clean Room instead of emailing the CSVs?
-Options:
-- A) DCRs are faster.
-- B) Sending raw user lists violates privacy laws (GDPR) and exposes business secrets (customer lists). DCRs calculate the overlap count/value without sharing the lists.
-- C) CSVs are too big.
-- D) DCRs use AI.
-Answers: B
-Explanation: Sharing raw PII (Personally Identifiable Information) like email lists is a massive privacy risk and compliance violation. DCRs allow the mathematical operation (Intersection) without the data exposure.
-
-### Federated Learning
-Q: In Federated Learning, what is sent from the user's device to the central server?
-Options:
-- A) The user's browsing history.
-- B) The user's raw input text.
-- C) Model weight updates (Gradients).
-- D) An encrypted copy of the hard drive.
-Answers: C
-Explanation: The raw data stays on the device. The local model computes gradients (how to improve the model based on local data), and only these mathematical updates are sent to the cloud.
-
 ## Learning Sources
 - [Snowflake Data Clean Rooms](https://www.snowflake.com/en/data-cloud/workloads/data-collaboration/) - Industry standard DCR.
 - [Google Privacy Sandbox: Topics API](https://privacysandbox.com/proposals/topics/) - Replacement for cookies.

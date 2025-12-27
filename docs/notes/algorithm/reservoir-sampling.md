@@ -72,36 +72,6 @@ sample = reservoir_sampling(data, 10)
 print(f"Sample: {sample}")
 ```
 
-## Flashcards
-
-- What is the main use case for Reservoir Sampling? ::: Selecting a random sample of $k$ items from a **stream of unknown size** or a dataset too large to fit in memory.
-- What is the time complexity of Reservoir Sampling? ::: **O(N)** (single pass over the data).
-- What is the space complexity of Reservoir Sampling? ::: **O(k)** (size of the sample).
-- When processing the $i$-th element (where $i > k$), with what probability should we keep it? ::: Probability **$k/i$**.
-- If we decide to keep the $i$-th element, which element do we replace? ::: A **randomly selected** element from the existing reservoir (index $0$ to $k-1$).
-
-## Quizzes
-
-### Probability Check
-Q: You are sampling $k=1$ item from a stream. You see the 10th item ($x_{10}$). What is the probability that you swap it into the reservoir?
-Options:
-- A) 1/10
-- B) 1/1
-- C) 1/2
-- D) 9/10
-Answers: A
-Explanation: For $k=1$, at step $i$, we keep the new item with probability $1/i$. So for $i=10$, prob is $1/10$.
-
-### Distributed Sampling
-Q: How would you perform reservoir sampling on a distributed system (MapReduce/Spark)?
-Options:
-- A) It's impossible.
-- B) Assign a random number $r \in \[0, 1\]$ to every item, sort by $r$, and take the top $k$.
-- C) Collect all data to one machine and run the standard algorithm.
-- D) Run reservoir sampling on each partition, then just concatenate the results.
-Answers: B
-Explanation: This is called "Weighted Reservoir Sampling" or simply sorting by random key. Assigning a random float and taking the global top $k$ is mathematically equivalent to uniform sampling and works trivially in distributed sorts. Merging local reservoirs (D) is tricky to re-weight correctly.
-
 ## Learning Sources
 - [Wikipedia: Reservoir Sampling](https://en.wikipedia.org/wiki/Reservoir_sampling) - Standard definition and Algorithm R.
 - [GeeksforGeeks: Reservoir Sampling](https://www.geeksforgeeks.org/reservoir-sampling/) - Tutorial with code in C++/Java/Python.

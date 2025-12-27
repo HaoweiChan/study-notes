@@ -68,36 +68,6 @@ class BPRLoss(nn.Module):
         return loss.mean()
 ```
 
-## Flashcards
-
-- What is the main limitation of Pointwise ranking loss? ::: It treats each item independently and penalizes errors at the bottom of the list equally to errors at the top, ignoring relative ordering.
-- How does Pairwise ranking work? ::: It takes pairs of items (one positive, one negative) and trains the model to score the positive item higher than the negative one.
-- What is BPR (Bayesian Personalized Ranking)? ::: A popular **Pairwise** loss function used in recommender systems that optimizes the relative order of positive vs. negative items.
-- What is the goal of Listwise ranking? ::: To directly optimize the final ranking metric (like NDCG or MAP) considering the entire list of items at once.
-- Which LTR approach is generally considered State-of-the-Art for tabular data (e.g., search engines)? ::: **LambdaMART** (a Listwise/Pairwise hybrid using Gradient Boosting).
-
-## Quizzes
-
-### Choosing an Approach
-Q: You are building a search engine. You care most about the top 3 results being correct (NDCG@3). Pointwise regression on "relevance score" gives good RMSE but bad NDCG. Why?
-Options:
-- A) RMSE is broken.
-- B) Pointwise loss spends too much effort predicting the exact score of irrelevant documents (rank 100 vs 101), which doesn't affect NDCG@3.
-- C) You didn't train long enough.
-- D) You should use MSE instead of RMSE.
-Answers: B
-Explanation: Pointwise loss minimizes the error on *all* items. It tries just as hard to distinguish between relevance 0.1 and 0.2 (trash) as it does between 0.9 and 0.8 (top hits). Pairwise/Listwise approaches (specifically LambdaRank) weigh the top positions more heavily.
-
-### Complexity
-Q: Why is Listwise ranking computationally expensive?
-Options:
-- A) It requires infinite memory.
-- B) Calculating list-wide metrics (like sort order) is non-differentiable and usually $O(N \log N)$ or $O(N^2)$ per query during training.
-- C) It only works on CPUs.
-- D) It requires labeling every single item in the universe.
-Answers: B
-Explanation: Sorting is a non-differentiable operation, requiring complex approximations (SoftRank) or specific gradient derivations (LambdaRank), and processing lists is more expensive than single items.
-
 ## Learning Sources
 - [Microsoft Learning to Rank](https://www.microsoft.com/en-us/research/project/mslr/) - Classic papers on RankNet, LambdaRank, LambdaMART.
 - [CatBoost/XGBoost Documentation](https://catboost.ai/docs/concepts/loss-functions-ranking.html) - Practical guide to using ranking objectives (YetiRank, PairLogit).

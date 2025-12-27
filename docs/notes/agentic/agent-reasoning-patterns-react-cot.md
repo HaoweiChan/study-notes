@@ -70,36 +70,6 @@ Thought: I have the answer.
 Final Answer: Keanu Reeves is not married.
 ```
 
-## Flashcards
-
-- What is the core idea of Chain of Thought (CoT)? ::: It encourages the LLM to generate **intermediate reasoning steps** before the final answer, which improves performance on complex tasks.
-- What does ReAct stand for? ::: **Re**asoning + **Act**ing.
-- How does ReAct differ from standard CoT? ::: CoT is for internal reasoning only. ReAct allows the model to **take actions** (call tools) and use the **observations** from those actions to inform the next reasoning step.
-- What is "Zero-Shot CoT"? ::: Triggering reasoning capabilities simply by appending the phrase "**Let's think step by step**" to the prompt, without providing examples.
-- What is the "Observation" step in the ReAct loop? ::: It is the output/result returned by an **external tool** (e.g., API response) that the model reads to update its context.
-
-## Quizzes
-
-### Pattern Selection
-Q: You are building an agent to book flight tickets. This requires checking availability, comparing prices, and then booking. Which pattern is most appropriate?
-Options:
-- A) Zero-Shot Classification
-- B) Chain of Thought (CoT)
-- C) ReAct (Reason + Act)
-- D) Sentiment Analysis
-Answers: C
-Explanation: The task requires interacting with external systems (Flight API) and making decisions based on the results (if price > X, check another flight). ReAct is designed exactly for this loop of Reasoning -> Tool Use -> Observation.
-
-### Limitations
-Q: What is a common failure mode of ReAct agents?
-Options:
-- A) They never hallucinate.
-- B) Getting stuck in a loop (Thought -> Action -> Same Observation -> Thought -> Same Action...).
-- C) They cannot perform math.
-- D) They work too fast.
-Answers: B
-Explanation: ReAct agents can get stuck in infinite loops if the Action doesn't yield new info or if the model fails to recognize it has enough info. Limits on "max steps" are usually required.
-
 ## Learning Sources
 - [ReAct Paper (ICLR 2023)](https://arxiv.org/abs/2210.03629) - The original paper "ReAct: Synergizing Reasoning and Acting in Language Models".
 - [Chain-of-Thought Prompting Elicits Reasoning (NeurIPS 2022)](https://arxiv.org/abs/2201.11903) - The seminal CoT paper.

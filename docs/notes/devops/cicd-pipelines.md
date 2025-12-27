@@ -431,24 +431,6 @@ pipeline {
 }
 ```
 
-## Flashcards
-
-- What does CI/CD stand for in software development? ::: Continuous Integration / Continuous Deployment
-- What is the main goal of Continuous Integration? ::: To integrate code changes frequently and detect integration issues early through automated testing
-- What is the primary benefit of Continuous Deployment? ::: Automated deployment of every code change that passes all tests to production
-- What are the core stages of a typical CI/CD pipeline? ::: Build, Test, Deploy, Monitor
-- What is the purpose of a build stage in CI/CD? ::: To compile source code and create deployable artifacts like Docker images
-- What type of testing is typically performed in the CI stage? ::: Unit tests, integration tests, and static code analysis
-- What is the role of artifact repositories in CI/CD? ::: To store and version build artifacts, dependencies, and deployment packages
-- What is infrastructure as code in the context of CI/CD? ::: Managing and provisioning infrastructure through machine-readable definition files
-- What is the purpose of blue-green deployment? ::: To reduce downtime by running two identical production environments and switching between them
-- What is canary deployment? ::: Gradually rolling out changes to a small subset of users before full deployment
-- What is the main advantage of feature flags in CI/CD? ::: To enable/disable features without redeploying, allowing for safer releases
-- What is the purpose of automated rollback in CI/CD? ::: To quickly revert to a previous working version if issues are detected post-deployment
-- What is the difference between Continuous Delivery and Continuous Deployment? ::: Continuous Delivery requires manual approval for production deployment, while Continuous Deployment is fully automated
-- What is the role of monitoring in CI/CD pipelines? ::: To track deployment success, application health, and provide feedback for continuous improvement
-- What is a common challenge with CI/CD pipelines? ::: Managing environment drift between development, staging, and production environments
-
 ## Links
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
 - [GitLab CI/CD Documentation](https://docs.gitlab.com/ee/ci/)

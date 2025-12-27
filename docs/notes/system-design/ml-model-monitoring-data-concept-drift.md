@@ -104,36 +104,6 @@ print(f"PSI Score: {psi_score:.4f}")
 # PSI > 0.2 indicates significant drift
 ```
 
-## Flashcards
-
-- What is Data Drift (Covariate Shift)? ::: A change in the distribution of **input features** $P(X)$, while the underlying relationship to the target stays the same.
-- What is Concept Drift? ::: A change in the **relationship** between inputs and the target variable $P(Y|X)$ (e.g., user preferences change).
-- What is PSI (Population Stability Index)? ::: A metric used to quantify how much a variable's distribution has shifted between two time periods (e.g., Training vs. Production).
-- Why is monitoring Concept Drift harder than Data Drift? ::: Because Concept Drift detection usually requires **ground truth labels**, which may be delayed or unavailable in production, whereas Data Drift only looks at inputs.
-- What is the typical threshold for PSI to indicate "Significant Drift"? ::: A PSI value greater than **0.2**.
-
-## Quizzes
-
-### Diagnosis
-Q: Your fraud detection model's accuracy drops suddenly. You check the input feature distributions (PSI), and they are all stable (PSI < 0.1). What is the most likely cause?
-Options:
-- A) Data Drift.
-- B) Concept Drift.
-- C) Bug in the PSI calculation.
-- D) The server is down.
-Answers: B
-Explanation: If inputs $P(X)$ are stable (no Data Drift), but accuracy drops, it implies the relationship $P(Y|X)$ has changed. For example, fraudsters invented a new technique that looks "normal" based on old features. This is Concept Drift.
-
-### Architecture
-Q: You have a credit risk model where defaults are known only after 12 months. How do you monitor this model effectively in the short term?
-Options:
-- A) Wait 12 months to calculate accuracy.
-- B) Monitor Data Drift (PSI) on key features daily. If features shift, retrain or investigate.
-- C) Assume the model is perfect.
-- D) Use the model's own predictions as ground truth.
-Answers: B
-Explanation: Since you have a long "Label Delay," you cannot monitor accuracy directly. You must rely on leading indicators like Data Drift. If the applicant population changes (e.g., income drops), the model is likely invalid, even if you don't have the default labels yet.
-
 ## Learning Sources
 - [Evidently AI: Data Drift detection](https://docs.evidentlyai.com/) - Popular open-source tool for ML monitoring.
 - [Google Cloud: MLOps Drift Detection](https://cloud.google.com/blog/products/ai-machine-learning/detecting-feature-drift-in-tensorflow-extended) - Implementation in TFX.
