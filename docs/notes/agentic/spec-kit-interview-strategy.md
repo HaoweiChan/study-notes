@@ -10,7 +10,7 @@ category: "agentic"
 # Spec Kit 30-Min Interview Strategy
 
 ## Summary
-This strategy uses **Spec Kit** within Cursor to demonstrate "Architectural Control over AI" during a 30-minute coding interview. By "programming the AI" via a Constitution and Specs before generating code, you demonstrate the ability to lead an AI workflow rather than just typing code.
+This strategy uses **Spec Kit** within Cursor to demonstrate **Architectural Control over AI** during a 30-minute coding interview. By "programming the AI" via a Constitution and Specs before generating code, you demonstrate the ability to lead an AI workflow rather than just typing code.
 
 ## Details
 
@@ -28,8 +28,8 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
 
 # 3. Initialize your Interview Directory
-mkdir appier_interview_prep
-cd appier_interview_prep
+mkdir interview_prep_demo
+cd interview_prep_demo
 specify init
 # Select "Cursor" as your AI tool when prompted.
 # Select "One-time usage" or "Persistent" (Persistent is better if you practice).
@@ -42,7 +42,7 @@ Spec Kit relies on a `constitution.md` file to govern how the AI behaves. **Edit
 When the clock starts, do **not** just start coding. Follow this "Speed-Run" protocol.
 
 #### Step 0: The Setup (Min 0-2)
-* Open your `appier_interview_prep` folder in Cursor.
+* Open your `interview_prep_demo` folder in Cursor.
 * **Paste the Problem:** Paste the interviewer's prompt into a new file `problem.txt` (so it's in context).
 * **Open Cursor Chat (Cmd+L / Ctrl+L).**
 
