@@ -2,7 +2,7 @@
 
 A structured knowledge base with an interactive web interface. Built for efficient learning, quick reference, and interview preparation.
 
-**Live Demo:** [haoweichan.github.io/study-notes](https://haoweichan.github.io/study-notes/)
+**View Online:** [haoweichan.github.io/study-notes](https://haoweichan.github.io/study-notes/)
 
 ## What's Inside
 

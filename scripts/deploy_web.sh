@@ -35,6 +35,9 @@ echo "deg  Deploying to docs/..."
 rm -rf "$DOCS_DIR"/*
 cp -r "$WEB_DIR/dist/"* "$DOCS_DIR/"
 
+# 4. Disable Jekyll (Crucial for serving raw .md files and _assets)
+touch "$DOCS_DIR/.nojekyll"
+
 echo "✅ Deployment complete! open docs/index.html to test."
 
 
