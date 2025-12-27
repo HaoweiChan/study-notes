@@ -60,6 +60,36 @@
     "source": "notes/algorithm/monotonic-queue.md"
   },
   {
+    "q": "What is the primary use case for a Difference Array?",
+    "a": "Efficiently performing multiple range updates on an array or matrix (Write-Heavy).",
+    "category": "algorithm",
+    "source": "notes/algorithm/difference-array.md"
+  },
+  {
+    "q": "What is the time complexity of a single update operation in a Difference Array?",
+    "a": "$O(1)$",
+    "category": "algorithm",
+    "source": "notes/algorithm/difference-array.md"
+  },
+  {
+    "q": "What operation is needed to retrieve the final values from a Difference Array after updates?",
+    "a": "Prefix Sum (Integration)",
+    "category": "algorithm",
+    "source": "notes/algorithm/difference-array.md"
+  },
+  {
+    "q": "How does the Difference Array update logic relate to 2D Prefix Sum query logic?",
+    "a": "They are inverse operations; Difference Array updates 4 corners to \"mark\" changes, while Prefix Sum uses 4 corners (inclusion-exclusion) to \"read\" sums.",
+    "category": "algorithm",
+    "source": "notes/algorithm/difference-array.md"
+  },
+  {
+    "q": "In a 1D Difference Array, to add `x` to range `[l, r]`, what two updates are made?",
+    "a": "`diff[l] += x` and `diff[r+1] -= x`",
+    "category": "algorithm",
+    "source": "notes/algorithm/difference-array.md"
+  },
+  {
     "q": "What is the primary purpose of a segment tree?",
     "a": "To efficiently perform range queries (sum, min, max) and point updates on arrays",
     "category": "algorithm",
@@ -450,6 +480,156 @@
     "source": "notes/algorithm/kmp-algorithm.md"
   },
   {
+    "q": "What is the main use case for Reservoir Sampling?",
+    "a": "Selecting a random sample of $k$ items from a **stream of unknown size** or a dataset too large to fit in memory.",
+    "category": "algorithm",
+    "source": "notes/algorithm/reservoir-sampling.md"
+  },
+  {
+    "q": "What is the time complexity of Reservoir Sampling?",
+    "a": "**O(N)** (single pass over the data).",
+    "category": "algorithm",
+    "source": "notes/algorithm/reservoir-sampling.md"
+  },
+  {
+    "q": "What is the space complexity of Reservoir Sampling?",
+    "a": "**O(k)** (size of the sample).",
+    "category": "algorithm",
+    "source": "notes/algorithm/reservoir-sampling.md"
+  },
+  {
+    "q": "When processing the $i$-th element (where $i > k$), with what probability should we keep it?",
+    "a": "Probability **$k/i$**.",
+    "category": "algorithm",
+    "source": "notes/algorithm/reservoir-sampling.md"
+  },
+  {
+    "q": "If we decide to keep the $i$-th element, which element do we replace?",
+    "a": "A **randomly selected** element from the existing reservoir (index $0$ to $k-1$).",
+    "category": "algorithm",
+    "source": "notes/algorithm/reservoir-sampling.md"
+  },
+  {
+    "q": "What is the primary constraint in an RTB system?",
+    "a": "**Latency** (typically < 100ms total, < 50ms internal).",
+    "category": "system-design",
+    "source": "notes/system-design/design-real-time-bidding-rtb-system.md"
+  },
+  {
+    "q": "What database type is best for User Profile lookups in RTB?",
+    "a": "**Key-Value Stores** like Redis or Aerospike (low latency, high throughput).",
+    "category": "system-design",
+    "source": "notes/system-design/design-real-time-bidding-rtb-system.md"
+  },
+  {
+    "q": "How do we handle heavy ML inference within 20ms?",
+    "a": "Use a **Cascade** (light model for filtration, heavy model for ranking) or optimize model serving (quantization, compilation).",
+    "category": "system-design",
+    "source": "notes/system-design/design-real-time-bidding-rtb-system.md"
+  },
+  {
+    "q": "What is \"Pacing\" in AdTech?",
+    "a": "Spreading an advertiser's budget evenly throughout the day so they don't spend it all in the first hour.",
+    "category": "system-design",
+    "source": "notes/system-design/design-real-time-bidding-rtb-system.md"
+  },
+  {
+    "q": "Why is distributed budget management difficult?",
+    "a": "Because locking a central database for every bid is too slow; we use **local allocation** and **batch synchronization**.",
+    "category": "system-design",
+    "source": "notes/system-design/design-real-time-bidding-rtb-system.md"
+  },
+  {
+    "q": "What is Training-Serving Skew?",
+    "a": "The performance degradation caused when production data/logic differs from training data/logic.",
+    "category": "system-design",
+    "source": "notes/system-design/feature-stores-training-serving-skew.md"
+  },
+  {
+    "q": "What is the main responsibility of a Feature Store?",
+    "a": "To serve consistent feature values to both **offline training** and **online inference** environments.",
+    "category": "system-design",
+    "source": "notes/system-design/feature-stores-training-serving-skew.md"
+  },
+  {
+    "q": "What is Point-in-Time (PIT) Correctness?",
+    "a": "Ensuring that historical training data only uses feature values that were actually available **before** the event timestamp (no future leakage).",
+    "category": "system-design",
+    "source": "notes/system-design/feature-stores-training-serving-skew.md"
+  },
+  {
+    "q": "Which database type is typically used for the \"Online Store\"?",
+    "a": "Low-latency Key-Value stores (Redis, DynamoDB, Cassandra).",
+    "category": "system-design",
+    "source": "notes/system-design/feature-stores-training-serving-skew.md"
+  },
+  {
+    "q": "Which database type is typically used for the \"Offline Store\"?",
+    "a": "Scalable Data Warehouses or Data Lakes (BigQuery, Snowflake, S3/Parquet).",
+    "category": "system-design",
+    "source": "notes/system-design/feature-stores-training-serving-skew.md"
+  },
+  {
+    "q": "What is Data Drift (Covariate Shift)?",
+    "a": "A change in the distribution of **input features** $P(X)$, while the underlying relationship to the target stays the same.",
+    "category": "system-design",
+    "source": "notes/system-design/ml-model-monitoring-data-concept-drift.md"
+  },
+  {
+    "q": "What is Concept Drift?",
+    "a": "A change in the **relationship** between inputs and the target variable $P(Y|X)$ (e.g., user preferences change).",
+    "category": "system-design",
+    "source": "notes/system-design/ml-model-monitoring-data-concept-drift.md"
+  },
+  {
+    "q": "What is PSI (Population Stability Index)?",
+    "a": "A metric used to quantify how much a variable's distribution has shifted between two time periods (e.g., Training vs. Production).",
+    "category": "system-design",
+    "source": "notes/system-design/ml-model-monitoring-data-concept-drift.md"
+  },
+  {
+    "q": "Why is monitoring Concept Drift harder than Data Drift?",
+    "a": "Because Concept Drift detection usually requires **ground truth labels**, which may be delayed or unavailable in production, whereas Data Drift only looks at inputs.",
+    "category": "system-design",
+    "source": "notes/system-design/ml-model-monitoring-data-concept-drift.md"
+  },
+  {
+    "q": "What is the typical threshold for PSI to indicate \"Significant Drift\"?",
+    "a": "A PSI value greater than **0.2**.",
+    "category": "system-design",
+    "source": "notes/system-design/ml-model-monitoring-data-concept-drift.md"
+  },
+  {
+    "q": "What is the main trade-off in Approximate Nearest Neighbor (ANN) search?",
+    "a": "Trading a small amount of **Accuracy/Recall** (missing the absolute best match) for massive gains in **Speed** ($O(N) \\rightarrow O(\\log N)$).",
+    "category": "system-design",
+    "source": "notes/system-design/embedding-search-engines-vector-dbs.md"
+  },
+  {
+    "q": "How does HNSW (Hierarchical Navigable Small World) work?",
+    "a": "It builds a multi-layered graph where upper layers have long connections (highways) for fast traversal and lower layers have short connections for precise local search.",
+    "category": "system-design",
+    "source": "notes/system-design/embedding-search-engines-vector-dbs.md"
+  },
+  {
+    "q": "What is the \"Voronoi Cell\" concept in IVF indexing?",
+    "a": "Partitioning the vector space into regions (cells) around centroids; during search, we only look at vectors inside the cell closest to the query.",
+    "category": "system-design",
+    "source": "notes/system-design/embedding-search-engines-vector-dbs.md"
+  },
+  {
+    "q": "Which similarity metric is best when vector magnitude should be ignored (only direction matters)?",
+    "a": "**Cosine Similarity**.",
+    "category": "system-design",
+    "source": "notes/system-design/embedding-search-engines-vector-dbs.md"
+  },
+  {
+    "q": "What is `nprobe` in Faiss IVF?",
+    "a": "A hyperparameter that determines how many adjacent clusters (cells) to search. Higher `nprobe` increases accuracy but decreases speed.",
+    "category": "system-design",
+    "source": "notes/system-design/embedding-search-engines-vector-dbs.md"
+  },
+  {
     "q": "What is the main purpose of Docker containers?",
     "a": "To package applications and their dependencies into lightweight, portable, and isolated environments",
     "category": "devops",
@@ -718,5 +898,275 @@
     "a": "Managing environment drift between development, staging, and production environments",
     "category": "devops",
     "source": "notes/devops/cicd-pipelines.md"
+  },
+  {
+    "q": "What is the main benefit of Recursive Character Chunking over Fixed-Size Chunking?",
+    "a": "It attempts to keep related text together (paragraphs, sentences) rather than splitting mid-sentence, preserving **semantic meaning**.",
+    "category": "agentic",
+    "source": "notes/agentic/rag-architectures-chunking.md"
+  },
+  {
+    "q": "Why is Hybrid Search often better than pure Vector Search?",
+    "a": "Vector search can fail on **exact keyword matches** (like part numbers or acronyms), which BM25/Keyword search handles well.",
+    "category": "agentic",
+    "source": "notes/agentic/rag-architectures-chunking.md"
+  },
+  {
+    "q": "What is the role of a Re-Ranker (Cross-Encoder) in RAG?",
+    "a": "It takes a broad set of candidate results and re-scores them with high precision to select the best few for the LLM, improving relevance.",
+    "category": "agentic",
+    "source": "notes/agentic/rag-architectures-chunking.md"
+  },
+  {
+    "q": "What is \"Parent-Child\" indexing?",
+    "a": "Searching against small, precise chunks (Children) but returning larger, surrounding context (Parent) to the LLM.",
+    "category": "agentic",
+    "source": "notes/agentic/rag-architectures-chunking.md"
+  },
+  {
+    "q": "What is Reciprocal Rank Fusion (RRF)?",
+    "a": "An algorithm to combine ranked lists from different search methods (e.g., BM25 and Vector Search) into a single unified ranking.",
+    "category": "agentic",
+    "source": "notes/agentic/rag-architectures-chunking.md"
+  },
+  {
+    "q": "What is the first command to run in the Spec Kit workflow?",
+    "a": "`/speckit.specify`",
+    "category": "agentic",
+    "source": "notes/agentic/spec-kit-interview-strategy.md"
+  },
+  {
+    "q": "Why is the `constitution.md` file important?",
+    "a": "It defines the \"rules of engagement\" for the AI (e.g., \"use single file\", \"explain Big-O\"), preventing it from over-engineering or missing requirements.",
+    "category": "agentic",
+    "source": "notes/agentic/spec-kit-interview-strategy.md"
+  },
+  {
+    "q": "If the AI generates an over-complicated plan (e.g., using PostgreSQL), what should you do?",
+    "a": "**Interrupt and Refine**: Tell it to use a simpler alternative like SQLite or in-memory structures appropriate for a 30-minute interview.",
+    "category": "agentic",
+    "source": "notes/agentic/spec-kit-interview-strategy.md"
+  },
+  {
+    "q": "What are the three main steps in the Spec Kit loop?",
+    "a": "**Specify** (Requirements), **Plan** (Architecture), **Implement** (Code Generation).",
+    "category": "agentic",
+    "source": "notes/agentic/spec-kit-interview-strategy.md"
+  },
+  {
+    "q": "What should you do if the task is trivial (e.g., \"reverse a string\")?",
+    "a": "Skip Spec Kit and use standard Cursor Chat or Composer to avoid unnecessary overhead.",
+    "category": "agentic",
+    "source": "notes/agentic/spec-kit-interview-strategy.md"
+  },
+  {
+    "q": "What is the core idea of Chain of Thought (CoT)?",
+    "a": "It encourages the LLM to generate **intermediate reasoning steps** before the final answer, which improves performance on complex tasks.",
+    "category": "agentic",
+    "source": "notes/agentic/agent-reasoning-patterns-react-cot.md"
+  },
+  {
+    "q": "What does ReAct stand for?",
+    "a": "**Re**asoning + **Act**ing.",
+    "category": "agentic",
+    "source": "notes/agentic/agent-reasoning-patterns-react-cot.md"
+  },
+  {
+    "q": "How does ReAct differ from standard CoT?",
+    "a": "CoT is for internal reasoning only. ReAct allows the model to **take actions** (call tools) and use the **observations** from those actions to inform the next reasoning step.",
+    "category": "agentic",
+    "source": "notes/agentic/agent-reasoning-patterns-react-cot.md"
+  },
+  {
+    "q": "What is \"Zero-Shot CoT\"?",
+    "a": "Triggering reasoning capabilities simply by appending the phrase \"**Let's think step by step**\" to the prompt, without providing examples.",
+    "category": "agentic",
+    "source": "notes/agentic/agent-reasoning-patterns-react-cot.md"
+  },
+  {
+    "q": "What is the \"Observation\" step in the ReAct loop?",
+    "a": "It is the output/result returned by an **external tool** (e.g., API response) that the model reads to update its context.",
+    "category": "agentic",
+    "source": "notes/agentic/agent-reasoning-patterns-react-cot.md"
+  },
+  {
+    "q": "What is the main motivation for PEFT (Parameter-Efficient Fine-Tuning)?",
+    "a": "To reduce the **computational and memory costs** of fine-tuning large models by updating only a small subset of parameters.",
+    "category": "agentic",
+    "source": "notes/agentic/llm-fine-tuning-lora-qlora.md"
+  },
+  {
+    "q": "How does LoRA represent weight updates?",
+    "a": "As the product of two **low-rank matrices** ($B \\times A$) added to the frozen base weights.",
+    "category": "agentic",
+    "source": "notes/agentic/llm-fine-tuning-lora-qlora.md"
+  },
+  {
+    "q": "What is the advantage of merging LoRA weights for inference?",
+    "a": "It eliminates any **latency overhead**; the model architecture remains identical to the original, just with updated weight values.",
+    "category": "agentic",
+    "source": "notes/agentic/llm-fine-tuning-lora-qlora.md"
+  },
+  {
+    "q": "What does QLoRA add to standard LoRA?",
+    "a": "It loads the frozen base model in **4-bit precision** (quantized), drastically reducing VRAM usage while maintaining performance.",
+    "category": "agentic",
+    "source": "notes/agentic/llm-fine-tuning-lora-qlora.md"
+  },
+  {
+    "q": "What is \"Catastrophic Forgetting\"?",
+    "a": "When a model forgets previously learned knowledge (e.g., how to speak English) while being fine-tuned on a new task (e.g., coding). PEFT mitigates this by freezing the base model.",
+    "category": "agentic",
+    "source": "notes/agentic/llm-fine-tuning-lora-qlora.md"
+  },
+  {
+    "q": "Why is Accuracy a bad metric for CTR prediction?",
+    "a": "Because of extreme **class imbalance** (CTR is very low), a model predicting all zeros would have high accuracy but zero value.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/adtech-metrics-auc-logloss-lift.md"
+  },
+  {
+    "q": "What does AUC measure in the context of CTR?",
+    "a": "It measures the probability that a random **click** is ranked higher than a random **non-click**. It evaluates **ranking quality**.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/adtech-metrics-auc-logloss-lift.md"
+  },
+  {
+    "q": "What does LogLoss measure that AUC does not?",
+    "a": "LogLoss measures **calibration** (how accurate the predicted probability values are), which is critical for calculating correct bids.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/adtech-metrics-auc-logloss-lift.md"
+  },
+  {
+    "q": "What is the benefit of Normalized Entropy (NE) over LogLoss?",
+    "a": "NE allows for comparison of model performance across datasets with **different average CTRs**.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/adtech-metrics-auc-logloss-lift.md"
+  },
+  {
+    "q": "If a model has high AUC but high LogLoss, what does it mean?",
+    "a": "The model ranks items correctly (good for sorting), but the probability values are incorrectly scaled (bad for pricing/bidding).",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/adtech-metrics-auc-logloss-lift.md"
+  },
+  {
+    "q": "What is the main problem with One-Hot Encoding for User IDs?",
+    "a": "**High Cardinality**: The vector size becomes unmanageably large (millions of dimensions) and sparse.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/handling-sparse-data-embeddings-hashing-trick.md"
+  },
+  {
+    "q": "How do Embeddings solve the sparsity problem?",
+    "a": "They map high-dimensional sparse indices to **low-dimensional dense vectors** (e.g., size 64), which capture semantic relationships.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/handling-sparse-data-embeddings-hashing-trick.md"
+  },
+  {
+    "q": "What is the \"Hashing Trick\"?",
+    "a": "Mapping raw feature values to a fixed-size vector index using a hash function and modulo, avoiding the need for a vocabulary dictionary.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/handling-sparse-data-embeddings-hashing-trick.md"
+  },
+  {
+    "q": "What is the main downside of the Hashing Trick?",
+    "a": "**Hash Collisions**: Different features may map to the same index, causing noise (though models are often robust to this).",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/handling-sparse-data-embeddings-hashing-trick.md"
+  },
+  {
+    "q": "Why is the Hashing Trick useful for \"Crossed Features\"?",
+    "a": "Crossed features (e.g., City x Job) have combinatorial cardinality; hashing keeps the memory usage constant regardless of the number of combinations.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/handling-sparse-data-embeddings-hashing-trick.md"
+  },
+  {
+    "q": "What is the main goal of the \"Wide\" component in Wide & Deep?",
+    "a": "To **memorize** specific feature co-occurrences (e.g., specific rules).",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/ctr-prediction-models-deepfm-wide-deep.md"
+  },
+  {
+    "q": "What is the main goal of the \"Deep\" component in Wide & Deep?",
+    "a": "To **generalize** to unseen feature combinations using embeddings.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/ctr-prediction-models-deepfm-wide-deep.md"
+  },
+  {
+    "q": "How does DeepFM improve upon Wide & Deep?",
+    "a": "It replaces the manual feature engineering of the Wide part with a **Factorization Machine (FM)** to learn 2nd-order interactions automatically.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/ctr-prediction-models-deepfm-wide-deep.md"
+  },
+  {
+    "q": "What is the shared input mechanism in DeepFM?",
+    "a": "The FM component and the Deep component share the same **Embedding vectors** for the raw features.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/ctr-prediction-models-deepfm-wide-deep.md"
+  },
+  {
+    "q": "Which architecture is typically used for the Retrieval stage (candidate generation)?",
+    "a": "**Two-Tower** (or DSSM) architecture.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/ctr-prediction-models-deepfm-wide-deep.md"
+  },
+  {
+    "q": "What is the goal of Multi-Armed Bandit algorithms?",
+    "a": "To balance **Exploration** (gathering data) and **Exploitation** (maximizing reward) to minimize regret.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/multi-armed-bandits-thompson-sampling-ucb.md"
+  },
+  {
+    "q": "How does Thompson Sampling select an arm?",
+    "a": "It samples a random value from each arm's **posterior distribution** and picks the highest sample.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/multi-armed-bandits-thompson-sampling-ucb.md"
+  },
+  {
+    "q": "What is the intuition behind UCB (Upper Confidence Bound)?",
+    "a": "**Optimism in the face of uncertainty**: it favors arms that have a high potential (upper bound), either because they have a high average or because we don't know enough about them yet.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/multi-armed-bandits-thompson-sampling-ucb.md"
+  },
+  {
+    "q": "How does Epsilon-Greedy handle exploration?",
+    "a": "It chooses a completely random arm with a fixed probability $\\epsilon$ at every step.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/multi-armed-bandits-thompson-sampling-ucb.md"
+  },
+  {
+    "q": "What is a Contextual Bandit?",
+    "a": "A bandit algorithm that uses side information (Context/Features) about the user or environment to decide which arm is best for *that specific request*.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/multi-armed-bandits-thompson-sampling-ucb.md"
+  },
+  {
+    "q": "What is the main limitation of Pointwise ranking loss?",
+    "a": "It treats each item independently and penalizes errors at the bottom of the list equally to errors at the top, ignoring relative ordering.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/ranking-loss-functions-pointwise-pairwise-listwise.md"
+  },
+  {
+    "q": "How does Pairwise ranking work?",
+    "a": "It takes pairs of items (one positive, one negative) and trains the model to score the positive item higher than the negative one.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/ranking-loss-functions-pointwise-pairwise-listwise.md"
+  },
+  {
+    "q": "What is BPR (Bayesian Personalized Ranking)?",
+    "a": "A popular **Pairwise** loss function used in recommender systems that optimizes the relative order of positive vs. negative items.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/ranking-loss-functions-pointwise-pairwise-listwise.md"
+  },
+  {
+    "q": "What is the goal of Listwise ranking?",
+    "a": "To directly optimize the final ranking metric (like NDCG or MAP) considering the entire list of items at once.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/ranking-loss-functions-pointwise-pairwise-listwise.md"
+  },
+  {
+    "q": "Which LTR approach is generally considered State-of-the-Art for tabular data (e.g., search engines)?",
+    "a": "**LambdaMART** (a Listwise/Pairwise hybrid using Gradient Boosting).",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/ranking-loss-functions-pointwise-pairwise-listwise.md"
   }
 ]

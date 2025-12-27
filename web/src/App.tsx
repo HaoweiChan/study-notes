@@ -2,15 +2,16 @@ import { useState, useEffect } from 'react';
 import { useData } from '@/hooks/use-data';
 import { FlashcardDeck } from '@/components/FlashcardDeck';
 import { QuizDeck } from '@/components/QuizDeck';
+import { NotesList } from '@/components/NotesList';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Moon, Sun, Search, BookOpen, GraduationCap, Star } from 'lucide-react';
+import { Moon, Sun, Search, BookOpen, GraduationCap, Star, FileText } from 'lucide-react';
 import { usePersistedState } from '@/hooks/use-persisted-state';
 
 function App() {
-  const { flashcards, quizzes, loading } = useData();
+  const { flashcards, quizzes, notes, loading } = useData();
   const [category, setCategory] = usePersistedState('selected_category', 'all');
   const [search, setSearch] = useState('');
   const [isDark, setIsDark] = usePersistedState('dark_mode', false);
@@ -31,7 +32,8 @@ function App() {
 
   const categories = Array.from(new Set([
     ...flashcards.map(c => c.category),
-    ...quizzes.map(q => q.category)
+    ...quizzes.map(q => q.category),
+    ...notes.map(n => n.category)
   ])).sort();
 
   const filteredFlashcards = flashcards.filter(c => {
@@ -41,8 +43,6 @@ function App() {
       c.a.toLowerCase().includes(search.toLowerCase());
     
     // Bookmark filter requires finding the original index
-    // This is a bit expensive O(N^2) effectively if implemented naively in filter
-    // Optimization: Pre-compute original indices or assume unique identity
     const originalIdx = flashcards.indexOf(c); // Determine index in original array
     const matchBookmark = !bookmarkedOnly || bookmarks.includes(originalIdx);
 
@@ -53,6 +53,14 @@ function App() {
     const matchCategory = category === 'all' || q.category === category;
     const matchSearch = search === '' || 
       q.q.toLowerCase().includes(search.toLowerCase());
+    return matchCategory && matchSearch;
+  });
+
+  const filteredNotes = notes.filter(n => {
+    const matchCategory = category === 'all' || n.category === category;
+    const matchSearch = search === '' || 
+      n.title.toLowerCase().includes(search.toLowerCase()) || 
+      n.tags?.some(t => t.toLowerCase().includes(search.toLowerCase()));
     return matchCategory && matchSearch;
   });
 
@@ -104,12 +112,15 @@ function App() {
       <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue="flashcards" className="w-full space-y-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <TabsList className="grid w-full sm:w-[400px] grid-cols-2">
+            <TabsList className="grid w-full sm:w-[600px] grid-cols-3">
                 <TabsTrigger value="flashcards" className="gap-2">
                     <BookOpen className="h-4 w-4" /> Flashcards
                 </TabsTrigger>
                 <TabsTrigger value="quizzes" className="gap-2">
                     <GraduationCap className="h-4 w-4" /> Quizzes
+                </TabsTrigger>
+                <TabsTrigger value="notes" className="gap-2">
+                    <FileText className="h-4 w-4" /> Notes
                 </TabsTrigger>
             </TabsList>
 
@@ -144,6 +155,10 @@ function App() {
 
           <TabsContent value="quizzes" className="focus-visible:outline-none focus-visible:ring-0">
             <QuizDeck quizzes={filteredQuizzes} />
+          </TabsContent>
+
+          <TabsContent value="notes" className="focus-visible:outline-none focus-visible:ring-0">
+            <NotesList notes={filteredNotes} />
           </TabsContent>
         </Tabs>
       </main>

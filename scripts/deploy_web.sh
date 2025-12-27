@@ -14,6 +14,13 @@ echo "📦 Updating artifacts..."
 mkdir -p "$WEB_DIR/public/artifacts"
 cp "$DOCS_DIR/artifacts/"*.json "$WEB_DIR/public/artifacts/"
 
+# 1b. Copy Notes to web/public
+echo "📝 Copying notes content..."
+mkdir -p "$WEB_DIR/public/notes"
+# Remove old notes to ensure clean state
+rm -rf "$WEB_DIR/public/notes/"*
+cp -r "$PROJECT_ROOT/notes/"* "$WEB_DIR/public/notes/"
+
 # 2. Build React App
 echo "🏗️  Building Web App..."
 cd "$WEB_DIR"

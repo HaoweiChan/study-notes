@@ -14,6 +14,15 @@ export interface Quiz {
   source: string;
 }
 
+export interface Note {
+  title: string;
+  category: string;
+  slug: string;
+  path: string;
+  tags: string[];
+  date: string;
+}
+
 export const CATEGORY_COLORS: Record<string, string> = {
   'algorithm': 'bg-blue-600',
   'devops': 'bg-green-600',
@@ -30,5 +39,3 @@ export const FALLBACK_COLORS = [
   'bg-lime-600',
   'bg-teal-600',
 ];
-
-
