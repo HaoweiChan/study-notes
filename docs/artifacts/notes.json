@@ -1,0 +1,414 @@
+[
+  {
+    "title": "RAG Architectures & Chunking",
+    "category": "agentic",
+    "slug": "rag-architectures-chunking",
+    "path": "notes/agentic/rag-architectures-chunking.md",
+    "tags": [
+      "genai",
+      "llm",
+      "search"
+    ],
+    "date": "2025-12-27"
+  },
+  {
+    "title": "Spec Kit 30-Min Interview Strategy",
+    "category": "agentic",
+    "slug": "spec-kit-interview-strategy",
+    "path": "notes/agentic/spec-kit-interview-strategy.md",
+    "tags": [
+      "interview-prep",
+      "agentic-workflow",
+      "cursor",
+      "productivity"
+    ],
+    "date": "2025-12-27"
+  },
+  {
+    "title": "Agent Reasoning Patterns (ReAct, CoT)",
+    "category": "agentic",
+    "slug": "agent-reasoning-patterns-react-cot",
+    "path": "notes/agentic/agent-reasoning-patterns-react-cot.md",
+    "tags": [
+      "agents",
+      "genai",
+      "prompt-engineering"
+    ],
+    "date": "2025-12-27"
+  },
+  {
+    "title": "LLM Fine-Tuning (LoRA, QLoRA)",
+    "category": "agentic",
+    "slug": "llm-fine-tuning-lora-qlora",
+    "path": "notes/agentic/llm-fine-tuning-lora-qlora.md",
+    "tags": [
+      "genai",
+      "fine-tuning",
+      "peft"
+    ],
+    "date": "2025-12-27"
+  },
+  {
+    "title": "Reservoir Sampling",
+    "category": "algorithm",
+    "slug": "reservoir-sampling",
+    "path": "notes/algorithm/reservoir-sampling.md",
+    "tags": [
+      "algorithm",
+      "probability",
+      "data-engineering"
+    ],
+    "date": "2025-12-27"
+  },
+  {
+    "title": "Design Real-Time Bidding (RTB) System",
+    "category": "system-design",
+    "slug": "design-real-time-bidding-rtb-system",
+    "path": "notes/system-design/design-real-time-bidding-rtb-system.md",
+    "tags": [
+      "system-design",
+      "adtech",
+      "high-concurrency"
+    ],
+    "date": "2025-12-27"
+  },
+  {
+    "title": "Feature Stores & Training-Serving Skew",
+    "category": "system-design",
+    "slug": "feature-stores-training-serving-skew",
+    "path": "notes/system-design/feature-stores-training-serving-skew.md",
+    "tags": [
+      "mlops",
+      "system-design",
+      "data-engineering"
+    ],
+    "date": "2025-12-27"
+  },
+  {
+    "title": "ML Model Monitoring (Data & Concept Drift)",
+    "category": "system-design",
+    "slug": "ml-model-monitoring-data-concept-drift",
+    "path": "notes/system-design/ml-model-monitoring-data-concept-drift.md",
+    "tags": [
+      "mlops",
+      "system-design",
+      "production-ml"
+    ],
+    "date": "2025-12-27"
+  },
+  {
+    "title": "Embedding Search Engines (Vector DBs)",
+    "category": "system-design",
+    "slug": "embedding-search-engines-vector-dbs",
+    "path": "notes/system-design/embedding-search-engines-vector-dbs.md",
+    "tags": [
+      "system-design",
+      "search",
+      "genai",
+      "vectors"
+    ],
+    "date": "2025-12-27"
+  },
+  {
+    "title": "AdTech Metrics (AUC, LogLoss, Lift)",
+    "category": "machine-learning",
+    "slug": "adtech-metrics-auc-logloss-lift",
+    "path": "notes/machine-learning/adtech-metrics-auc-logloss-lift.md",
+    "tags": [
+      "metrics",
+      "adtech",
+      "machine-learning"
+    ],
+    "date": "2025-12-27"
+  },
+  {
+    "title": "Handling Sparse Data (Embeddings, Hashing Trick)",
+    "category": "machine-learning",
+    "slug": "handling-sparse-data-embeddings-hashing-trick",
+    "path": "notes/machine-learning/handling-sparse-data-embeddings-hashing-trick.md",
+    "tags": [
+      "feature-engineering",
+      "adtech",
+      "deep-learning"
+    ],
+    "date": "2025-12-27"
+  },
+  {
+    "title": "CTR Prediction Models (DeepFM, Wide&Deep)",
+    "category": "machine-learning",
+    "slug": "ctr-prediction-models-deepfm-wide-deep",
+    "path": "notes/machine-learning/ctr-prediction-models-deepfm-wide-deep.md",
+    "tags": [
+      "recommender-systems",
+      "deep-learning",
+      "adtech"
+    ],
+    "date": "2025-12-27"
+  },
+  {
+    "title": "Multi-Armed Bandits (Thompson Sampling, UCB)",
+    "category": "machine-learning",
+    "slug": "multi-armed-bandits-thompson-sampling-ucb",
+    "path": "notes/machine-learning/multi-armed-bandits-thompson-sampling-ucb.md",
+    "tags": [
+      "reinforcement-learning",
+      "adtech",
+      "ab-testing"
+    ],
+    "date": "2025-12-27"
+  },
+  {
+    "title": "Ranking Loss Functions (Pointwise, Pairwise, Listwise)",
+    "category": "machine-learning",
+    "slug": "ranking-loss-functions-pointwise-pairwise-listwise",
+    "path": "notes/machine-learning/ranking-loss-functions-pointwise-pairwise-listwise.md",
+    "tags": [
+      "ranking",
+      "loss-functions",
+      "recommender-systems"
+    ],
+    "date": "2025-12-27"
+  },
+  {
+    "title": "Difference Array",
+    "category": "algorithm",
+    "slug": "difference-array",
+    "path": "notes/algorithm/difference-array.md",
+    "tags": [],
+    "date": "2025-12-01"
+  },
+  {
+    "title": "n8n Workflow Automation",
+    "category": "agentic",
+    "slug": "n8n-workflow-automation",
+    "path": "notes/agentic/n8n-workflow-automation.md",
+    "tags": [],
+    "date": "2025-10-21"
+  },
+  {
+    "title": "MCP (Model Context Protocol)",
+    "category": "agentic",
+    "slug": "mcp-model-context-protocol",
+    "path": "notes/agentic/mcp-model-context-protocol.md",
+    "tags": [],
+    "date": "2025-10-21"
+  },
+  {
+    "title": "Docker Containers",
+    "category": "devops",
+    "slug": "docker-containers",
+    "path": "notes/devops/docker-containers.md",
+    "tags": [
+      "containerization",
+      "virtualization",
+      "DevOps",
+      "microservices"
+    ],
+    "date": "2025-10-20"
+  },
+  {
+    "title": "Kubernetes Orchestration",
+    "category": "devops",
+    "slug": "kubernetes-orchestration",
+    "path": "notes/devops/kubernetes-orchestration.md",
+    "tags": [
+      "container orchestration",
+      "microservices",
+      "DevOps",
+      "scalability"
+    ],
+    "date": "2025-10-20"
+  },
+  {
+    "title": "CI/CD Pipelines",
+    "category": "devops",
+    "slug": "cicd-pipelines",
+    "path": "notes/devops/cicd-pipelines.md",
+    "tags": [
+      "continuous integration",
+      "continuous deployment",
+      "automation",
+      "DevOps"
+    ],
+    "date": "2025-10-20"
+  },
+  {
+    "title": "Twitter System Design",
+    "category": "system-design",
+    "slug": "twitter",
+    "path": "notes/system-design/twitter.md",
+    "tags": [],
+    "date": "2025-10-10"
+  },
+  {
+    "title": "Distributed Message Queue Design",
+    "category": "system-design",
+    "slug": "distributed-message-queue",
+    "path": "notes/system-design/distributed-message-queue.md",
+    "tags": [],
+    "date": "2025-10-10"
+  },
+  {
+    "title": "2338. Count the Number of Ideal Arrays",
+    "category": "leetcode",
+    "slug": "2338-count-the-number-of-ideal-arrays",
+    "path": "notes/leetcode/2338-count-the-number-of-ideal-arrays.md",
+    "tags": [
+      "Dynamic Programming",
+      "Math",
+      "Combinatorics",
+      "Number Theory"
+    ],
+    "date": "2025-10-08"
+  },
+  {
+    "title": "992. Subarrays with K Different Integers",
+    "category": "leetcode",
+    "slug": "992-subarrays-with-k-different-integers",
+    "path": "notes/leetcode/992-subarrays-with-k-different-integers.md",
+    "tags": [
+      "Hash Table",
+      "Two Pointers",
+      "Sliding Window"
+    ],
+    "date": "2025-10-08"
+  },
+  {
+    "title": "240. Search a 2D Matrix II",
+    "category": "leetcode",
+    "slug": "240-search-a-2d-matrix-ii",
+    "path": "notes/leetcode/240-search-a-2d-matrix-ii.md",
+    "tags": [
+      "Binary Search",
+      "Matrix",
+      "Two Pointers"
+    ],
+    "date": "2025-10-08"
+  },
+  {
+    "title": "1135. Connecting Cities with Minimum Cost",
+    "category": "leetcode",
+    "slug": "1135-connecting-cities-with-minimum-cost",
+    "path": "notes/leetcode/1135-connecting-cities-with-minimum-cost.md",
+    "tags": [
+      "Union Find",
+      "Graph",
+      "Minimum Spanning Tree",
+      "Greedy"
+    ],
+    "date": "2025-10-08"
+  },
+  {
+    "title": "315. Count of Smaller Numbers After Self",
+    "category": "leetcode",
+    "slug": "315-count-of-smaller-numbers-after-self",
+    "path": "notes/leetcode/315-count-of-smaller-numbers-after-self.md",
+    "tags": [
+      "Binary Search",
+      "Divide and Conquer",
+      "Binary Indexed Tree",
+      "Segment Tree",
+      "Merge Sort"
+    ],
+    "date": "2025-10-08"
+  },
+  {
+    "title": "546. Remove Boxes",
+    "category": "leetcode",
+    "slug": "546-remove-boxes",
+    "path": "notes/leetcode/546-remove-boxes.md",
+    "tags": [
+      "Dynamic Programming",
+      "Interval DP"
+    ],
+    "date": "2025-10-08"
+  },
+  {
+    "title": "265. Paint House II",
+    "category": "leetcode",
+    "slug": "265-paint-house-ii",
+    "path": "notes/leetcode/265-paint-house-ii.md",
+    "tags": [
+      "Dynamic Programming",
+      "Array"
+    ],
+    "date": "2025-10-08"
+  },
+  {
+    "title": "1488. Avoid Flood in The City",
+    "category": "leetcode",
+    "slug": "1488-avoid-flood-in-the-city",
+    "path": "notes/leetcode/1488-avoid-flood-in-the-city.md",
+    "tags": [
+      "Hash Table",
+      "Binary Search",
+      "Greedy",
+      "Heap"
+    ],
+    "date": "2025-10-07"
+  },
+  {
+    "title": "Monotonic Queue",
+    "category": "algorithm",
+    "slug": "monotonic-queue",
+    "path": "notes/algorithm/monotonic-queue.md",
+    "tags": [],
+    "date": "2025-10-07"
+  },
+  {
+    "title": "Segment Tree",
+    "category": "algorithm",
+    "slug": "segment-tree",
+    "path": "notes/algorithm/segment-tree.md",
+    "tags": [],
+    "date": "2025-10-07"
+  },
+  {
+    "title": "Union-Find DSU",
+    "category": "algorithm",
+    "slug": "union-find-dsu",
+    "path": "notes/algorithm/union-find-dsu.md",
+    "tags": [],
+    "date": "2025-10-07"
+  },
+  {
+    "title": "Monotonic Stack",
+    "category": "algorithm",
+    "slug": "monotonic-stack",
+    "path": "notes/algorithm/monotonic-stack.md",
+    "tags": [],
+    "date": "2025-10-07"
+  },
+  {
+    "title": "Graph Search Algorithms",
+    "category": "algorithm",
+    "slug": "graph-search-algorithms",
+    "path": "notes/algorithm/graph-search-algorithms.md",
+    "tags": [],
+    "date": "2025-10-07"
+  },
+  {
+    "title": "Minimax Algorithm",
+    "category": "algorithm",
+    "slug": "minimax-algorithm",
+    "path": "notes/algorithm/minimax-algorithm.md",
+    "tags": [],
+    "date": "2025-10-07"
+  },
+  {
+    "title": "2D Prefix Sum",
+    "category": "algorithm",
+    "slug": "2d-prefix-sum",
+    "path": "notes/algorithm/2d-prefix-sum.md",
+    "tags": [],
+    "date": "2025-10-07"
+  },
+  {
+    "title": "KMP Algorithm",
+    "category": "algorithm",
+    "slug": "kmp-algorithm",
+    "path": "notes/algorithm/kmp-algorithm.md",
+    "tags": [],
+    "date": "2025-10-07"
+  }
+]

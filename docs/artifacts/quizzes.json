@@ -1,0 +1,451 @@
+[
+  {
+    "q": "You have an empty $1000 \\times 1000$ grid. You need to perform 50,000 operations where you add a value $k$ to a rectangular subregion. After all operations, you need to print the final grid. Which approach is most efficient?",
+    "options": [
+      "Naive iteration for each update ($O(Q \\cdot M \\cdot N)$)",
+      "2D Segment Tree ($O(Q \\log(MN))$)",
+      "2D Difference Array ($O(Q + MN)$)",
+      "2D Prefix Sum ($O(MN)$ build, but doesn't help with updates)"
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "Difference Array allows $O(1)$ updates. Total time is $O(Q)$ for updates + $O(MN)$ for the final reconstruction. This is much faster than $O(Q \\log(MN))$ or $O(Q \\cdot MN)$.\n\n### Inverse Relationship",
+    "category": "algorithm",
+    "source": "notes/algorithm/difference-array.md"
+  },
+  {
+    "q": "If you apply the Prefix Sum operation to a Difference Array, what do you get?",
+    "options": [
+      "The original array with updates applied",
+      "The prefix sum of the original array",
+      "A sparse matrix",
+      "The derivative of the array"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "The Difference Array stores the \"rate of change\" or boundaries. Running a Prefix Sum (Integration) over it reconstructs the actual values (the original array with updates).",
+    "category": "algorithm",
+    "source": "notes/algorithm/difference-array.md"
+  },
+  {
+    "q": "You are sampling $k=1$ item from a stream. You see the 10th item ($x_{10}$). What is the probability that you swap it into the reservoir?",
+    "options": [
+      "1/10",
+      "1/1",
+      "1/2",
+      "9/10"
+    ],
+    "answers": [
+      0
+    ],
+    "explanation": "For $k=1$, at step $i$, we keep the new item with probability $1/i$. So for $i=10$, prob is $1/10$.\n\n### Distributed Sampling",
+    "category": "algorithm",
+    "source": "notes/algorithm/reservoir-sampling.md"
+  },
+  {
+    "q": "How would you perform reservoir sampling on a distributed system (MapReduce/Spark)?",
+    "options": [
+      "It's impossible.",
+      "Assign a random number $r \\in \\[0, 1\\]$ to every item, sort by $r$, and take the top $k$.",
+      "Collect all data to one machine and run the standard algorithm.",
+      "Run reservoir sampling on each partition, then just concatenate the results."
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "This is called \"Weighted Reservoir Sampling\" or simply sorting by random key. Assigning a random float and taking the global top $k$ is mathematically equivalent to uniform sampling and works trivially in distributed sorts. Merging local reservoirs (D) is tricky to re-weight correctly.",
+    "category": "algorithm",
+    "source": "notes/algorithm/reservoir-sampling.md"
+  },
+  {
+    "q": "Your RTB system is timing out. Profiling shows the User Profile Service (PostgreSQL) is taking 100ms on complex joins. How do you fix this?",
+    "options": [
+      "Add more indexes to PostgreSQL.",
+      "Move User Profiles to a wide-column store or Key-Value store (Cassandra/Aerospike) and pre-compute segments.",
+      "Increase the timeout to 200ms.",
+      "Cache the entire database in Python memory."
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "Relational joins are too slow for RTB. You must denormalize data. Pre-computing segments (\"User X -> \\[Segment A, Segment B\\]\") and storing in a high-performance KV store is the standard solution.\n\n### Budget Handling",
+    "category": "system-design",
+    "source": "notes/system-design/design-real-time-bidding-rtb-system.md"
+  },
+  {
+    "q": "You have 100 bidder instances. An advertiser has a $100 budget. How do you prevent overspending without slowing down bidding?",
+    "options": [
+      "Global Lock: Check a central Redis counter before every bid.",
+      "Local Allocation: Give each bidder $1. When it runs out, it asks a central coordinator for another $1.",
+      "Post-processing: Bid as much as you want, cancel ads later.",
+      "Randomly bid on 1% of traffic."
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "Local Allocation minimizes network calls. \"Check-and-set\" on a central store (A) introduces massive contention and latency. Option B ensures strict limits with minimal overhead.",
+    "category": "system-design",
+    "source": "notes/system-design/design-real-time-bidding-rtb-system.md"
+  },
+  {
+    "q": "Your model has 90% accuracy in the notebook but 60% in production. You suspect \"Logic Skew.\" What is the most likely cause?",
+    "options": [
+      "The model is overfitting.",
+      "The production code implements the feature calculation (e.g., rolling average) differently than the Python training code.",
+      "The production server is too slow.",
+      "The learning rate was too high."
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "Logic skew happens when the implementation of feature engineering differs between environments (e.g., Python vs. SQL/Java). A Feature Store solves this by using a single definition.\n\n### Point-in-Time Correctness",
+    "category": "system-design",
+    "source": "notes/system-design/feature-stores-training-serving-skew.md"
+  },
+  {
+    "q": "You are predicting if a user will click an ad at 10:00 AM. You have a feature \"Number of clicks today.\" Why is a simple SQL join dangerous?",
+    "options": [
+      "SQL is slow.",
+      "A simple join might include clicks that happened at 10:05 AM (after the prediction), causing Data Leakage.",
+      "It uses too much memory.",
+      "SQL cannot calculate sums."
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "This is \"Future Leakage.\" The model learns to predict using data it won't have in reality. You must use an \"As-Of\" join to get the count *strictly before* 10:00 AM.",
+    "category": "system-design",
+    "source": "notes/system-design/feature-stores-training-serving-skew.md"
+  },
+  {
+    "q": "Your fraud detection model's accuracy drops suddenly. You check the input feature distributions (PSI), and they are all stable (PSI < 0.1). What is the most likely cause?",
+    "options": [
+      "Data Drift.",
+      "Concept Drift.",
+      "Bug in the PSI calculation.",
+      "The server is down."
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "If inputs $P(X)$ are stable (no Data Drift), but accuracy drops, it implies the relationship $P(Y|X)$ has changed. For example, fraudsters invented a new technique that looks \"normal\" based on old features. This is Concept Drift.\n\n### Architecture",
+    "category": "system-design",
+    "source": "notes/system-design/ml-model-monitoring-data-concept-drift.md"
+  },
+  {
+    "q": "You have a credit risk model where defaults are known only after 12 months. How do you monitor this model effectively in the short term?",
+    "options": [
+      "Wait 12 months to calculate accuracy.",
+      "Monitor Data Drift (PSI) on key features daily. If features shift, retrain or investigate.",
+      "Assume the model is perfect.",
+      "Use the model's own predictions as ground truth."
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "Since you have a long \"Label Delay,\" you cannot monitor accuracy directly. You must rely on leading indicators like Data Drift. If the applicant population changes (e.g., income drops), the model is likely invalid, even if you don't have the default labels yet.",
+    "category": "system-design",
+    "source": "notes/system-design/ml-model-monitoring-data-concept-drift.md"
+  },
+  {
+    "q": "You have 1 Billion vectors. You need high accuracy but are memory constrained (cannot store a massive graph in RAM). Which index type is better?",
+    "options": [
+      "Flat Index (Brute Force)",
+      "HNSW",
+      "IVF with Product Quantization (IVF-PQ)",
+      "Linear Scan"
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "HNSW is fast but memory-hungry because it stores the graph edges. IVF-PQ (Product Quantization) compresses the vectors themselves (lossy compression) and uses an inverted index, drastically reducing memory footprint while maintaining acceptable accuracy for billion-scale datasets.\n\n### Metric Choice",
+    "category": "system-design",
+    "source": "notes/system-design/embedding-search-engines-vector-dbs.md"
+  },
+  {
+    "q": "You are using OpenAI Embeddings (which are normalized to unit length). Does it matter if you use Dot Product or Cosine Similarity?",
+    "options": [
+      "Yes, Cosine is better.",
+      "Yes, Dot Product is better.",
+      "No, they are mathematically equivalent for normalized vectors.",
+      "Yes, Euclidean is the only valid metric."
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "Cosine Similarity is $\\frac{A \\cdot B}{\\|A\\|\\|B\\|}$. If vectors are normalized, $\\|A\\|=1$ and $\\|B\\|=1$, so Cosine Similarity simply equals the Dot Product $A \\cdot B$.",
+    "category": "system-design",
+    "source": "notes/system-design/embedding-search-engines-vector-dbs.md"
+  },
+  {
+    "q": "You are building a RAG system for a legal contract. The contract relies heavily on definitions found in previous paragraphs. If you use small, non-overlapping chunks, what is the risk?",
+    "options": [
+      "The retrieval will be too slow.",
+      "The chunks will lose context (e.g., \"The Party\" refers to whom?), leading to hallucinations.",
+      "The embedding model will crash.",
+      "The LLM will refuse to answer."
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "Small chunks without overlap or parent context strip away necessary references. A chunk saying \"The Party shall pay...\" is useless if the definition of \"The Party\" is in a previous chunk that wasn't retrieved.\n\n### Improving Retrieval",
+    "category": "agentic",
+    "source": "notes/agentic/rag-architectures-chunking.md"
+  },
+  {
+    "q": "Users are searching for specific error codes \"ERR-505\" but your Vector RAG system keeps returning generic \"error handling\" documentation instead of the specific page for 505. How do you fix this?",
+    "options": [
+      "Switch to a larger LLM.",
+      "Implement Hybrid Search (add Keyword/BM25 search).",
+      "Increase chunk size.",
+      "Use a different Vector Database."
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "Embeddings cluster concepts. \"ERR-505\" and \"ERR-404\" might have very similar embeddings (both are errors). Keyword search (BM25) treats \"ERR-505\" as a specific token and will find the exact match.",
+    "category": "agentic",
+    "source": "notes/agentic/rag-architectures-chunking.md"
+  },
+  {
+    "q": "During the \"Plan\" phase, Spec Kit proposes a microservices architecture for a simple \"URL Shortener\" interview question. What is your move?",
+    "options": [
+      "Let it build the microservices to impress the interviewer.",
+      "Stop the generation and prompt: \"Refine plan: Use a monolithic Python script with in-memory dictionary for storage.\"",
+      "Manually delete the plan file.",
+      "Switch to writing Java code."
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "A 30-minute interview cannot support microservices. Demonstrating \"Architectural Control\" means knowing when to simplify. You must override the AI's tendency to over-engineer.\n\n### Setup",
+    "category": "agentic",
+    "source": "notes/agentic/spec-kit-interview-strategy.md"
+  },
+  {
+    "q": "Why do we edit `constitution.md` *before* the interview?",
+    "options": [
+      "To cheat on the test.",
+      "To pre-load the AI with our coding standards (e.g., \"Single File\", \"Defensive Coding\") so we don't have to type them during the timed session.",
+      "Because the default one is empty.",
+      "To install Python libraries."
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "The Constitution acts as a persistent set of instructions. By defining \"Speed & MVP\" and \"Single File\" preferences beforehand, you save time and ensure the AI output aligns with interview constraints automatically.",
+    "category": "agentic",
+    "source": "notes/agentic/spec-kit-interview-strategy.md"
+  },
+  {
+    "q": "You are building an agent to book flight tickets. This requires checking availability, comparing prices, and then booking. Which pattern is most appropriate?",
+    "options": [
+      "Zero-Shot Classification",
+      "Chain of Thought (CoT)",
+      "ReAct (Reason + Act)",
+      "Sentiment Analysis"
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "The task requires interacting with external systems (Flight API) and making decisions based on the results (if price > X, check another flight). ReAct is designed exactly for this loop of Reasoning -> Tool Use -> Observation.\n\n### Limitations",
+    "category": "agentic",
+    "source": "notes/agentic/agent-reasoning-patterns-react-cot.md"
+  },
+  {
+    "q": "What is a common failure mode of ReAct agents?",
+    "options": [
+      "They never hallucinate.",
+      "Getting stuck in a loop (Thought -> Action -> Same Observation -> Thought -> Same Action...).",
+      "They cannot perform math.",
+      "They work too fast."
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "ReAct agents can get stuck in infinite loops if the Action doesn't yield new info or if the model fails to recognize it has enough info. Limits on \"max steps\" are usually required.",
+    "category": "agentic",
+    "source": "notes/agentic/agent-reasoning-patterns-react-cot.md"
+  },
+  {
+    "q": "You want to fine-tune a 70B parameter model. In 16-bit (BF16), the model weights alone take ~140GB. Full fine-tuning requires gradients + optimizer states (~4x weights) $\\approx$ 600GB+. Using QLoRA, roughly how much VRAM do you need?",
+    "options": [
+      "600GB",
+      "~40-48GB",
+      "1GB",
+      "140GB"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "QLoRA loads the model in 4-bit (70B * 0.5 bytes = 35GB). The LoRA adapters + gradients + optimizer states add a small overhead (few GBs). This fits on a single A6000 (48GB) or two 24GB cards.\n\n### Architecture",
+    "category": "agentic",
+    "source": "notes/agentic/llm-fine-tuning-lora-qlora.md"
+  },
+  {
+    "q": "Which layers should you apply LoRA to for best results?",
+    "options": [
+      "Only the embedding layer.",
+      "Only the output layer.",
+      "Usually the Attention layers (Query, Key, Value) and sometimes MLP layers.",
+      "Layer Norms only."
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "Empirical studies show that adapting the Attention matrices (q_proj, v_proj) yields the best performance trade-off. Adapting MLP layers can further improve performance but adds more parameters.",
+    "category": "agentic",
+    "source": "notes/agentic/llm-fine-tuning-lora-qlora.md"
+  },
+  {
+    "q": "You are building a Real-Time Bidding (RTB) bidder where the bid price is calculated as `CTR * Value`. You have two models:\n- Model A: AUC 0.85, LogLoss 0.4\n- Model B: AUC 0.80, LogLoss 0.2\nWhich model should you choose?",
+    "options": [
+      "Model A because it ranks ads better.",
+      "Model B because it has better probability calibration.",
+      "Neither, use Accuracy.",
+      "Model A because higher AUC implies better conversion."
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "For bidding, the *value* of the probability matters directly for the price calculation. Lower LogLoss indicates the predicted probabilities are closer to reality, reducing the risk of over/under-bidding. Model A might rank well but output calibrated probabilities (e.g., predicting 0.99 for a 0.5 event).\n\n### Understanding AUC",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/adtech-metrics-auc-logloss-lift.md"
+  },
+  {
+    "q": "An AUC of 0.5 indicates what?",
+    "options": [
+      "Perfect prediction",
+      "Random guessing",
+      "Inverse prediction (predicting 0 for 1 and vice versa)",
+      "50% Accuracy"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "An AUC of 0.5 means the model cannot distinguish between positive and negative classes better than a random coin flip.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/adtech-metrics-auc-logloss-lift.md"
+  },
+  {
+    "q": "You have 100 Million unique User IDs. You want to use User ID as a feature in a Deep Learning model. Your GPU has 16GB memory. An embedding size of 128 floats (4 bytes) requires approx 50GB. What do you do?",
+    "options": [
+      "Buy a bigger GPU.",
+      "Use One-Hot Encoding.",
+      "Use the Hashing Trick to map users to a smaller space (e.g., 10 Million buckets) and learn embeddings for the buckets.",
+      "Ignore the User ID feature."
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "100M * 128 * 4 bytes = ~51.2 GB. This doesn't fit. Hashing allows you to cap the \"effective\" vocabulary size (e.g., to 10M or 1M) to fit in memory, accepting some collisions.\n\n### Comparison",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/handling-sparse-data-embeddings-hashing-trick.md"
+  },
+  {
+    "q": "Feature Hashing vs. Vocabulary Lookup. Which one allows you to train on a streaming dataset where new, never-before-seen User IDs appear constantly?",
+    "options": [
+      "Vocabulary Lookup",
+      "Feature Hashing",
+      "Neither"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "Vocabulary Lookup requires building a dictionary of all known keys *before* training. Feature Hashing is stateless; it can handle any new string immediately by hashing it to an existing bucket.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/handling-sparse-data-embeddings-hashing-trick.md"
+  },
+  {
+    "q": "You have a dataset where specific combinations of features (e.g., \"City=Paris\" AND \"Language=French\") are highly predictive, but you also want the model to recommend relevant items to users with little history. Which architecture helps balance these needs?",
+    "options": [
+      "Logistic Regression",
+      "Matrix Factorization",
+      "Wide & Deep",
+      "K-Nearest Neighbors"
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "Wide & Deep is explicitly designed to balance memorization (Wide part for specific rules like City+Language) and generalization (Deep part for new users/items via embeddings).\n\n### DeepFM Architecture",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/ctr-prediction-models-deepfm-wide-deep.md"
+  },
+  {
+    "q": "In DeepFM, how are 2nd-order feature interactions handled?",
+    "options": [
+      "By manually creating cross-product features",
+      "By a Factorization Machine component using dot products of embeddings",
+      "By the MLP (Multi-Layer Perceptron) hidden layers only",
+      "By a Recurrent Neural Network"
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "DeepFM uses a Factorization Machine layer to explicitly model 2nd-order interactions ($<v_i, v_j> x_i x_j$) using the shared embeddings, without manual engineering.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/ctr-prediction-models-deepfm-wide-deep.md"
+  },
+  {
+    "q": "You have 5 ad creatives. You want to find the winner quickly but maximize revenue during the test. Which algorithm is generally preferred in modern AdTech?",
+    "options": [
+      "A/B Testing (Equal traffic to all until significance)",
+      "Epsilon-Greedy",
+      "Thompson Sampling",
+      "Random Selection"
+    ],
+    "answers": [
+      2
+    ],
+    "explanation": "Thompson Sampling dynamically adjusts traffic. As soon as one creative looks promising, it gets more traffic (Exploit), but still allows others a chance (Explore). It minimizes \"Regret\" (revenue lost) compared to A/B testing which wastes 50% of traffic on the loser until the test ends.\n\n### UCB Logic",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/multi-armed-bandits-thompson-sampling-ucb.md"
+  },
+  {
+    "q": "In the UCB formula $Score = Average + \\text{Bonus}$. What happens to the \"Bonus\" term as we pull the arm more times?",
+    "options": [
+      "It increases.",
+      "It decreases (shrinks to zero).",
+      "It stays the same.",
+      "It becomes negative."
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "The bonus represents the width of the confidence interval (Uncertainty). As we get more data ($n$ increases), our uncertainty decreases, so the bonus shrinks, and the algorithm relies more on the pure Average (Exploitation).",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/multi-armed-bandits-thompson-sampling-ucb.md"
+  },
+  {
+    "q": "You are building a search engine. You care most about the top 3 results being correct (NDCG@3). Pointwise regression on \"relevance score\" gives good RMSE but bad NDCG. Why?",
+    "options": [
+      "RMSE is broken.",
+      "Pointwise loss spends too much effort predicting the exact score of irrelevant documents (rank 100 vs 101), which doesn't affect NDCG@3.",
+      "You didn't train long enough.",
+      "You should use MSE instead of RMSE."
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "Pointwise loss minimizes the error on *all* items. It tries just as hard to distinguish between relevance 0.1 and 0.2 (trash) as it does between 0.9 and 0.8 (top hits). Pairwise/Listwise approaches (specifically LambdaRank) weigh the top positions more heavily.\n\n### Complexity",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/ranking-loss-functions-pointwise-pairwise-listwise.md"
+  },
+  {
+    "q": "Why is Listwise ranking computationally expensive?",
+    "options": [
+      "It requires infinite memory.",
+      "Calculating list-wide metrics (like sort order) is non-differentiable and usually $O(N \\log N)$ or $O(N^2)$ per query during training.",
+      "It only works on CPUs.",
+      "It requires labeling every single item in the universe."
+    ],
+    "answers": [
+      1
+    ],
+    "explanation": "Sorting is a non-differentiable operation, requiring complex approximations (SoftRank) or specific gradient derivations (LambdaRank), and processing lists is more expensive than single items.",
+    "category": "machine-learning",
+    "source": "notes/machine-learning/ranking-loss-functions-pointwise-pairwise-listwise.md"
+  }
+]
