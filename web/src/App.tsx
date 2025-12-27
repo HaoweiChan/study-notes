@@ -17,6 +17,7 @@ function App() {
   const [isDark, setIsDark] = usePersistedState('dark_mode', false);
   const [bookmarkedOnly, setBookmarkedOnly] = useState(false);
   const [bookmarks] = usePersistedState<number[]>('bookmarked_cards', []);
+  const [activeTab, setActiveTab] = useState('flashcards');
 
   useEffect(() => {
     if (isDark) {
@@ -110,7 +111,7 @@ function App() {
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        <Tabs defaultValue="flashcards" className="w-full space-y-8">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full space-y-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <TabsList className="grid w-full sm:w-[600px] grid-cols-3">
                 <TabsTrigger value="flashcards" className="gap-2">
@@ -124,40 +125,32 @@ function App() {
                 </TabsTrigger>
             </TabsList>
 
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                {category !== 'all' && (
-                    <span className="bg-primary/10 text-primary px-2 py-1 rounded-md text-xs font-medium uppercase">
-                        {category}
-                    </span>
-                )}
-                {bookmarkedOnly && (
-                    <span className="bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 px-2 py-1 rounded-md text-xs font-medium uppercase">
-                        Bookmarked
-                    </span>
+            <div className="flex items-center gap-2">
+                {/* Show Bookmarked Only button if active tab is flashcards */}
+                {activeTab === 'flashcards' && (
+                     <Button 
+                        variant={bookmarkedOnly ? "secondary" : "outline"} 
+                        size="sm" 
+                        onClick={() => setBookmarkedOnly(!bookmarkedOnly)}
+                        className="gap-2 h-9"
+                    >
+                        <Star className={bookmarkedOnly ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"} size={16} />
+                        <span className="hidden sm:inline">{bookmarkedOnly ? "Show All" : "Bookmarked Only"}</span>
+                        <span className="sm:hidden">{bookmarkedOnly ? "All" : "Stars"}</span>
+                    </Button>
                 )}
             </div>
           </div>
 
-          <TabsContent value="flashcards" className="space-y-4 focus-visible:outline-none focus-visible:ring-0">
-            <div className="flex justify-end mb-4">
-                 <Button 
-                    variant={bookmarkedOnly ? "secondary" : "outline"} 
-                    size="sm" 
-                    onClick={() => setBookmarkedOnly(!bookmarkedOnly)}
-                    className="gap-2"
-                >
-                    <Star className={bookmarkedOnly ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"} size={16} />
-                    {bookmarkedOnly ? "Show All" : "Bookmarked Only"}
-                </Button>
-            </div>
+          <TabsContent value="flashcards" className="focus-visible:outline-none focus-visible:ring-0 mt-0">
             <FlashcardDeck cards={filteredFlashcards} allCards={flashcards} />
           </TabsContent>
 
-          <TabsContent value="quizzes" className="focus-visible:outline-none focus-visible:ring-0">
+          <TabsContent value="quizzes" className="focus-visible:outline-none focus-visible:ring-0 mt-0">
             <QuizDeck quizzes={filteredQuizzes} />
           </TabsContent>
 
-          <TabsContent value="notes" className="focus-visible:outline-none focus-visible:ring-0">
+          <TabsContent value="notes" className="focus-visible:outline-none focus-visible:ring-0 mt-0">
             <NotesList notes={filteredNotes} />
           </TabsContent>
         </Tabs>
